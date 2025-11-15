@@ -1,4 +1,3 @@
-/* Reset و فونت */
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +5,26 @@
     font-family: 'Iranian Sans', sans-serif;
 }
 
+/* پس‌زمینه متحرک */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, #f5f7fa, #e4edf5, #dbeafe, #eff6ff);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+    z-index: -1;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
     color: #333;
     line-height: 1.6;
     min-height: 100vh;
@@ -17,10 +34,11 @@ body {
 .container {
     max-width: 800px;
     margin: 0 auto;
-    background-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 150, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 150, 0.15);
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 /* هدر */
@@ -31,15 +49,43 @@ header {
     padding: 40px 20px;
 }
 
-header h1 {
-    font-size: 2.8rem;
-    margin-bottom: 10px;
+/* عنوان فارسی متحرک */
+.farsi-title {
+    font-size: 3.5rem;
     font-weight: 700;
+    background: linear-gradient(45deg, #ffffff, #e0f2fe, #ffffff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 3s ease-in-out infinite;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    margin-bottom: 15px;
+}
+
+@keyframes shine {
+    0%, 100% {
+        background-position: -200% center;
+    }
+    50% {
+        background-position: 200% center;
+    }
 }
 
 .tagline {
-    font-size: 1.1rem;
+    animation: fadeInUp 1.5s ease-out;
+    font-size: 1.3rem;
     opacity: 0.9;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* بخش اصلی */
@@ -54,6 +100,7 @@ main {
     color: #2563eb;
     font-size: 1.8rem;
     position: relative;
+    animation: fadeInUp 1s ease-out;
 }
 
 .services h2::after, .contact h2::after {
@@ -81,6 +128,7 @@ main {
     text-align: center;
     transition: all 0.3s ease;
     cursor: default;
+    animation: fadeInUp 1s ease-out;
 }
 
 .service-item:hover {
@@ -108,6 +156,7 @@ main {
     max-width: 500px;
     margin-right: auto;
     margin-left: auto;
+    animation: fadeInUp 1s ease-out;
 }
 
 .contact-buttons {
@@ -129,6 +178,7 @@ main {
     font-size: 1.1rem;
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s ease-out;
 }
 
 .contact-btn i {
@@ -158,6 +208,7 @@ footer {
     background-color: #f1f5f9;
     color: #64748b;
     font-size: 0.9rem;
+    animation: fadeInUp 1s ease-out;
 }
 
 /* رسپانسیو برای موبایل */
@@ -170,8 +221,8 @@ footer {
         padding: 30px 15px;
     }
     
-    header h1 {
-        font-size: 2.2rem;
+    .farsi-title {
+        font-size: 2.8rem;
     }
     
     main {
