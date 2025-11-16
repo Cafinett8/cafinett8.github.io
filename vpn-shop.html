@@ -32,12 +32,19 @@
         .header {
             text-align: center;
             margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .vpn-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: #93c5fd;
         }
         
         .header h1 {
             font-family: 'B Titr', sans-serif;
             font-size: 2.8rem;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: #ffffff;
         }
         
@@ -127,13 +134,18 @@
         
         /* کارت بانکی */
         .bank-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #004B8D 0%, #0066CC 100%);
             border-radius: 20px;
             padding: 25px;
             text-align: center;
             margin: 20px 0;
             border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .bank-logo {
+            font-size: 2rem;
+            margin-bottom: 10px;
         }
         
         .card-number {
@@ -152,7 +164,55 @@
             margin-bottom: 10px;
         }
         
-        /* دکمه واتس‌اپ */
+        /* بخش آپلود عکس */
+        .upload-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            text-align: center;
+            display: none;
+        }
+        
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 10px;
+        }
+        
+        .upload-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .file-name {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #93c5fd;
+        }
+        
+        .preview-image {
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: none;
+        }
+        
+        .upload-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        /* دکمه واتساپ */
         .whatsapp-section {
             text-align: center;
             margin-top: 30px;
@@ -171,6 +231,7 @@
             transition: all 0.3s ease;
             border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            cursor: pointer;
         }
         
         .whatsapp-btn:hover {
@@ -228,6 +289,10 @@
             .header h1 {
                 font-size: 2.2rem;
             }
+            
+            .preview-image {
+                max-width: 250px;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/B-Titr/BTitr.css">
@@ -237,8 +302,9 @@
     <div class="container">
         <!-- هدر -->
         <div class="header">
+            <div class="vpn-icon">🛡️</div>
             <h1>فروش فیلترشکن</h1>
-            <p>خرید آسان از طریق واتس‌اپ - بدون نیاز به فیلترشکن</p>
+            <p>خرید آسان از طریق واتساپ - بدون نیاز به فیلترشکن</p>
         </div>
         
         <!-- مراحل خرید -->
@@ -260,24 +326,47 @@
                 <div class="step-number">۲</div>
                 <div class="step-title">💳 واریز مبلغ به حساب بانکی</div>
                 <div class="bank-card">
-                    <div>شماره کارت:</div>
+                    <div class="bank-logo">🏦</div>
+                    <div>بانک سامان</div>
                     <div class="card-number">6219 8619 8734 8090</div>
                     <div class="card-owner">بنام: امیر محمد حضراتی</div>
-                    <div>بانک انصار</div>
                 </div>
             </div>
             
-            <!-- مرحله ۳: ارسال رسید -->
+            <!-- مرحله ۳: آپلود رسید -->
             <div class="step">
                 <div class="step-number">۳</div>
-                <div class="step-title">📱 ارسال رسید از طریق واتس‌اپ</div>
+                <div class="step-title">📷 آپلود عکس رسید پرداخت</div>
+                
+                <div class="upload-section" id="uploadSection">
+                    <div class="upload-icon">📷</div>
+                    <div style="margin-bottom: 15px;">
+                        <strong>عکس رسید پرداخت را آپلود کنید</strong>
+                        <br>
+                        <small>عکس واضح از رسید بانکی خود را انتخاب کنید</small>
+                    </div>
+                    
+                    <input type="file" id="receiptImage" accept="image/*" style="display: none;">
+                    <button type="button" class="upload-btn" onclick="document.getElementById('receiptImage').click()">
+                        📸 انتخاب عکس رسید
+                    </button>
+                    
+                    <div id="fileName" class="file-name"></div>
+                    <img id="imagePreview" class="preview-image" src="" alt="پیش‌نمایش عکس">
+                </div>
+            </div>
+            
+            <!-- مرحله ۴: ارسال به واتساپ -->
+            <div class="step">
+                <div class="step-number">۴</div>
+                <div class="step-title">📱 ارسال رسید از طریق واتساپ</div>
                 <div class="whatsapp-section">
-                    <p>پس از واریز، روی دکمه زیر کلیک کنید و رسید پرداخت را ارسال نمایید</p>
-                    <a href="#" id="whatsappBtn" class="whatsapp-btn" onclick="sendToWhatsApp()">
-                        📱 ارسال رسید به واتس‌اپ
-                    </a>
+                    <p>پس از آپلود عکس رسید، روی دکمه زیر کلیک کنید</p>
+                    <button id="whatsappBtn" class="whatsapp-btn" onclick="sendToWhatsApp()" disabled>
+                        📱 ارسال رسید به واتساپ
+                    </button>
                     <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
-                        شماره واتس‌اپ: ۰۹۲۲۴۰۴۴۸۴۲
+                        شماره واتساپ: ۰۹۲۲۴۰۴۴۸۴۲
                     </div>
                 </div>
             </div>
@@ -296,6 +385,7 @@
         ];
 
         let selectedPackage = null;
+        let receiptFile = null;
 
         // ایجاد جدول قیمت
         function createPricingTable() {
@@ -333,25 +423,51 @@
                 - مبلغ: <strong>${selectedPackage.price} تومان</strong>
             `;
             
-            // فعال کردن دکمه واتس‌اپ
-            document.getElementById('whatsappBtn').style.display = 'inline-block';
+            // نمایش بخش آپلود
+            document.getElementById('uploadSection').style.display = 'block';
         }
 
-        // ارسال به واتس‌اپ
+        // مدیریت آپلود عکس
+        document.getElementById('receiptImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                receiptFile = file;
+                document.getElementById('fileName').textContent = `فایل انتخاب شده: ${file.name}`;
+                
+                // نمایش پیش‌نمایش
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').src = e.target.result;
+                    document.getElementById('imagePreview').style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+                
+                // فعال کردن دکمه واتساپ
+                document.getElementById('whatsappBtn').disabled = false;
+            }
+        });
+
+        // ارسال به واتساپ
         function sendToWhatsApp() {
             if (!selectedPackage) {
                 alert('لطفاً ابتدا یک بسته انتخاب کنید');
                 return;
             }
             
+            if (!receiptFile) {
+                alert('لطفاً عکس رسید را آپلود کنید');
+                return;
+            }
+            
             const message = `سلام! 👋
 
-بسته فیلترشکن زیر را خریداری کردم:
-📦 بسته: ${selectedPackage.size}
-💰 مبلغ: ${selectedPackage.price} تومان
-⏰ مدت: ${selectedPackage.duration}
+📦 **سفارش فیلترشکن**
+• بسته: ${selectedPackage.size}
+• مبلغ: ${selectedPackage.price} تومان  
+• مدت: ${selectedPackage.duration}
 
-رسید پرداخت را ارسال می‌کنم. لطفاً فیلترشکن را برایم ارسال کنید.
+✅ رسید پرداخت آپلود شده است.
+لطفاً فیلترشکن را برایم ارسال کنید.
 
 با تشکر`;
             
@@ -364,8 +480,6 @@
         // راه‌اندازی اولیه
         document.addEventListener('DOMContentLoaded', function() {
             createPricingTable();
-            // ابتدا دکمه واتس‌اپ غیرفعال باشد
-            document.getElementById('whatsappBtn').style.display = 'none';
         });
     </script>
 </body>
