@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>درخواست فیلم و سریال</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .request-form {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkbox-item input {
+            width: auto;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: block;
+            margin: 30px auto 0;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header, .request-form {
+                padding: 20px;
+            }
+            
+            .checkbox-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 درخواست فیلم و سریال</h1>
+            <p>درخواست خود را ثبت کنید تا در اسرع وقت برای شما ارسال شود</p>
+        </div>
+        
+        <div class="request-form">
+            <form id="requestForm">
+                <div class="form-group">
+                    <label for="name">نام و نام خانوادگی:</label>
+                    <input type="text" id="name" name="name" placeholder="نام کامل خود را وارد کنید" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">شماره تماس:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="09xxxxxxxxx" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="title">نام فیلم یا سریال:</label>
+                    <input type="text" id="title" name="title" placeholder="مثال: سریال Breaking Bad - فصل ۲" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="type">نوع محتوا:</label>
+                    <select id="type" name="type" required>
+                        <option value="">انتخاب کنید</option>
+                        <option value="movie">فیلم سینمایی</option>
+                        <option value="series">سریال</option>
+                        <option value="documentary">مستند</option>
+                        <option value="animation">انیمیشن</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>نوع صدا و زیرنویس:</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="dubbed" name="audio_type" value="dubbed">
+                            <label for="dubbed" style="font-weight: normal;">دوبله فارسی</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="subtitled" name="audio_type" value="subtitled">
+                            <label for="subtitled" style="font-weight: normal;">زیرنویس فارسی</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="original" name="audio_type" value="original">
+                            <label for="original" style="font-weight: normal;">زبان اصلی</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quality">کیفیت مورد نظر:</label>
+                    <select id="quality" name="quality">
+                        <option value="">انتخاب کنید (اختیاری)</option>
+                        <option value="480p">480p (SD)</option>
+                        <option value="720p">720p (HD)</option>
+                        <option value="1080p">1080p (Full HD)</option>
+                        <option value="4k">4K (Ultra HD)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="year">سال تولید (اختیاری):</label>
+                    <input type="number" id="year" name="year" placeholder="مثال: 2024" min="1900" max="2030">
+                </div>
+                
+                <div class="form-group">
+                    <label for="details">توضیحات بیشتر (اختیاری):</label>
+                    <textarea id="details" name="details" placeholder="اطلاعات بیشتری که دارید را اینجا بنویسید... مانند: کارگردان، بازیگران، ژانر و..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">📨 ارسال درخواست</button>
+            </form>
+            
+            <div id="successMessage" class="success-message">
+                ✅ درخواست شما با موفقیت ثبت شد!
+                <br>
+                <small>به زودی با شما تماس گرفته خواهد شد</small>
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="index.html" class="back-btn">← بازگشت به صفحه اصلی</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('requestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // گرفتن اطلاعات فرم
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                title: document.getElementById('title').value,
+                type: document.getElementById('type').value,
+                quality: document.getElementById('quality').value,
+                year: document.getElementById('year').value,
+                details: document.getElementById('details').value,
+                audioTypes: Array.from(document.querySelectorAll('input[name="audio_type"]:checked')).map(cb => cb.value),
+                date: new Date().toLocaleDateString('fa-IR'),
+                time: new Date().toLocaleTimeString('fa-IR')
+            };
+            
+            // ذخیره در localStorage
+            const requests = JSON.parse(localStorage.getItem('mediaRequests')) || [];
+            requests.push(formData);
+            localStorage.setItem('mediaRequests', JSON.stringify(requests));
+            
+            // نمایش پیام موفقیت
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // پاک کردن فرم
+            document.getElementById('requestForm').reset();
+            
+            // مخفی کردن پیام پس از 5 ثانیه
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
