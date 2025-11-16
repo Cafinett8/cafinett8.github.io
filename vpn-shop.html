@@ -5,460 +5,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فروش فیلترشکن - کافی نت</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Vazir', 'Segoe UI', sans-serif;
-        }
+        /* استایل‌های قبلی رو حفظ کن و اینا رو اضافه کن */
         
-        body {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
+        .upload-section {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 40px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .header h1 {
-            font-family: 'B Titr', sans-serif;
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-        
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        /* جدول قیمت */
-        .pricing-table {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-        
-        .package-card {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 30px 25px;
-            text-align: center;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .package-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .package-card:hover::before {
-            left: 100%;
-        }
-        
-        .package-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-        
-        .package-card.selected {
-            background: rgba(59, 130, 246, 0.4);
-            border-color: #3b82f6;
-            transform: scale(1.05);
-        }
-        
-        .package-icon {
-            font-size: 3rem;
-            color: #93c5fd;
-            margin-bottom: 15px;
-        }
-        
-        .package-size {
-            font-size: 1.6rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-        
-        .package-duration {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 15px;
-        }
-        
-        .package-price {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #93c5fd;
-            text-shadow: 0 2px 10px rgba(147, 197, 253, 0.3);
-        }
-        
-        /* بخش کارت بانکی */
-        .bank-section {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 35px;
-            border-radius: 20px;
-            margin-bottom: 40px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .bank-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        
-        .bank-title {
-            font-size: 1.4rem;
-            margin-bottom: 25px;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .card-number {
-            font-family: monospace;
-            font-size: 1.8rem;
-            letter-spacing: 3px;
-            margin-bottom: 20px;
-            background: rgba(255,255,255,0.2);
-            padding: 15px;
-            border-radius: 10px;
-            direction: ltr;
-        }
-        
-        .card-owner {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-        
-        .bank-name {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        /* فرم ارسال رسید */
-        .receipt-form {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 35px;
-            border-radius: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .form-title {
-            font-size: 1.6rem;
-            margin-bottom: 25px;
-            text-align: center;
-            color: #ffffff;
-        }
-        
-        .selected-package-info {
-            background: rgba(59, 130, 246, 0.3);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 18px;
-            border-radius: 12px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
-        .submit-btn {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            border: none;
-            padding: 20px 50px;
-            border-radius: 15px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-        }
-        
-        .submit-btn:disabled {
-            background: #6b7280;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .success-message {
-            background: rgba(34, 197, 94, 0.3);
-            color: white;
             padding: 25px;
             border-radius: 15px;
+            margin-bottom: 25px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
             text-align: center;
-            margin-top: 25px;
-            display: none;
-            font-size: 1.2rem;
         }
         
-        .back-btn {
-            display: inline-block;
-            margin-top: 25px;
-            color: #93c5fd;
-            text-decoration: none;
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
             font-size: 1.1rem;
-            text-align: center;
-            width: 100%;
-            padding: 15px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 10px;
         }
         
-        .back-btn:hover {
-            color: #ffffff;
+        .upload-btn:hover {
+            transform: translateY(-2px);
         }
         
-        @media (max-width: 768px) {
-            .container {
-                padding: 25px;
-                margin: 10px;
-            }
-            
-            .pricing-table {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .bank-card {
-                padding: 20px;
-            }
-            
-            .card-number {
-                font-size: 1.4rem;
-            }
+        .file-name {
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #93c5fd;
+        }
+        
+        .preview-image {
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: none;
+        }
+        
+        .upload-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
         }
     </style>
-    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/B-Titr/BTitr.css">
-    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <!-- هدر -->
-        <div class="header">
-            <h1>فروش فیلترشکن</h1>
-            <p>پس از انتخاب بسته مورد نظر، مبلغ را واریز کرده و رسید را ارسال کنید</p>
+    <!-- محتوای قبلی رو حفظ کن -->
+    
+    <!-- در فرم ارسال رسید، این بخش رو اضافه کن -->
+    <div class="upload-section">
+        <div class="upload-icon">📷</div>
+        <div style="margin-bottom: 15px;">
+            <strong>آپلود عکس رسید پرداخت</strong>
+            <br>
+            <small>عکس واضح از رسید بانکی خود را آپلود کنید</small>
         </div>
         
-        <!-- جدول قیمت -->
-        <div class="pricing-table" id="pricingTable">
-            <!-- بسته‌ها با JavaScript پر می‌شوند -->
-        </div>
+        <input type="file" id="receiptImage" accept="image/*" style="display: none;">
+        <button type="button" class="upload-btn" onclick="document.getElementById('receiptImage').click()">
+            📸 انتخاب عکس
+        </button>
         
-        <!-- بخش کارت بانکی -->
-        <div class="bank-section">
-            <div class="bank-card">
-                <div class="bank-title">💳 برای واریز مبلغ</div>
-                <div class="card-number">6219 8619 8734 8090</div>
-                
-                <div class="card-owner">بنام: امیر محمد حضراتی</div>
-                <div class="bank-name">بانک سامان</div>
-            </div>
-        </div>
-        
-        <!-- فرم ارسال رسید -->
-        <div class="receipt-form" id="receiptForm" style="display: none;">
-            <div class="form-title">📨 ارسال رسید پرداخت</div>
-            
-            <div class="selected-package-info" id="selectedPackageInfo">
-                <!-- اطلاعات بسته انتخاب شده -->
-            </div>
-            
-            <form id="paymentForm">
-                <div class="form-group">
-                    <label for="customerName">نام و نام خانوادگی:</label>
-                    <input type="text" id="customerName" placeholder="نام کامل خود را وارد کنید" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="customerPhone">شماره تماس:</label>
-                    <input type="tel" id="customerPhone" placeholder="09xxxxxxxxx" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="customerAddress">آدرس ارسال (تلگرام، واتس‌اپ، ایمیل):</label>
-                    <input type="text" id="customerAddress" placeholder="آیدی تلگرام یا شماره واتس‌اپ یا ایمیل" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="receiptNumber">شماره پیگیری تراکنش:</label>
-                    <input type="text" id="receiptNumber" placeholder="شماره پیگیری بانکی" required>
-                </div>
-                
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    ✅ ارسال رسید و دریافت فیلترشکن
-                </button>
-            </form>
-            
-            <div id="successMessage" class="success-message">
-                ✅ رسید شما با موفقیت ثبت شد!
-                <br>
-                <small>فیلترشکن به زودی برای شما ارسال خواهد شد</small>
-            </div>
-            
-            <a href="index.html" class="back-btn">← بازگشت به صفحه اصلی</a>
-        </div>
+        <div id="fileName" class="file-name"></div>
+        <img id="imagePreview" class="preview-image" src="" alt="پیش‌نمایش عکس">
     </div>
 
     <script>
-        // داده‌های بسته‌ها
-        const packages = [
-            { size: "۳۰ گیگ", duration: "۱ ماه", price: "۱۰۰,۰۰۰", icon: "📱" },
-            { size: "۵۰ گیگ", duration: "۱ ماه", price: "۱۵۰,۰۰۰", icon: "💻" },
-            { size: "۷۰ گیگ", duration: "۱ ماه", price: "۱۸۰,۰۰۰", icon: "🚀" },
-            { size: "۱۰۰ گیگ", duration: "۱ ماه", price: "۲۰۰,۰۰۰", icon: "⚡" }
-        ];
-
-        let selectedPackage = null;
-
-        // ایجاد جدول قیمت
-        function createPricingTable() {
-            const pricingTable = document.getElementById('pricingTable');
-            
-            packages.forEach((pkg, index) => {
-                const card = document.createElement('div');
-                card.className = 'package-card';
-                card.innerHTML = `
-                    <div class="package-icon">${pkg.icon}</div>
-                    <div class="package-size">${pkg.size}</div>
-                    <div class="package-duration">${pkg.duration}</div>
-                    <div class="package-price">${pkg.price} تومان</div>
-                `;
+        let receiptFile = null;
+        
+        // مدیریت آپلود عکس
+        document.getElementById('receiptImage').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                receiptFile = file;
+                document.getElementById('fileName').textContent = `فایل انتخاب شده: ${file.name}`;
                 
-                card.addEventListener('click', () => selectPackage(index));
-                pricingTable.appendChild(card);
-            });
-        }
-
-        // انتخاب بسته
-        function selectPackage(index) {
-            // حذف انتخاب قبلی
-            document.querySelectorAll('.package-card').forEach(card => {
-                card.classList.remove('selected');
-            });
+                // نمایش پیش‌نمایش
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('imagePreview').src = e.target.result;
+                    document.getElementById('imagePreview').style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // ارسال به تلگرام
+        async function sendOrderToTelegram(formData) {
+            const botToken = '8549605115:AAGCvusxHBcdRFvqOMYc8liu80kUjmfl0S8';
+            const chatId = '7537680867';
             
-            // انتخاب جدید
-            selectedPackage = packages[index];
-            document.querySelectorAll('.package-card')[index].classList.add('selected');
-            
-            // نمایش فرم
-            document.getElementById('receiptForm').style.display = 'block';
-            document.getElementById('selectedPackageInfo').innerHTML = `
-                📦 بسته انتخاب شده: ${selectedPackage.size} - ${selectedPackage.duration}
-                <br>
-                💰 مبلغ: ${selectedPackage.price} تومان
+            // ساخت پیام متنی
+            const textMessage = `
+🎯 **سفارش جدید فیلترشکن**
+📦 بسته: ${formData.package}
+💰 قیمت: ${formData.price}
+👤 نام: ${formData.name}
+📞 تلفن: ${formData.phone}
+📍 آدرس ارسال: ${formData.address}
+🔢 شماره پیگیری: ${formData.receipt}
+⏰ زمان: ${new Date().toLocaleString('fa-IR')}
             `;
             
-            // اسکرول به فرم
-            document.getElementById('receiptForm').scrollIntoView({ behavior: 'smooth' });
+            try {
+                // ارسال پیام متنی
+                await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: textMessage,
+                        parse_mode: 'Markdown'
+                    })
+                });
+                
+                // اگر عکس وجود دارد، ارسال عکس
+                if (receiptFile) {
+                    const photoFormData = new FormData();
+                    photoFormData.append('chat_id', chatId);
+                    photoFormData.append('photo', receiptFile);
+                    photoFormData.append('caption', `📷 عکس رسید پرداخت - ${formData.name}`);
+                    
+                    await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto`, {
+                        method: 'POST',
+                        body: photoFormData
+                    });
+                }
+                
+                return true;
+            } catch (error) {
+                console.error('خطا در ارسال به تلگرام:', error);
+                return false;
+            }
         }
-
-        // ارسال فرم
-        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+        
+        // در قسمت ارسال فرم، این رو جایگزین کن
+        document.getElementById('paymentForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = {
-                package: selectedPackage,
+                package: selectedPackage.size + ' - ' + selectedPackage.price + ' تومان',
+                price: selectedPackage.price,
                 name: document.getElementById('customerName').value,
                 phone: document.getElementById('customerPhone').value,
                 address: document.getElementById('customerAddress').value,
-                receipt: document.getElementById('receiptNumber').value,
-                date: new Date().toLocaleDateString('fa-IR'),
-                time: new Date().toLocaleTimeString('fa-IR')
+                receipt: document.getElementById('receiptNumber').value
             };
             
-            // ذخیره در localStorage
-            const orders = JSON.parse(localStorage.getItem('vpnOrders')) || [];
-            orders.push(formData);
-            localStorage.setItem('vpnOrders', JSON.stringify(orders));
+            // ارسال به تلگرام
+            const telegramSent = await sendOrderToTelegram(formData);
             
-            // نمایش پیام موفقیت
-            document.getElementById('successMessage').style.display = 'block';
-            
-            // غیرفعال کردن دکمه
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('submitBtn').textContent = '✅ ارسال شد';
-            
-            // پاک کردن فرم پس از 5 ثانیه
-            setTimeout(() => {
-                document.getElementById('paymentForm').reset();
-                document.getElementById('successMessage').style.display = 'none';
-                document.getElementById('submitBtn').disabled = false;
-                document.getElementById('submitBtn').textContent = '✅ ارسال رسید و دریافت فیلترشکن';
-            }, 5000);
-        });
-
-        // راه‌اندازی اولیه
-        document.addEventListener('DOMContentLoaded', function() {
-            createPricingTable();
+            if (telegramSent) {
+                // نمایش پیام موفقیت
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('submitBtn').disabled = true;
+                document.getElementById('submitBtn').textContent = '✅ ارسال شد';
+            } else {
+                alert('خطا در ارسال اطلاعات. لطفاً مستقیماً به تلگرام پیام دهید.');
+            }
         });
     </script>
 </body>
