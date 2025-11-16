@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فروش فیلترشکن - کافی نت</title>
+    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/B-Titr/BTitr.css">
+    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
     <style>
         * {
             margin: 0;
@@ -141,6 +143,7 @@
             margin: 20px 0;
             border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
         
         .bank-logo {
@@ -157,11 +160,32 @@
             padding: 12px;
             border-radius: 10px;
             direction: ltr;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .card-number:hover {
+            background: rgba(255,255,255,0.3);
         }
         
         .card-owner {
             font-size: 1.2rem;
             margin-bottom: 10px;
+        }
+        
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
         }
         
         /* بخش آپلود عکس */
@@ -272,6 +296,53 @@
             color: #ffffff;
         }
         
+        /* پاپ‌آپ راهنما */
+        .instructions-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            display: none;
+        }
+        
+        .instructions-content {
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .instructions-content h3 {
+            color: #25D366;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .instructions-content ol {
+            text-align: right;
+            padding-right: 20px;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+        
+        .close-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 25px;
@@ -295,8 +366,6 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/B-Titr/BTitr.css">
-    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
 </head>
 <body>
     <div class="container">
@@ -328,8 +397,13 @@
                 <div class="bank-card">
                     <div class="bank-logo">🏦</div>
                     <div>بانک سامان</div>
-                    <div class="card-number">6219 8619 8734 8090</div>
+                    <div class="card-number" id="cardNumber" onclick="copyCardNumber()">
+                        6219 8619 8734 8090
+                    </div>
                     <div class="card-owner">بنام: امیر محمد حضراتی</div>
+                    <button class="copy-btn" onclick="copyCardNumber()">
+                        📋 کپی شماره کارت
+                    </button>
                 </div>
             </div>
             
@@ -373,6 +447,27 @@
         </div>
         
         <a href="index.html" class="back-btn">← بازگشت به صفحه اصلی</a>
+    </div>
+
+    <!-- پاپ‌آپ راهنمای ارسال -->
+    <div class="instructions-popup" id="instructionsPopup">
+        <div class="instructions-content">
+            <h3>📋 راهنمای ارسال به واتساپ</h3>
+            <ol>
+                <li>روی دکمه "باز کردن واتساپ" کلیک کنید</li>
+                <li>عکس رسید را آپلود کنید (آیکون 📎)</li>
+                <li>پیام زیر را کپی و در واتساپ پیست کنید</li>
+            </ol>
+            
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin: 15px 0; text-align: right;">
+                <div id="messageToCopy" style="white-space: pre-wrap;"></div>
+                <button onclick="copyMessage()" class="upload-btn" style="margin-top: 10px; background: #25D366;">
+                    📋 کپی پیام
+                </button>
+            </div>
+            
+            <button class="close-btn" onclick="closeInstructions()">بستن</button>
+        </div>
     </div>
 
     <script>
@@ -427,6 +522,16 @@
             document.getElementById('uploadSection').style.display = 'block';
         }
 
+        // کپی شماره کارت
+        function copyCardNumber() {
+            const cardNumber = "6219861987348090";
+            navigator.clipboard.writeText(cardNumber).then(() => {
+                alert('✅ شماره کارت کپی شد: ' + cardNumber);
+            }).catch(() => {
+                alert('❌ خطا در کپی کردن شماره کارت');
+            });
+        }
+
         // مدیریت آپلود عکس
         document.getElementById('receiptImage').addEventListener('change', function(e) {
             const file = e.target.files[0];
@@ -466,15 +571,37 @@
 • مبلغ: ${selectedPackage.price} تومان  
 • مدت: ${selectedPackage.duration}
 
-✅ رسید پرداخت آپلود شده است.
+✅ رسید پرداخت ضمیمه شده است.
 لطفاً فیلترشکن را برایم ارسال کنید.
 
 با تشکر`;
             
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/989224044842?text=${encodedMessage}`;
+            // نمایش راهنمای ارسال
+            document.getElementById('messageToCopy').textContent = message;
+            document.getElementById('instructionsPopup').style.display = 'flex';
             
-            window.open(whatsappUrl, '_blank');
+            // کپی خودکار پیام
+            copyMessage();
+        }
+
+        // کپی پیام
+        function copyMessage() {
+            const message = document.getElementById('messageToCopy').textContent;
+            navigator.clipboard.writeText(message).then(() => {
+                alert('✅ پیام کپی شد! حالا در واتساپ پیست کنید.');
+                
+                // باز کردن واتساپ
+                setTimeout(() => {
+                    window.open('https://wa.me/989224044842', '_blank');
+                }, 1000);
+            }).catch(() => {
+                alert('❌ خطا در کپی کردن پیام');
+            });
+        }
+
+        // بستن راهنما
+        function closeInstructions() {
+            document.getElementById('instructionsPopup').style.display = 'none';
         }
 
         // راه‌اندازی اولیه
