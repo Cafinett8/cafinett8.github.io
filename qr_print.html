@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پرینت QR کد - کافی نت</title>
+    <style>
+        @media print {
+            @page {
+                size: A4;
+                margin: 2cm;
+            }
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: white;
+            font-family: 'B Titr', 'Vazir', sans-serif;
+            color: #1e3c72;
+            padding: 40px;
+            max-width: 210mm;
+            margin: 0 auto;
+        }
+        
+        .print-container {
+            text-align: center;
+            border: 3px solid #1e3c72;
+            border-radius: 25px;
+            padding: 50px 30px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .header {
+            margin-bottom: 40px;
+        }
+        
+        .title {
+            font-size: 3.5rem;
+            color: #1e3c72;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            font-size: 2rem;
+            color: #3b82f6;
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            font-size: 1.3rem;
+            color: #64748b;
+            margin-bottom: 40px;
+        }
+        
+        .qr-section {
+            margin: 40px 0;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            border: 2px solid #3b82f6;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(30, 64, 175, 0.2);
+        }
+        
+        .qr-image {
+            width: 250px;
+            height: 250px;
+            border: 3px solid #1e3c72;
+            border-radius: 15px;
+            padding: 15px;
+            background: white;
+        }
+        
+        .contact-info {
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border-radius: 15px;
+        }
+        
+        .contact-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-method {
+            text-align: center;
+        }
+        
+        .contact-method i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .website {
+            margin-top: 40px;
+            padding: 20px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .url {
+            direction: ltr;
+            font-family: monospace;
+            background: white;
+            color: #1e3c72;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/B-Titr/BTitr.css">
+    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="print-container">
+        <div class="header">
+            <h1 class="title">کافی نت</h1>
+            <h2 class="subtitle">خدمات اینترنتی تخصصی</h2>
+            <p class="description">برای دسترسی سریع به خدمات ما</p>
+        </div>
+        
+        <div class="qr-section">
+            <h3 style="color: #1e3c72; margin-bottom: 20px; font-size: 1.5rem;">QR کد را اسکن کنید</h3>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://cafinett8.github.io&color=1e3c72&bgcolor=ffffff&format=png" 
+                 alt="QR Code" 
+                 class="qr-image">
+        </div>
+        
+        <div class="contact-info">
+            <h3 class="contact-title">ارتباط با ما</h3>
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <i class="fab fa-telegram-plane"></i>
+                    <span>تلگرام</span>
+                </div>
+                <div class="contact-method">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>واتس‌اپ</span>
+                </div>
+                <div class="contact-method">
+                    <i class="fas fa-phone"></i>
+                    <span>تماس</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="website">
+            <strong>وبسایت ما:</strong>
+            <div class="url">cafinett8.github.io</div>
+        </div>
+        
+        <div class="footer">
+            <p>اسکن کنید و مستقیماً به سایت ما متصل شوید</p>
+        </div>
+    </div>
+</body>
+</html>
