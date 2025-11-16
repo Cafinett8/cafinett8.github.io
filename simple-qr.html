@@ -25,7 +25,7 @@
         }
         
         body {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: #1e3c72;
             font-family: 'B Titr', 'Vazir', sans-serif;
             width: 297mm;
             height: 210mm;
@@ -35,57 +35,40 @@
             color: white;
         }
         
-        .a4-container {
+        .qr-container {
             text-align: center;
-            width: 100%;
             padding: 50px;
         }
         
-        /* عنوان بزرگ */
         .main-title {
             font-family: 'B Titr', sans-serif;
-            font-size: 5.5rem;
+            font-size: 4rem;
             color: #ffffff;
-            margin-bottom: 30px;
-            text-shadow: 
-                3px 3px 0 #1e40af,
-                6px 6px 0 #1e3a8a;
+            margin-bottom: 40px;
         }
         
-        /* کیوآر کد */
-        .qr-section {
-            margin: 40px 0;
-        }
-        
-        .qr-image {
-            width: 300px;
-            height: 300px;
-            border: 4px solid #ffffff;
+        .qr-code {
+            width: 350px;
+            height: 350px;
+            border: 5px solid white;
             border-radius: 20px;
-            padding: 15px;
+            padding: 20px;
             background: white;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            margin: 0 auto 30px;
         }
         
-        /* لینک سایت */
-        .website-link {
-            margin-top: 40px;
-        }
-        
-        .url {
+        .website {
             font-family: 'Vazir', sans-serif;
-            font-size: 2rem;
-            background: rgba(255, 255, 255, 0.2);
+            font-size: 1.8rem;
+            background: rgba(255,255,255,0.2);
             padding: 15px 30px;
-            border-radius: 15px;
+            border-radius: 10px;
             display: inline-block;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            direction: ltr;
         }
         
         .instruction {
             font-family: 'Vazir', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-top: 20px;
             opacity: 0.9;
         }
@@ -94,22 +77,16 @@
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
 </head>
 <body>
-    <div class="a4-container">
-        <!-- عنوان اصلی -->
+    <div class="qr-container">
         <h1 class="main-title">کافی نت</h1>
         
-        <!-- کیوآر کد -->
-        <div class="qr-section">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://cafinett8.github.io&color=1e3c72&bgcolor=ffffff&format=png" 
-                 alt="QR Code" 
-                 class="qr-image">
-        </div>
+        <!-- QR کد ساده و مستقیم -->
+        <img src="https://quickchart.io/qr?text=https://cafinett8.github.io&size=350&margin=1" 
+             alt="QR Code" 
+             class="qr-code">
         
-        <!-- لینک سایت -->
-        <div class="website-link">
-            <div class="url">cafinett8.github.io</div>
-            <div class="instruction">QR کد را اسکن کنید</div>
-        </div>
+        <div class="website">cafinett8.github.io</div>
+        <div class="instruction">اسکن کنید → وارد سایت شوید</div>
     </div>
 </body>
 </html>
