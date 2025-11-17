@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html><html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,315 +7,156 @@
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Vazir', sans-serif;
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
-            color: #ffffff;
-            min-height: 100vh;
-            overflow-x: hidden;
-            direction: rtl;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #011627, #03346E);
+            color: #fff;
+            margin: 0;
+            padding: 0;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
-
-        /* هدر */
         header {
             text-align: center;
-            padding: 80px 0 50px;
+            padding: 100px 0 60px;
         }
-
         .neon-title {
             font-family: 'BTitr', sans-serif;
-            font-size: clamp(5rem, 15vw, 9rem);
+            font-size: clamp(5rem, 12vw, 8rem);
             font-weight: 900;
-            margin-bottom: 20px;
-            animation: colorBlink 2s infinite, titleGlow 3s ease-in-out infinite;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
-            line-height: 1.1;
-            letter-spacing: 3px;
+            color: #4da3ff;
+            animation: neonBlink 1.5s infinite;
+            text-shadow: 0 0 5px #4da3ff, 0 0 10px #4da3ff, 0 0 20px #00c6ff;
         }
-
-        @keyframes colorBlink {
-            0% { color: #ffffff; }
-            25% { color: #e0f2fe; }
-            50% { color: #bfdbfe; }
-            75% { color: #93c5fd; }
-            100% { color: #ffffff; }
+        @keyframes neonBlink {
+            0%, 100% { color: #4da3ff; }
+            50% { color: #00c6ff; }
         }
-
-        @keyframes titleGlow {
-            0%, 100% { 
-                filter: brightness(1);
-                transform: scale(1);
-            }
-            50% { 
-                filter: brightness(1.3);
-                transform: scale(1.05);
-            }
-        }
-
         .tagline {
             font-size: 1.8rem;
+            margin-top: 10px;
             opacity: 0.9;
-            font-weight: 500;
         }
-
-        /* خدمات */
         .services {
-            padding: 50px 0;
+            padding: 60px 0;
+            text-align: center;
         }
-
         .services h2 {
-            text-align: center;
-            font-family: 'BTitr', sans-serif;
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 40px;
-            color: #ffffff;
+            color: #4da3ff;
         }
-
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            max-width: 1000px;
-            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
         }
-
         .service-item {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255,255,255,0.1);
             border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
+            padding: 30px 20px;
+            min-width: 200px;
             transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
-            text-decoration: none;
-            color: inherit;
-            display: block;
         }
-
         .service-item:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px) scale(1.05);
+            background: rgba(255,255,255,0.2);
         }
-
-        .service-item i {
-            font-size: 4rem;
-            margin-bottom: 25px;
-            color: #ffffff;
-            display: block;
-            transition: all 0.3s ease;
-        }
-
-        .service-item:hover i {
-            transform: scale(1.1);
-        }
-
-        .service-item p {
-            font-family: 'BTitr', sans-serif;
-            font-size: 1.8rem;
-            margin: 0;
-            font-weight: 700;
-        }
-
         .service-link {
+            color: #fff;
             text-decoration: none;
-            color: inherit;
-            display: block;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
-
-        /* تماس */
         .contact {
-            padding: 60px 0 40px;
+            padding: 60px 0;
             text-align: center;
         }
-
         .contact h2 {
-            font-family: 'BTitr', sans-serif;
-            font-size: 3rem;
-            margin-bottom: 30px;
-            color: #ffffff;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #4da3ff;
         }
-
-        .contact p {
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            font-size: 1.4rem;
-            opacity: 0.9;
-            line-height: 1.8;
-        }
-
         .contact-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
-            max-width: 700px;
-            margin: 0 auto;
         }
-
         .contact-btn {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 20px 35px;
+            gap: 10px;
+            padding: 15px 30px;
             border-radius: 50px;
             text-decoration: none;
-            color: white;
+            color: #fff;
             font-weight: bold;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             transition: all 0.3s ease;
-            min-width: 200px;
-            justify-content: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, #4da3ff, #00c6ff);
         }
-
         .contact-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 15px #00c6ff;
         }
-
-        .telegram {
-            background: linear-gradient(135deg, #0088cc, #00aced);
-        }
-
-        .whatsapp {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-        }
-
-        .phone {
-            background: linear-gradient(135deg, #1e40af, #3b82f6);
-        }
-
-        /* فوتر */
         footer {
             text-align: center;
-            padding: 30px 0;
+            padding: 40px 0;
             margin-top: 40px;
             font-size: 1.1rem;
             opacity: 0.8;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* رسپانسیو */
-        @media (max-width: 768px) {
-            header {
-                padding: 60px 0 30px;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .service-item {
-                padding: 30px 20px;
-            }
-            
-            .contact-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-            }
-            
-            .contact-btn {
-                width: 100%;
-                max-width: 280px;
-            }
-            
-            .services h2, .contact h2 {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .neon-title {
-                font-size: 4rem;
-            }
-            
-            .service-item i {
-                font-size: 3.5rem;
-            }
-            
-            .service-item p {
-                font-size: 1.6rem;
-            }
-            
-            .tagline {
-                font-size: 1.4rem;
-            }
+            border-top: 1px solid rgba(255,255,255,0.2);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1 class="neon-title">کافی نت</h1>
-            <p class="tagline">انجام خدمات اینترنتی</p>
-        </header>
+<div class="container">
+    <header>
+        <h1 class="neon-title">کافی نت</h1>
+        <p class="tagline">انجام خدمات اینترنتی</p>
+    </header><main>
+    <section class="services">
+        <h2>امکانات و خدمات</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <p><a href="powerpoint-order.html" class="service-link">سفارش پاورپوینت</a></p>
+            </div>
+            <div class="service-item">
+                <p><a href="research-order.html" class="service-link">تحقیق دانشجویی</a></p>
+            </div>
+            <div class="service-item">
+                <p><a href="vpn-shop.html" class="service-link">فیلترشکن پرسرعت</a></p>
+            </div>
+        </div>
+    </section>
 
-        <main>
-            <section class="services">
-                <h2>امکانات و خدمات</h2>
-                <div class="services-grid">
-                    <a href="software-install.html" class="service-item">
-                        <i class="fas fa-download"></i>
-                        <p>نصب نرم افزار و ویندوز</p>
-                    </a>
-                    <a href="print-scan.html" class="service-item">
-                        <i class="fas fa-print"></i>
-                        <p>چاپ و اسکن</p>
-                    </a>
-                    <a href="research-order.html" class="service-item">
-                        <i class="fas fa-file-word"></i>
-                        <p>تحقیق دانشجویی</p>
-                    </a>
-                    <a href="powerpoint-order.html" class="service-item">
-                        <i class="fas fa-file-powerpoint"></i>
-                        <p>پاورپوینت</p>
-                    </a>
-                    <a href="vpn-shop.html" class="service-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <p>فیلترشکن پرسرعت</p>
-                    </a>
-                </div>
-            </section>
+    <section class="contact">
+        <h2>تماس با ما</h2>
+        <p>برای دریافت خدمات با ما در تماس باشید:</p>
+        <div class="contact-buttons">
+            <a href="https://t.me/Cafinett8" target="_blank" class="contact-btn">
+                <i class="fab fa-telegram-plane"></i><span>تلگرام</span>
+            </a>
+            <a href="https://wa.me/989224044842" target="_blank" class="contact-btn">
+                <i class="fab fa-whatsapp"></i><span>واتساپ</span>
+            </a>
+            <a href="tel:09224044842" class="contact-btn">
+                <i class="fas fa-phone"></i><span>تماس</span>
+            </a>
+        </div>
+    </section>
+</main>
 
-            <section class="contact">
-                <h2>تماس با ما</h2>
-                <p>برای دریافت خدمات با ما در تماس باشید:</p>
-                <div class="contact-buttons">
-                    <a href="https://t.me/Cafinett8" target="_blank" class="contact-btn telegram">
-                        <i class="fab fa-telegram-plane"></i>
-                        <span>تلگرام</span>
-                    </a>
-                    <a href="https://wa.me/989224044842" target="_blank" class="contact-btn whatsapp">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>واتساپ</span>
-                    </a>
-                    <a href="tel:09224044842" class="contact-btn phone">
-                        <i class="fas fa-phone"></i>
-                        <span>تماس</span>
-                    </a>
-                </div>
-            </section>
-        </main>
+<footer>
+    <p>© 2023 کافی نت. تمامی حقوق محفوظ است.</p>
+</footer>
 
-        <footer>
-            <p>© 2023 کافی نت. تمامی حقوق محفوظ است.</p>
-        </footer>
-    </div>
+</div>
 </body>
 </html>
