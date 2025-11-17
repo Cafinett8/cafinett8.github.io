@@ -1,153 +1,481 @@
-<!DOCTYPE html><html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کافی نت | خدمات اینترنتی</title>
+    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/B-Titr/BTitr.css">
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{
-            font-family:'Vazir',sans-serif;
-            background:#0b0f1a;
-            color:#fff;
-            transition:0.5s;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        body.day{
-            background:#dfefff;
-            color:#002b5c;
+
+        body {
+            font-family: 'Vazir', sans-serif;
+            background: #0b0f1a;
+            color: #fff;
+            transition: 0.5s;
+            min-height: 100vh;
         }
-        .toggle{
-            position:fixed;top:25px;left:25px;
-            width:60px;height:60px;border-radius:50%;
-            background:#1a2337;color:#4da3ff;
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.8rem;cursor:pointer;
-            box-shadow:0 0 20px rgba(0,0,0,0.4);
-            transition:0.4s;
+
+        body.day {
+            background: linear-gradient(135deg, #dfefff, #b8d4ff);
+            color: #002b5c;
         }
-        body.day .toggle{background:#fff;color:#0057d9;box-shadow:0 0 15px rgba(0,0,0,0.2)}header{text-align:center;padding:110px 0 60px 0}
-    .title{
-        font-size:4.8rem;font-weight:900;
-        background:linear-gradient(135deg,#4da3ff,#78c7ff);
-        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-        animation:glow 3s infinite;
-    }
-    @keyframes glow{
-        0%,100%{filter:brightness(1)}
-        50%{filter:brightness(1.4)}
-    }
-    body.day .title{
-        background:linear-gradient(135deg,#0057d9,#0091ff);
-        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    }
 
-    .tagline{font-size:1.6rem;margin-top:10px;opacity:.9}
+        .toggle {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #1a2337;
+            color: #4da3ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+            transition: 0.4s;
+            z-index: 1000;
+            border: 2px solid rgba(77, 163, 255, 0.3);
+        }
 
-    .services{padding:70px 0}
-    .services h2{
-        text-align:center;font-size:3rem;margin-bottom:60px;
-        background:linear-gradient(135deg,#4da3ff,#78c7ff);
-        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    }
-    body.day .services h2{
-        background:linear-gradient(135deg,#0057d9,#0091ff);
-        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    }
+        .toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+            box-shadow: 0 0 30px rgba(77, 163, 255, 0.6);
+        }
 
-    .grid{
-        max-width:1300px;margin:auto;
-        display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
-        gap:40px;
-    }
-    .item{
-        background:rgba(255,255,255,0.05);
-        border:1px solid rgba(255,255,255,0.08);
-        border-radius:20px;padding:50px;text-align:center;
-        transition:0.4s;
-        backdrop-filter:blur(8px);
-    }
-    .item:hover{
-        transform:translateY(-12px);
-        box-shadow:0 20px 45px rgba(0,0,0,0.5);
-    }
-    body.day .item{
-        background:rgba(255,255,255,0.7);
-        border-color:rgba(0,85,170,0.2);
-    }
+        body.day .toggle {
+            background: #fff;
+            color: #0057d9;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            border-color: rgba(0, 87, 217, 0.3);
+        }
 
-    .item i{
-        font-size:4rem;margin-bottom:25px;
-        background:linear-gradient(135deg,#4da3ff,#78c7ff);
-        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    }
-    body.day .item i{
-        background:linear-gradient(135deg,#0057d9,#0091ff);
-        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    }
+        header {
+            text-align: center;
+            padding: 120px 0 70px 0;
+        }
 
-    .item p a{
-        text-decoration:none;color:inherit;font-size:2rem;font-weight:bold;
-    }
+        .title {
+            font-family: 'BTitr', sans-serif;
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #4da3ff, #78c7ff, #a6dcff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 3s ease-in-out infinite;
+            text-shadow: 0 5px 25px rgba(77, 163, 255, 0.3);
+            margin-bottom: 15px;
+        }
 
-    .contact{padding:90px 0;text-align:center}
+        @keyframes glow {
+            0%, 100% {
+                filter: brightness(1);
+                transform: scale(1);
+            }
+            50% {
+                filter: brightness(1.4);
+                transform: scale(1.02);
+            }
+        }
 
-    .contact h2{
-        font-size:3rem;margin-bottom:40px;
-        background:linear-gradient(135deg,#4da3ff,#78c7ff);
-        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    }
-    body.day .contact h2{
-        background:linear-gradient(135deg,#0057d9,#0091ff);
-        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-    }
+        body.day .title {
+            background: linear-gradient(135deg, #0057d9, #0091ff, #4da3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-    .contact p{max-width:600px;margin:auto;font-size:1.4rem;opacity:.9;line-height:2}
+        .tagline {
+            font-size: 1.7rem;
+            margin-top: 10px;
+            opacity: 0.9;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
 
-    .btns{margin-top:40px;display:flex;justify-content:center;gap:25px;flex-wrap:wrap}
-    .btn{
-        padding:18px 40px;border-radius:40px;font-size:1.3rem;
-        background:#0057d9;color:#fff;text-decoration:none;
-        box-shadow:0 10px 25px rgba(0,0,0,0.4);
-        transition:0.3s;
-    }
-    .btn:hover{transform:translateY(-10px);box-shadow:0 15px 40px rgba(0,0,0,0.5)}
+        .services {
+            padding: 80px 20px;
+        }
 
-    footer{text-align:center;padding:50px 0;margin-top:80px;font-size:1.2rem;opacity:.7}
+        .services h2 {
+            text-align: center;
+            font-family: 'BTitr', sans-serif;
+            font-size: 3.2rem;
+            margin-bottom: 70px;
+            background: linear-gradient(135deg, #4da3ff, #78c7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
 
-    @media(max-width:480px){.title{font-size:3.4rem}}
-</style>
+        .services h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, #4da3ff, #78c7ff);
+            border-radius: 2px;
+        }
 
+        body.day .services h2 {
+            background: linear-gradient(135deg, #0057d9, #0091ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.day .services h2::after {
+            background: linear-gradient(90deg, #0057d9, #0091ff);
+        }
+
+        .grid {
+            max-width: 1300px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 45px;
+        }
+
+        .item {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 25px;
+            padding: 60px 40px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4da3ff, #78c7ff);
+        }
+
+        .item:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            border-color: rgba(77, 163, 255, 0.4);
+        }
+
+        body.day .item {
+            background: rgba(255, 255, 255, 0.85);
+            border-color: rgba(0, 85, 170, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body.day .item::before {
+            background: linear-gradient(90deg, #0057d9, #0091ff);
+        }
+
+        body.day .item:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(0, 87, 217, 0.4);
+        }
+
+        .item i {
+            font-size: 4.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #4da3ff, #78c7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .item:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        body.day .item i {
+            background: linear-gradient(135deg, #0057d9, #0091ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .item p a {
+            text-decoration: none;
+            color: inherit;
+            font-size: 2.1rem;
+            font-weight: bold;
+            font-family: 'BTitr', sans-serif;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .item p a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4da3ff, #78c7ff);
+            transition: width 0.3s ease;
+        }
+
+        .item p a:hover::after {
+            width: 100%;
+        }
+
+        body.day .item p a::after {
+            background: linear-gradient(90deg, #0057d9, #0091ff);
+        }
+
+        .contact {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-family: 'BTitr', sans-serif;
+            font-size: 3.2rem;
+            margin-bottom: 50px;
+            background: linear-gradient(135deg, #4da3ff, #78c7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .contact h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, #4da3ff, #78c7ff);
+            border-radius: 2px;
+        }
+
+        body.day .contact h2 {
+            background: linear-gradient(135deg, #0057d9, #0091ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        body.day .contact h2::after {
+            background: linear-gradient(90deg, #0057d9, #0091ff);
+        }
+
+        .contact p {
+            max-width: 650px;
+            margin: 0 auto 50px auto;
+            font-size: 1.5rem;
+            opacity: 0.9;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .btns {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 20px 45px;
+            border-radius: 50px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 200px;
+            justify-content: center;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:nth-child(1) {
+            background: linear-gradient(135deg, #0088cc, #00aced);
+            color: #fff;
+        }
+
+        .btn:nth-child(2) {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #fff;
+        }
+
+        .btn:nth-child(3) {
+            background: linear-gradient(135deg, #4da3ff, #78c7ff);
+            color: #fff;
+        }
+
+        body.day .btn:nth-child(3) {
+            background: linear-gradient(135deg, #0057d9, #0091ff);
+        }
+
+        .btn:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            margin-top: 80px;
+            font-size: 1.3rem;
+            opacity: 0.8;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        body.day footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 3.8rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+            
+            .item {
+                padding: 50px 30px;
+            }
+            
+            .btns {
+                flex-direction: column;
+                align-items: center;
+                gap: 25px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 3rem;
+            }
+            
+            .services h2,
+            .contact h2 {
+                font-size: 2.5rem;
+            }
+            
+            .item p a {
+                font-size: 1.8rem;
+            }
+            
+            .toggle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="toggle" onclick="changeTheme()">🌙</div><header>
-    <h1 class="title">کافی نت</h1>
-    <p class="tagline">ارائه خدمات دیجیتال و اینترنتی</p>
-</header>
-
-<section class="services">
-    <h2>خدمات تخصصی ما</h2>
-    <div class="grid">
-        <div class="item"><i>📊</i><p><a href="#">طراحی پاورپوینت</a></p></div>
-        <div class="item"><i>🎓</i><p><a href="#">پروژه دانشجویی</a></p></div>
-        <div class="item"><i>⚡</i><p><a href="#">فیلتر شکن پرسرعت</a></p></div>
+    <div class="toggle" onclick="changeTheme()">
+        <i class="fas fa-moon"></i>
     </div>
-</section>
 
-<section class="contact">
-    <h2>ارتباط با ما</h2>
-    <p>برای دریافت خدمات باکیفیت و مشاوره رایگان، از طریق راه‌های زیر با ما در تماس باشید</p>
-    <div class="btns">
-        <a href="#" class="btn">تلگرام</a>
-        <a href="#" class="btn">واتساپ</a>
-        <a href="#" class="btn">تماس مستقیم</a>
-    </div>
-</section>
+    <header>
+        <h1 class="title">کافی نت</h1>
+        <p class="tagline">ارائه خدمات دیجیتال و اینترنتی</p>
+    </header>
 
-<footer>© ۲۰۲۳ کافی نت - تمامی حقوق محفوظ است</footer>
+    <section class="services">
+        <h2>خدمات تخصصی ما</h2>
+        <div class="grid">
+            <div class="item">
+                <i class="fas fa-presentation"></i>
+                <p><a href="powerpoint-order.html">طراحی پاورپوینت</a></p>
+            </div>
+            <div class="item">
+                <i class="fas fa-graduation-cap"></i>
+                <p><a href="research-order.html">پروژه دانشجویی</a></p>
+            </div>
+            <div class="item">
+                <i class="fas fa-bolt"></i>
+                <p><a href="vpn-shop.html">اینترنت پرسرعت</a></p>
+            </div>
+        </div>
+    </section>
 
-<script>
-function changeTheme(){
-    document.body.classList.toggle('day');
-}
-</script></body>
+    <section class="contact">
+        <h2>ارتباط با ما</h2>
+        <p>برای دریافت خدمات باکیفیت و مشاوره رایگان، از طریق راه‌های زیر با ما در تماس باشید</p>
+        <div class="btns">
+            <a href="https://t.me/Cafinett8" target="_blank" class="btn">
+                <i class="fab fa-telegram-plane"></i>
+                تلگرام
+            </a>
+            <a href="https://wa.me/989224044842" target="_blank" class="btn">
+                <i class="fab fa-whatsapp"></i>
+                واتساپ
+            </a>
+            <a href="tel:09224044842" class="btn">
+                <i class="fas fa-phone-alt"></i>
+                تماس مستقیم
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        © ۲۰۲۳ کافی نت - تمامی حقوق محفوظ است
+    </footer>
+
+    <script>
+        function changeTheme() {
+            document.body.classList.toggle('day');
+            const icon = document.querySelector('.toggle i');
+            
+            if (document.body.classList.contains('day')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+    </script>
+</body>
 </html>
