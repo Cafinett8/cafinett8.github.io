@@ -15,16 +15,18 @@
         }
 
         :root {
-            --day-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --night-bg: linear-gradient(135deg, #0f1b3a, #1e3a8a, #3b82f6);
+            --day-bg: linear-gradient(135deg, #1e3a8a, #3b82f6, #1e40af);
+            --night-bg: linear-gradient(135deg, #0a0a0a, #1a1a1a, #000000);
             --day-card: linear-gradient(145deg, #ffffff, #f0f8ff);
-            --night-card: linear-gradient(145deg, #1e293b, #334155);
+            --night-card: linear-gradient(145deg, #1a1a1a, #2d2d2d);
             --day-text: #1e40af;
             --night-text: #e0f2fe;
-            --day-accent: #2563eb;
+            --day-accent: #1e40af;
             --night-accent: #60a5fa;
-            --day-secondary: #4f46e5;
-            --night-secondary: #818cf8;
+            --day-secondary: #1e3a8a;
+            --night-secondary: #3b82f6;
+            --day-icon: #ffffff;
+            --night-icon: #3b82f6;
         }
 
         body {
@@ -33,6 +35,7 @@
             color: var(--day-text);
             min-height: 100vh;
             transition: all 0.6s ease;
+            font-weight: bold;
         }
 
         body.night-mode {
@@ -86,20 +89,21 @@
 
         .neon-title {
             font-family: 'BTitr', sans-serif;
-            font-size: 5rem;
-            background: linear-gradient(135deg, var(--day-accent), var(--day-secondary));
+            font-size: 6rem;
+            background: linear-gradient(135deg, #ffffff, #e0f2fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
             animation: titleGlow 3s ease-in-out infinite;
-            text-shadow: 0 5px 25px rgba(37, 99, 235, 0.3);
+            text-shadow: 0 5px 25px rgba(255, 255, 255, 0.5);
+            font-weight: 900;
         }
 
         .night-mode .neon-title {
             background: linear-gradient(135deg, var(--night-accent), var(--night-secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 5px 25px rgba(96, 165, 250, 0.3);
+            text-shadow: 0 5px 25px rgba(96, 165, 250, 0.5);
         }
 
         @keyframes titleGlow {
@@ -114,9 +118,14 @@
         }
 
         .tagline {
-            font-size: 1.7rem;
+            font-size: 2rem;
             opacity: 0.9;
-            font-weight: 500;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .night-mode .tagline {
+            color: var(--night-text);
         }
 
         /* خدمات */
@@ -127,12 +136,13 @@
         .section-title {
             text-align: center;
             font-family: 'BTitr', sans-serif;
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             margin-bottom: 70px;
-            background: linear-gradient(135deg, var(--day-accent), var(--day-secondary));
+            background: linear-gradient(135deg, #ffffff, #e0f2fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
+            font-weight: 900;
         }
 
         .section-title::after {
@@ -143,7 +153,7 @@
             transform: translateX(-50%);
             width: 120px;
             height: 4px;
-            background: linear-gradient(90deg, var(--day-accent), var(--day-secondary));
+            background: linear-gradient(90deg, #ffffff, #e0f2fe);
             border-radius: 2px;
         }
 
@@ -169,8 +179,8 @@
             padding: 60px 40px;
             text-align: center;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid rgba(37, 99, 235, 0.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -182,13 +192,13 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(90deg, var(--day-accent), var(--day-secondary));
+            background: linear-gradient(90deg, #ffffff, #e0f2fe);
         }
 
         .night-mode .service-card {
             background: var(--night-card);
             border-color: rgba(96, 165, 250, 0.3);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
 
         .night-mode .service-card::before {
@@ -197,23 +207,20 @@
 
         .service-card:hover {
             transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         }
 
         .service-icon {
             font-size: 4.5rem;
             margin-bottom: 30px;
-            background: linear-gradient(135deg, var(--day-accent), var(--day-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--day-icon);
             display: block;
             transition: all 0.3s ease;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
         }
 
         .night-mode .service-icon {
-            background: linear-gradient(135deg, var(--night-accent), var(--night-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--night-icon);
         }
 
         .service-card:hover .service-icon {
@@ -222,9 +229,9 @@
 
         .service-name {
             font-family: 'BTitr', sans-serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin: 0;
-            font-weight: bold;
+            font-weight: 900;
         }
 
         .service-link {
@@ -242,7 +249,7 @@
             left: 0;
             width: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--day-accent), var(--day-secondary));
+            background: linear-gradient(90deg, #ffffff, #e0f2fe);
             transition: width 0.3s ease;
         }
 
@@ -262,12 +269,13 @@
 
         .contact-title {
             font-family: 'BTitr', sans-serif;
-            font-size: 3.2rem;
+            font-size: 3.5rem;
             margin-bottom: 50px;
-            background: linear-gradient(135deg, var(--day-accent), var(--day-secondary));
+            background: linear-gradient(135deg, #ffffff, #e0f2fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
+            font-weight: 900;
         }
 
         .contact-title::after {
@@ -278,7 +286,7 @@
             transform: translateX(-50%);
             width: 120px;
             height: 4px;
-            background: linear-gradient(90deg, var(--day-accent), var(--day-secondary));
+            background: linear-gradient(90deg, #ffffff, #e0f2fe);
             border-radius: 2px;
         }
 
@@ -295,9 +303,15 @@
         .contact-desc {
             max-width: 600px;
             margin: 0 auto 50px auto;
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             opacity: 0.9;
             line-height: 1.8;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .night-mode .contact-desc {
+            color: var(--night-text);
         }
 
         .contact-buttons {
@@ -316,7 +330,7 @@
             text-decoration: none;
             color: white;
             font-weight: bold;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             transition: all 0.4s ease;
             min-width: 200px;
             justify-content: center;
@@ -338,11 +352,13 @@
         }
 
         .phone {
-            background: linear-gradient(135deg, var(--day-accent), var(--day-secondary));
+            background: linear-gradient(135deg, #ffffff, #e0f2fe);
+            color: #1e40af;
         }
 
         .night-mode .phone {
             background: linear-gradient(135deg, var(--night-accent), var(--night-secondary));
+            color: white;
         }
 
         /* فوتر */
@@ -350,20 +366,23 @@
             text-align: center;
             padding: 60px 0;
             margin-top: 80px;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             opacity: 0.8;
             border-top: 2px solid;
-            border-image: linear-gradient(90deg, transparent, var(--day-accent), transparent) 1;
+            border-image: linear-gradient(90deg, transparent, #ffffff, transparent) 1;
+            font-weight: 700;
+            color: #ffffff;
         }
 
         .night-mode footer {
             border-image: linear-gradient(90deg, transparent, var(--night-accent), transparent) 1;
+            color: var(--night-text);
         }
 
         /* رسپانسیو */
         @media (max-width: 768px) {
             .neon-title {
-                font-size: 3.5rem;
+                font-size: 4.5rem;
             }
             
             .services-grid {
@@ -387,13 +406,13 @@
             }
             
             .section-title, .contact-title {
-                font-size: 2.5rem;
+                font-size: 3rem;
             }
         }
 
         @media (max-width: 480px) {
             .neon-title {
-                font-size: 2.8rem;
+                font-size: 3.5rem;
             }
             
             .service-card {
@@ -405,13 +424,17 @@
             }
             
             .service-name {
-                font-size: 1.7rem;
+                font-size: 1.9rem;
             }
             
             .theme-toggle {
                 width: 50px;
                 height: 50px;
                 font-size: 1.4rem;
+            }
+            
+            .tagline, .contact-desc {
+                font-size: 1.5rem;
             }
         }
     </style>
