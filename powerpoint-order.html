@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>سفارش پاورپوینت | کافی نت</title>
+    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/B-Titr/BTitr.css">
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -38,10 +39,19 @@
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-family: 'BTitr', sans-serif;
+            font-size: 3rem;
             margin-bottom: 10px;
             color: #fdbb2d;
-            text-shadow: 0 0 10px rgba(253, 187, 45, 0.5);
+            text-shadow: 0 0 15px rgba(253, 187, 45, 0.7);
+            font-weight: bold;
+        }
+        
+        .powerpoint-logo {
+            font-size: 4rem;
+            color: #fdbb2d;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(253, 187, 45, 0.8);
         }
         
         .tagline {
@@ -155,6 +165,29 @@
             border: 1px solid #fdbb2d;
         }
         
+        .send-order {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .send-btn {
+            background: linear-gradient(45deg, #fdbb2d, #ff6b6b);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'BTitr', sans-serif;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .send-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
         .contact-info {
             background: rgba(255, 255, 255, 0.1);
             border-radius: 10px;
@@ -236,7 +269,11 @@
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .powerpoint-logo {
+                font-size: 3rem;
             }
         }
     </style>
@@ -248,6 +285,9 @@
         </a>
         
         <header>
+            <div class="powerpoint-logo">
+                <i class="fab fa-microsoft"></i>
+            </div>
             <h1>سفارش پاورپوینت</h1>
             <p class="tagline">ارائه با کیفیت ترین ارائه‌های پاورپوینت</p>
         </header>
@@ -291,17 +331,24 @@
             <div class="total-price">
                 قیمت کل: <span id="total-price">100,000</span> تومان
             </div>
+            
+            <div class="send-order">
+                <button class="send-btn" onclick="sendOrder()">
+                    <i class="fas fa-paper-plane"></i>
+                    ارسال سفارش
+                </button>
+            </div>
         </section>
         
         <section class="contact-info">
             <h3 class="contact-title">برای ثبت سفارش با ما تماس بگیرید</h3>
             
             <div class="contact-buttons">
-                <a href="https://wa.me/989224044842" target="_blank" class="contact-btn whatsapp">
+                <a href="#" id="whatsapp-link" class="contact-btn whatsapp" target="_blank">
                     <i class="fab fa-whatsapp"></i>
                     <span>واتساپ</span>
                 </a>
-                <a href="https://t.me/Cafinett8" target="_blank" class="contact-btn telegram">
+                <a href="#" id="telegram-link" class="contact-btn telegram" target="_blank">
                     <i class="fab fa-telegram-plane"></i>
                     <span>تلگرام</span>
                 </a>
@@ -318,7 +365,7 @@
                 </div>
                 <div class="contact-item">
                     <i class="fab fa-telegram-plane"></i>
-                    <span>@Cafinett8</span>
+                    <span>Cafinett8@</span>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>
@@ -334,6 +381,7 @@
         let selectedPackage = document.querySelector('.package-option');
         selectedPackage.classList.add('selected');
         let packagePrice = parseInt(selectedPackage.getAttribute('data-price'));
+        let packageName = selectedPackage.querySelector('.package-name').textContent;
         
         packageOptions.forEach(option => {
             option.addEventListener('click', () => {
@@ -341,6 +389,7 @@
                 option.classList.add('selected');
                 selectedPackage = option;
                 packagePrice = parseInt(option.getAttribute('data-price'));
+                packageName = option.querySelector('.package-name').textContent;
                 updateTotalPrice();
             });
         });
@@ -360,6 +409,44 @@
             slidesCount.textContent = slidesInput.value;
             updateTotalPrice();
         });
+        
+        // ارسال سفارش به واتساپ و تلگرام
+        function sendOrder() {
+            const topic = document.getElementById('topic').value;
+            const slides = slidesInput.value;
+            const notes = document.getElementById('notes').value;
+            const totalPrice = (slides * packagePrice).toLocaleString();
+            
+            if (!topic) {
+                alert('لطفاً موضوع پاورپوینت را وارد کنید');
+                return;
+            }
+            
+            const message = `📊 سفارش جدید پاورپوینت:
+            
+📌 موضوع: ${topic}
+🎨 نوع: ${packageName}
+📑 تعداد اسلاید: ${slides} عدد
+💰 قیمت کل: ${totalPrice} تومان
+📝 توضیحات: ${notes || 'ندارد'}
+
+✅ لطفاً برای تأیید و پرداخت اقدام کنید.`;
+            
+            // کد پیام برای واتساپ
+            const encodedMessage = encodeURIComponent(message);
+            
+            // آپدیت لینک‌ها با پیام سفارش
+            document.getElementById('whatsapp-link').href = `https://wa.me/989224044842?text=${encodedMessage}`;
+            document.getElementById('telegram-link').href = `https://t.me/Cafinett8?text=${encodedMessage}`;
+            
+            // نمایش پیام موفقیت
+            alert('سفارش شما آماده ارسال است! لطفاً یکی از روش‌های ارتباطی را انتخاب کنید.');
+            
+            // اسکرول به بخش تماس
+            document.querySelector('.contact-info').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
         
         // مقداردهی اولیه
         updateTotalPrice();
