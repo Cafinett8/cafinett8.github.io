@@ -170,6 +170,13 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .bank-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
         
         .bank-card::before {
@@ -253,6 +260,8 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            width: 100%;
+            justify-content: center;
         }
         
         .copy-btn:hover {
@@ -462,7 +471,7 @@
             <div class="step">
                 <div class="step-number">۲</div>
                 <div class="step-title">💳 واریز مبلغ به حساب بانکی</div>
-                <div class="bank-card">
+                <div class="bank-card" onclick="copyCardNumber()">
                     <div class="bank-title">واریز مبلغ به حساب بانکی</div>
                     <div class="bank-name">بانک سامان</div>
                     
@@ -527,7 +536,7 @@
         ];
 
         let selectedPackage = null;
-        let canCopy = true; // فلگ برای جلوگیری از کلیک سریع
+        let copyCooldown = false;
 
         // ایجاد جدول قیمت
         function createPricingTable() {
@@ -566,70 +575,60 @@
             `;
         }
 
-        // کپی شماره کارت
+        // کپی شماره کارت - فوق آسان
         function copyCardNumber() {
-            if (!canCopy) return;
+            if (copyCooldown) return;
             
             const cardNumber = "6219861987348090";
-            const copyButton = document.getElementById('copyButton');
             
-            // غیرفعال کردن موقت دکمه
-            canCopy = false;
-            copyButton.style.opacity = '0.7';
-            copyButton.style.cursor = 'not-allowed';
+            // فعال کردن کول‌داون
+            copyCooldown = true;
             
-            // روش اصلی با Clipboard API
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(cardNumber)
-                    .then(() => {
-                        showCopyPopup();
-                    })
-                    .catch(err => {
-                        console.error('خطا در کپی:', err);
-                        fallbackCopy(cardNumber);
-                    });
-            } else {
-                fallbackCopy(cardNumber);
-            }
-            
-            // فعال کردن مجدد دکمه بعد از 1 ثانیه
-            setTimeout(() => {
-                canCopy = true;
-                copyButton.style.opacity = '1';
-                copyButton.style.cursor = 'pointer';
-            }, 1000);
-        }
-
-        function fallbackCopy(text) {
-            // ایجاد یک textarea موقت
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            
-            // قرار دادن خارج از صفحه
-            textArea.style.position = 'fixed';
-            textArea.style.top = '0';
-            textArea.style.left = '0';
-            textArea.style.opacity = '0';
-            
-            document.body.appendChild(textArea);
-            1
-            // انتخاب و کپی
-            textArea.focus();
-            textArea.select();
-            
-            try {
-                const successful = document.execCommand('copy');
-                if (successful) {
-                    showCopyPopup();
-                } else {
-                    alert('❌ لطفاً شماره کارت را دستی کپی کنید:\n' + text);
+            // روش فوق سریع - مستقیم کپی
+            const copyToClipboard = (text) => {
+                // روش 1: Clipboard API
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
                 }
-            } catch (err) {
-                alert('❌ لطفاً شماره کارت را دستی کپی کنید:\n' + text);
-            }
+                
+                // روش 2: execCommand
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.top = '0';
+                textArea.style.left = '0';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    const successful = document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    return Promise.resolve();
+                } catch (err) {
+                    document.body.removeChild(textArea);
+                    return Promise.reject(err);
+                }
+            };
             
-            // حذف textarea
-            document.body.removeChild(textArea);
+            // اجرای کپی
+            copyToClipboard(cardNumber)
+                .then(() => {
+                    // نمایش پاپ‌آپ موفقیت
+                    showCopyPopup();
+                })
+                .catch((err) => {
+                    console.log('خطا در کپی:', err);
+                    // حتی اگر خطا هم داد، پاپ‌آپ نشان بده
+                    showCopyPopup();
+                })
+                .finally(() => {
+                    // غیرفعال کردن کول‌داون بعد از 500ms
+                    setTimeout(() => {
+                        copyCooldown = false;
+                    }, 500);
+                });
         }
 
         function showCopyPopup() {
@@ -668,6 +667,13 @@
         // راه‌اندازی اولیه
         document.addEventListener('DOMContentLoaded', function() {
             createPricingTable();
+        });
+
+        // اضافه کردن event listener برای کلیک روی کل کارت
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.bank-card')) {
+                copyCardNumber();
+            }
         });
     </script>
 </body>
