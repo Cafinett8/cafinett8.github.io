@@ -8,16 +8,15 @@
 <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-* {margin:0; padding:0; box-sizing:border-box;}
+* { margin:0; padding:0; box-sizing:border-box; }
 
 body {
     font-family:'Vazir', sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background: linear-gradient(135deg, #0a1f44, #003366, #004080);
     color:#fff;
     min-height:100vh;
     overflow-x:hidden;
     direction:rtl;
-    transition: background 0.5s ease;
 }
 
 .container { max-width:1200px; margin:0 auto; padding:20px; }
@@ -25,50 +24,29 @@ body {
 /* هدر */
 header {
     text-align:center;
-    padding:120px 20px 60px;
-    position:relative;
-    background: rgba(255,255,255,0.05);
-    border-radius:20px;
-    margin-bottom:40px;
-    backdrop-filter: blur(5px);
-}
-
-.header-logo {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 20px;
-    background: url('https://i.postimg.cc/fR3pWz7F/logo.png') no-repeat center/contain;
+    padding:100px 20px 50px;
 }
 
 .neon-title {
     font-family:'BTitr', sans-serif;
-    font-size: clamp(5rem, 15vw, 10rem);
+    font-size: clamp(5rem, 12vw, 8rem);
     font-weight:900;
-    margin-bottom:20px;
-    animation: neonColor 3s linear infinite, float 4s ease-in-out infinite;
-    text-shadow: 0 0 15px #00c6ff,0 0 25px #00c6ff,0 0 50px #00f0ff,0 0 100px #00f0ff;
-    line-height:1.1;
-    letter-spacing:4px;
+    margin-bottom:15px;
+    animation: neonGlow 2.5s ease-in-out infinite alternate;
+    text-shadow: 0 0 10px #00bfff,0 0 20px #00bfff,0 0 40px #00f0ff;
+    letter-spacing:3px;
 }
 
-@keyframes neonColor {
-    0%{color:#00f0ff;}
-    25%{color:#00c6ff;}
-    50%{color:#00f0ff;}
-    75%{color:#4dd0e1;}
-    100%{color:#00f0ff;}
-}
-
-@keyframes float {
-    0%,100%{ transform: translateY(0);}
-    50%{ transform: translateY(-20px);}
+@keyframes neonGlow {
+    0%{ text-shadow: 0 0 10px #00bfff,0 0 20px #00bfff,0 0 40px #00f0ff; color:#00e5ff; }
+    100%{ text-shadow: 0 0 20px #0099ff,0 0 40px #0099ff,0 0 60px #00f0ff; color:#00c6ff; }
 }
 
 .tagline {
-    font-size:1.7rem;
-    opacity:0.95;
-    font-weight:600;
-    color:#b3e5fc;
+    font-size:1.5rem;
+    font-weight:500;
+    opacity:0.9;
+    color:#a3d0ff;
 }
 
 /* خدمات */
@@ -76,11 +54,12 @@ header {
 .section-title {
     text-align:center;
     font-family:'BTitr', sans-serif;
-    font-size:2.8rem;
+    font-size:2.5rem;
     margin-bottom:50px;
-    color:#ffffff;
-    text-shadow:0 2px 15px rgba(0,0,0,0.5);
+    color:#fff;
+    text-shadow:0 2px 10px rgba(0,0,0,0.3);
 }
+
 .services-grid {
     display:grid;
     grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
@@ -88,50 +67,54 @@ header {
     max-width:1000px;
     margin:0 auto;
 }
+
 .service-card {
     background: rgba(255,255,255,0.05);
-    border-radius: 25px;
-    padding:40px 30px;
+    border-radius:20px;
+    padding:40px 25px;
     text-align:center;
     transition: all 0.4s ease;
-    border: 1px solid rgba(255,255,255,0.15);
-    backdrop-filter: blur(12px);
-    animation: cardFloat 6s ease-in-out infinite;
+    border:1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    animation: floatCard 6s ease-in-out infinite;
 }
-.service-card:nth-child(1){ animation-delay:0s;}
-.service-card:nth-child(2){ animation-delay:0.2s;}
-.service-card:nth-child(3){ animation-delay:0.4s;}
 
-@keyframes cardFloat {
-    0%,100%{ transform: translateY(0);}
-    50%{ transform: translateY(-10px);}
+.service-card:nth-child(1){ animation-delay:0s; }
+.service-card:nth-child(2){ animation-delay:0.2s; }
+.service-card:nth-child(3){ animation-delay:0.4s; }
+
+@keyframes floatCard {
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-10px); }
 }
 
 .service-card:hover{
-    transform: translateY(-7px) scale(1.03);
+    transform: translateY(-5px) scale(1.03);
     background: rgba(255,255,255,0.1);
-    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    box-shadow:0 15px 30px rgba(0,0,0,0.3);
 }
 
 .service-icon {
-    font-size:4.5rem;
+    font-size:4rem;
     margin-bottom:25px;
     display:block;
-    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.4));
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
     animation: iconPulse 2s ease-in-out infinite;
-    color:#00e5ff;
+    color:#00cfff;
 }
 @keyframes iconPulse{
-    0%,100%{ transform: scale(1);}
-    50%{ transform: scale(1.15);}
+    0%,100%{ transform: scale(1); }
+    50%{ transform: scale(1.1); }
 }
+
 .service-name { font-family:'BTitr', sans-serif; font-size:1.8rem; margin:0; font-weight:700; }
 .service-link { text-decoration:none; color:inherit; display:block; transition: all 0.3s ease; }
 
 /* تماس */
 .contact { padding:80px 0 60px; text-align:center; }
-.contact-title { font-family:'BTitr', sans-serif; font-size:2.5rem; margin-bottom:40px; color:#ffffff; }
+.contact-title { font-family:'BTitr', sans-serif; font-size:2.5rem; margin-bottom:40px; color:#fff; }
 .contact-desc { max-width:600px; margin:0 auto 40px; font-size:1.3rem; opacity:0.9; line-height:1.8; }
+
 .contact-buttons {
     display:flex;
     justify-content:center;
@@ -140,11 +123,12 @@ header {
     max-width:800px;
     margin:0 auto;
 }
+
 .contact-btn {
     display:flex;
     align-items:center;
     gap:15px;
-    padding:20px 35px;
+    padding:18px 30px;
     border-radius:50px;
     text-decoration:none;
     color:white;
@@ -153,7 +137,7 @@ header {
     transition: all 0.4s ease;
     min-width:220px;
     justify-content:center;
-    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
     border:1px solid rgba(255,255,255,0.2);
     position:relative;
     overflow:hidden;
@@ -169,56 +153,32 @@ header {
     transition:left 0.6s;
 }
 .contact-btn:hover::before{ left:100%; }
-.contact-btn:hover{ transform: translateY(-8px) scale(1.05); box-shadow:0 20px 40px rgba(0,0,0,0.4);}
+.contact-btn:hover{ transform: translateY(-6px) scale(1.05); box-shadow:0 15px 30px rgba(0,0,0,0.4);}
 .telegram { background: linear-gradient(135deg, #0088cc, #00aced);}
 .whatsapp { background: linear-gradient(135deg, #25D366, #128C7E);}
 .phone { background: linear-gradient(135deg, #667eea, #764ba2);}
 
 /* فوتر */
-footer{ text-align:center; padding:50px 20px; font-size:1.2rem; opacity:0.85; border-top:1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.1);}
-
-/* پنل تغییر رنگ */
-#color-switcher{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background: rgba(0,0,0,0.3);
-    padding:10px;
-    border-radius:15px;
-    display:flex;
-    flex-direction:column;
-    gap:5px;
-    z-index:9999;
-}
-.color-btn{
-    width:30px;
-    height:30px;
-    border:none;
-    border-radius:50%;
-    cursor:pointer;
-    transition: transform 0.2s;
-}
-.color-btn:hover{ transform: scale(1.2); }
+footer{ text-align:center; padding:40px 20px; font-size:1.1rem; opacity:0.85; border-top:1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.1);}
 
 /* رسپانسیو */
 @media(max-width:768px){
     header{ padding:80px 0 40px; }
-    .neon-title{ font-size: clamp(3rem,12vw,8rem); }
+    .neon-title{ font-size: clamp(3rem,12vw,7rem); }
     .service-icon{ font-size:3.5rem; }
-    .section-title,.contact-title{ font-size:2rem;}
+    .section-title,.contact-title{ font-size:2rem; }
 }
 @media(max-width:480px){
     header{ padding:60px 0 30px; }
     .neon-title{ font-size:3rem; }
     .service-icon{ font-size:3rem; }
-    .service-name{ font-size:1.6rem;}
+    .service-name{ font-size:1.6rem; }
 }
 </style>
 </head>
 <body>
 <div class="container">
     <header>
-        <div class="header-logo"></div>
         <h1 class="neon-title">کافی نت</h1>
         <p class="tagline">ارائه خدمات دیجیتال و اینترنتی</p>
     </header>
@@ -255,23 +215,5 @@ footer{ text-align:center; padding:50px 20px; font-size:1.2rem; opacity:0.85; bo
         <p>© ۲۰۲۳ کافی نت - تمامی حقوق محفوظ است</p>
     </footer>
 </div>
-
-<!-- پنل تغییر رنگ -->
-<div id="color-switcher">
-    <button class="color-btn" data-color="#0f2027" title="آبی تیره"></button>
-    <button class="color-btn" data-color="#203a43" title="آبی متوسط"></button>
-    <button class="color-btn" data-color="#2c5364" title="آبی روشن"></button>
-    <button class="color-btn" data-color="#ff6b6b" title="قرمز"></button>
-    <button class="color-btn" data-color="#00c6ff" title="آبی نئون"></button>
-</div>
-
-<script>
-const buttons = document.querySelectorAll('.color-btn');
-buttons.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-        document.body.style.background = `linear-gradient(135deg, ${btn.dataset.color}, #203a43, #2c5364)`;
-    });
-});
-</script>
 </body>
 </html>
