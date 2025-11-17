@@ -4,10 +4,261 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>کافی نت | خدمات اینترنتی</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/B-Titr/BTitr.css">
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazir', sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            direction: rtl;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* هدر */
+        header {
+            text-align: center;
+            padding: 80px 0 50px;
+        }
+
+        .neon-title {
+            font-family: 'BTitr', sans-serif;
+            font-size: clamp(5rem, 15vw, 9rem);
+            font-weight: 900;
+            margin-bottom: 20px;
+            animation: colorBlink 2s infinite, titleGlow 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.7);
+            line-height: 1.1;
+            letter-spacing: 3px;
+        }
+
+        @keyframes colorBlink {
+            0% { color: #ffffff; }
+            25% { color: #e0f2fe; }
+            50% { color: #bfdbfe; }
+            75% { color: #93c5fd; }
+            100% { color: #ffffff; }
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { 
+                filter: brightness(1);
+                transform: scale(1);
+            }
+            50% { 
+                filter: brightness(1.3);
+                transform: scale(1.05);
+            }
+        }
+
+        .tagline {
+            font-size: 1.8rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* خدمات */
+        .services {
+            padding: 50px 0;
+        }
+
+        .services h2 {
+            text-align: center;
+            font-family: 'BTitr', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 40px;
+            color: #ffffff;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .service-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-item i {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            color: #ffffff;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover i {
+            transform: scale(1.1);
+        }
+
+        .service-item p {
+            font-family: 'BTitr', sans-serif;
+            font-size: 1.8rem;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        .service-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* تماس */
+        .contact {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-family: 'BTitr', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .contact p {
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            font-size: 1.4rem;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            min-width: 200px;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .telegram {
+            background: linear-gradient(135deg, #0088cc, #00aced);
+        }
+
+        .whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+
+        .phone {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+        }
+
+        /* فوتر */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            font-size: 1.1rem;
+            opacity: 0.8;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* رسپانسیو */
+        @media (max-width: 768px) {
+            header {
+                padding: 60px 0 30px;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .service-item {
+                padding: 30px 20px;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .contact-btn {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .services h2, .contact h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .neon-title {
+                font-size: 4rem;
+            }
+            
+            .service-item i {
+                font-size: 3.5rem;
+            }
+            
+            .service-item p {
+                font-size: 1.6rem;
+            }
+            
+            .tagline {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -20,22 +271,26 @@
             <section class="services">
                 <h2>امکانات و خدمات</h2>
                 <div class="services-grid">
-                    <div class="service-item">
-                        <i class="fas fa-mobile-alt"></i>
-                        <p>خدمات موبایل</p>
-                    </div>
-                    <div class="service-item">
+                    <a href="software-install.html" class="service-item">
                         <i class="fas fa-download"></i>
-                        <p>نصب نرم افزار/نصب ویندوز</p>
-                    </div>
-                    <div class="service-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <p><a href="vpn-shop.html" class="service-link">فیلترشکن پرسرعت</a></p>
-                    </div>
-                    <div class="service-item">
+                        <p>نصب نرم افزار و ویندوز</p>
+                    </a>
+                    <a href="print-scan.html" class="service-item">
                         <i class="fas fa-print"></i>
                         <p>چاپ و اسکن</p>
-                    </div>
+                    </a>
+                    <a href="research-order.html" class="service-item">
+                        <i class="fas fa-file-word"></i>
+                        <p>تحقیق دانشجویی</p>
+                    </a>
+                    <a href="powerpoint-order.html" class="service-item">
+                        <i class="fas fa-file-powerpoint"></i>
+                        <p>پاورپوینت</p>
+                    </a>
+                    <a href="vpn-shop.html" class="service-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <p>فیلترشکن پرسرعت</p>
+                    </a>
                 </div>
             </section>
 
@@ -63,7 +318,5 @@
             <p>© 2023 کافی نت. تمامی حقوق محفوظ است.</p>
         </footer>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
