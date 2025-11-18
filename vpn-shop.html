@@ -963,18 +963,18 @@
             `;
         }
 
-        // اعمال کد تخفیف
+        // اعمال کد تخفیف - آپدیت شده
         function applyDiscount() {
             const discountCode = document.getElementById('discountCode').value.trim();
             const discountMessage = document.getElementById('discountMessage');
             
-            if (discountCode.toUpperCase() === 'CAFINETT') {
+            if (discountCode.toUpperCase() === DISCOUNT_CONFIG.VALID_CODE) {
                 discountApplied = true;
-                discountMessage.innerHTML = '<span class="discount-success">✅ کد تخفیف با موفقیت اعمال شد! 40,000 تومان تخفیف</span>';
+                discountMessage.innerHTML = `<span class="discount-success">✅ کد تخفیف با موفقیت اعمال شد! ${DISCOUNT_CONFIG.DISCOUNT_MESSAGE}</span>`;
                 
                 // اگر بسته‌ای انتخاب شده، قیمت نهایی را محاسبه کن
                 if (selectedPackage) {
-                    const finalPrice = Math.max(selectedPackage.price - 40000, 0);
+                    const finalPrice = Math.max(selectedPackage.price - DISCOUNT_CONFIG.DISCOUNT_AMOUNT, 0);
                     document.getElementById('selectedInfo').innerHTML = `
                         ✅ بسته انتخاب شده: <strong>${selectedPackage.size}</strong>
                         - مبلغ اصلی: <strong>${formatPrice(selectedPackage.price)} تومان</strong>
@@ -1052,7 +1052,7 @@
             document.getElementById('copyPopup').style.display = 'none';
         }
 
-        // ارسال به واتساپ
+        // ارسال به واتساپ - آپدیت شده
         function sendToWhatsApp() {
             if (!selectedPackage) {
                 alert('لطفاً ابتدا یک بسته انتخاب کنید');
@@ -1062,7 +1062,7 @@
             // محاسبه قیمت نهایی با تخفیف
             let finalPrice = selectedPackage.price;
             if (discountApplied) {
-                finalPrice = Math.max(selectedPackage.price - 40000, 0);
+                finalPrice = Math.max(selectedPackage.price - DISCOUNT_CONFIG.DISCOUNT_AMOUNT, 0);
             }
             
             const message = `سلام! 👋
