@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خرید فیلترشکن پرسرعت - کافی نت</title>
+    <title>فروشگاه فیلترشکن - کافی نت</title>
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/B-Titr/BTitr.css">
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -736,7 +736,7 @@
         <!-- هدر -->
         <div class="header">
             <div class="vpn-icon">🚀</div>
-            <h1>خرید فیلترشکن</h1>
+            <h1>فروشگاه فیلترشکن</h1>
             <p>اتصال امن و پرسرعت به اینترنت جهانی</p>
         </div>
 
@@ -967,13 +967,13 @@
             const discountCode = document.getElementById('discountCode').value.trim();
             const discountMessage = document.getElementById('discountMessage');
             
-            if (discountCode.toUpperCase() === 'CAFINETT8') {
+            if (discountCode.toUpperCase() === 'CAFINETT') {
                 discountApplied = true;
-                discountMessage.innerHTML = '<span class="discount-success">✅ کد تخفیف با موفقیت اعمال شد! 30,000 تومان تخفیف</span>';
+                discountMessage.innerHTML = '<span class="discount-success">✅ کد تخفیف با موفقیت اعمال شد! 40,000 تومان تخفیف</span>';
                 
                 // اگر بسته‌ای انتخاب شده، قیمت نهایی را محاسبه کن
                 if (selectedPackage) {
-                    const finalPrice = Math.max(selectedPackage.price - 30000, 0);
+                    const finalPrice = Math.max(selectedPackage.price - 40000, 0);
                     document.getElementById('selectedInfo').innerHTML = `
                         ✅ بسته انتخاب شده: <strong>${selectedPackage.size}</strong>
                         - مبلغ اصلی: <strong>${formatPrice(selectedPackage.price)} تومان</strong>
@@ -1061,7 +1061,7 @@
             // محاسبه قیمت نهایی با تخفیف
             let finalPrice = selectedPackage.price;
             if (discountApplied) {
-                finalPrice = Math.max(selectedPackage.price - 30000, 0);
+                finalPrice = Math.max(selectedPackage.price - 40000, 0);
             }
             
             const message = `سلام! 👋
