@@ -22,7 +22,7 @@
         }
         
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 25px;
@@ -76,7 +76,180 @@
             font-size: 1.2rem;
             opacity: 0.9;
         }
+
+        /* تب‌های مدت زمان */
+        .duration-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
         
+        .duration-tab {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        
+        .duration-tab:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+        
+        .duration-tab.active {
+            background: rgba(37, 211, 102, 0.3);
+            border-color: #25D366;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        /* جدول قیمت */
+        .pricing-container {
+            margin-bottom: 40px;
+        }
+        
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .package-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .package-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .package-btn.selected {
+            background: rgba(37, 211, 102, 0.3);
+            border-color: #25D366;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+        }
+        
+        .package-size {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .package-price {
+            font-size: 1.3rem;
+            color: #93c5fd;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .package-original-price {
+            font-size: 1rem;
+            color: #ff6b6b;
+            text-decoration: line-through;
+            margin-bottom: 3px;
+        }
+        
+        .package-discount {
+            background: #ff6b6b;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        /* بخش کد تخفیف */
+        .discount-section {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+        
+        .discount-title {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #93c5fd;
+            font-weight: bold;
+        }
+        
+        .discount-input-container {
+            display: flex;
+            gap: 10px;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .discount-input {
+            flex: 1;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        
+        .discount-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .apply-discount-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .apply-discount-btn:hover {
+            background: #1ea952;
+            transform: translateY(-2px);
+        }
+        
+        .discount-message {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            min-height: 25px;
+        }
+        
+        .discount-success {
+            color: #25D366;
+            font-weight: bold;
+        }
+        
+        .discount-error {
+            color: #ff6b6b;
+        }
+
         /* مراحل خرید */
         .steps-container {
             margin-bottom: 40px;
@@ -111,50 +284,6 @@
         .step-title {
             font-size: 1.4rem;
             margin-bottom: 15px;
-            color: #93c5fd;
-            font-weight: bold;
-        }
-        
-        /* جدول قیمت */
-        .pricing-table {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .package-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 20px 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: white;
-            font-size: 1.1rem;
-        }
-        
-        .package-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-        }
-        
-        .package-btn.selected {
-            background: rgba(37, 211, 102, 0.3);
-            border-color: #25D366;
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
-        }
-        
-        .package-size {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        
-        .package-price {
-            font-size: 1.1rem;
             color: #93c5fd;
             font-weight: bold;
         }
@@ -441,6 +570,15 @@
                 font-size: 1.5rem;
                 padding: 15px 25px;
             }
+            
+            .duration-tabs {
+                gap: 8px;
+            }
+            
+            .duration-tab {
+                padding: 12px 18px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -452,6 +590,31 @@
             <h1>خرید فیلترشکن</h1>
             <p>اتصال امن و پرسرعت به اینترنت جهانی</p>
         </div>
+
+        <!-- تب‌های مدت زمان -->
+        <div class="duration-tabs" id="durationTabs">
+            <!-- با JavaScript پر می‌شود -->
+        </div>
+        
+        <!-- جدول قیمت -->
+        <div class="pricing-container">
+            <div class="pricing-table" id="pricingTable">
+                <!-- بسته‌ها با JavaScript پر می‌شوند -->
+            </div>
+            <div id="selectedInfo" class="selected-package-info" style="display: none;">
+                <!-- اطلاعات بسته انتخاب شده -->
+            </div>
+        </div>
+
+        <!-- بخش کد تخفیف -->
+        <div class="discount-section">
+            <div class="discount-title">🎁 کد تخفیف ویژه</div>
+            <div class="discount-input-container">
+                <input type="text" class="discount-input" id="discountCode" placeholder="کد تخفیف را وارد کنید">
+                <button class="apply-discount-btn" onclick="applyDiscount()">اعمال تخفیف</button>
+            </div>
+            <div class="discount-message" id="discountMessage"></div>
+        </div>
         
         <!-- مراحل خرید -->
         <div class="steps-container">
@@ -459,12 +622,7 @@
             <div class="step">
                 <div class="step-number">۱</div>
                 <div class="step-title">📦 انتخاب بسته اینترنتی</div>
-                <div class="pricing-table" id="pricingTable">
-                    <!-- بسته‌ها با JavaScript پر می‌شوند -->
-                </div>
-                <div id="selectedInfo" class="selected-package-info" style="display: none;">
-                    <!-- اطلاعات بسته انتخاب شده -->
-                </div>
+                <p>یکی از بسته‌های بالا را انتخاب کنید</p>
             </div>
             
             <!-- مرحله ۲: واریز مبلغ -->
@@ -527,33 +685,113 @@
     </div>
 
     <script>
-        // داده‌های بسته‌ها
-        const packages = [
-            { size: "۳۰ گیگ", duration: "۱ ماه", price: "۱۰۰,۰۰۰", icon: "📱" },
-            { size: "۵۰ گیگ", duration: "۱ ماه", price: "۱۵۰,۰۰۰", icon: "💻" },
-            { size: "۷۰ گیگ", duration: "۱ ماه", price: "۱۸۰,۰۰۰", icon: "🚀" },
-            { size: "۱۰۰ گیگ", duration: "۱ ماه", price: "۲۰۰,۰۰۰", icon: "⚡" }
-        ];
+        // داده‌های بسته‌ها با قیمت‌های جدید
+        const packages = {
+            "1month": [
+                { size: "20 گیگ", duration: "۱ ماه", originalPrice: 35000, price: 35000, icon: "📱" },
+                { size: "30 گیگ", duration: "۱ ماه", originalPrice: 42000, price: 100000, icon: "💻" },
+                { size: "40 گیگ", duration: "۱ ماه", originalPrice: 49000, price: 49000, icon: "🚀" },
+                { size: "50 گیگ", duration: "۱ ماه", originalPrice: 56000, price: 56000, icon: "⚡" },
+                { size: "60 گیگ", duration: "۱ ماه", originalPrice: 62999, price: 62999, icon: "🔥" },
+                { size: "70 گیگ", duration: "۱ ماه", originalPrice: 77000, price: 77000, icon: "🎯" },
+                { size: "100 گیگ", duration: "۱ ماه", originalPrice: 105000, price: 105000, icon: "💎" },
+                { size: "200 گیگ", duration: "۱ ماه", originalPrice: 210000, price: 210000, icon: "👑" },
+                { size: "300 گیگ", duration: "۱ ماه", originalPrice: 315000, price: 315000, icon: "🚀" }
+            ],
+            "2month": [
+                { size: "20 گیگ", duration: "۲ ماه", originalPrice: 45500, price: 45500, icon: "📱" },
+                { size: "40 گیگ", duration: "۲ ماه", originalPrice: 59499, price: 59499, icon: "💻" },
+                { size: "60 گیگ", duration: "۲ ماه", originalPrice: 77000, price: 77000, icon: "🚀" },
+                { size: "80 گیگ", duration: "۲ ماه", originalPrice: 101500, price: 101500, icon: "⚡" },
+                { size: "100 گیگ", duration: "۲ ماه", originalPrice: 118999, price: 118999, icon: "🔥" },
+                { size: "120 گیگ", duration: "۲ ماه", originalPrice: 147000, price: 147000, icon: "🎯" },
+                { size: "150 گیگ", duration: "۲ ماه", originalPrice: 168000, price: 168000, icon: "💎" },
+                { size: "200 گیگ", duration: "۲ ماه", originalPrice: 224000, price: 224000, icon: "👑" },
+                { size: "300 گیگ", duration: "۲ ماه", originalPrice: 322000, price: 322000, icon: "🚀" }
+            ],
+            "3month": [
+                { size: "60 گیگ", duration: "۳ ماه", originalPrice: 84000, price: 84000, icon: "📱" },
+                { size: "80 گیگ", duration: "۳ ماه", originalPrice: 112000, price: 112000, icon: "💻" },
+                { size: "90 گیگ", duration: "۳ ماه", originalPrice: 118999, price: 118999, icon: "🚀" },
+                { size: "100 گیگ", duration: "۳ ماه", originalPrice: 125999, price: 125999, icon: "⚡" },
+                { size: "120 گیگ", duration: "۳ ماه", originalPrice: 154000, price: 154000, icon: "🔥" },
+                { size: "150 گیگ", duration: "۳ ماه", originalPrice: 175000, price: 175000, icon: "🎯" },
+                { size: "200 گیگ", duration: "۳ ماه", originalPrice: 230999, price: 230999, icon: "💎" },
+                { size: "300 گیگ", duration: "۳ ماه", originalPrice: 329000, price: 329000, icon: "👑" }
+            ]
+        };
 
         let selectedPackage = null;
+        let selectedDuration = "1month";
         let copyCooldown = false;
+        let discountApplied = false;
+
+        // ایجاد تب‌های مدت زمان
+        function createDurationTabs() {
+            const durationTabs = document.getElementById('durationTabs');
+            const durations = [
+                { id: "1month", name: "🔷 یک ماهه" },
+                { id: "2month", name: "🔷 دو ماهه" },
+                { id: "3month", name: "🔷 سه ماهه" }
+            ];
+            
+            durations.forEach(duration => {
+                const tab = document.createElement('button');
+                tab.className = 'duration-tab';
+                if (duration.id === selectedDuration) {
+                    tab.classList.add('active');
+                }
+                tab.textContent = duration.name;
+                tab.setAttribute('data-duration', duration.id);
+                
+                tab.addEventListener('click', () => {
+                    selectedDuration = duration.id;
+                    document.querySelectorAll('.duration-tab').forEach(t => {
+                        t.classList.remove('active');
+                    });
+                    tab.classList.add('active');
+                    createPricingTable();
+                });
+                
+                durationTabs.appendChild(tab);
+            });
+        }
 
         // ایجاد جدول قیمت
         function createPricingTable() {
             const pricingTable = document.getElementById('pricingTable');
+            pricingTable.innerHTML = '';
             
-            packages.forEach((pkg, index) => {
+            const currentPackages = packages[selectedDuration];
+            
+            currentPackages.forEach((pkg, index) => {
                 const button = document.createElement('button');
                 button.className = 'package-btn';
+                
+                // محاسبه درصد افزایش قیمت
+                const increasePercentage = Math.round(((pkg.price - pkg.originalPrice) / pkg.originalPrice) * 100);
+                
+                let discountBadge = '';
+                if (increasePercentage > 0) {
+                    discountBadge = `<div class="package-discount">+${increasePercentage}%</div>`;
+                }
+                
                 button.innerHTML = `
+                    ${discountBadge}
                     <div class="package-size">${pkg.size}</div>
-                    <div class="package-price">${pkg.price} تومان</div>
+                    <div class="package-price">${formatPrice(pkg.price)} تومان</div>
+                    ${pkg.price !== pkg.originalPrice ? `<div class="package-original-price">${formatPrice(pkg.originalPrice)} تومان</div>` : ''}
                     <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">${pkg.duration}</div>
                 `;
                 
                 button.addEventListener('click', () => selectPackage(index));
                 pricingTable.appendChild(button);
             });
+        }
+
+        // قالب‌بندی قیمت
+        function formatPrice(price) {
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
         // انتخاب بسته
@@ -564,15 +802,49 @@
             });
             
             // انتخاب جدید
-            selectedPackage = packages[index];
+            const currentPackages = packages[selectedDuration];
+            selectedPackage = currentPackages[index];
             document.querySelectorAll('.package-btn')[index].classList.add('selected');
             
             // نمایش اطلاعات بسته انتخاب شده
             document.getElementById('selectedInfo').style.display = 'block';
             document.getElementById('selectedInfo').innerHTML = `
                 ✅ بسته انتخاب شده: <strong>${selectedPackage.size}</strong>
-                - مبلغ: <strong>${selectedPackage.price} تومان</strong>
+                - مبلغ: <strong>${formatPrice(selectedPackage.price)} تومان</strong>
+                ${discountApplied ? '<br>✅ کد تخفیف اعمال شد!' : ''}
             `;
+        }
+
+        // اعمال کد تخفیف
+        function applyDiscount() {
+            const discountCode = document.getElementById('discountCode').value.trim();
+            const discountMessage = document.getElementById('discountMessage');
+            
+            if (discountCode.toUpperCase() === 'CAFINETT8') {
+                discountApplied = true;
+                discountMessage.innerHTML = '<span class="discount-success">✅ کد تخفیف با موفقیت اعمال شد! 30,000 تومان تخفیف</span>';
+                
+                // اگر بسته‌ای انتخاب شده، قیمت نهایی را محاسبه کن
+                if (selectedPackage) {
+                    const finalPrice = Math.max(selectedPackage.price - 30000, 0);
+                    document.getElementById('selectedInfo').innerHTML = `
+                        ✅ بسته انتخاب شده: <strong>${selectedPackage.size}</strong>
+                        - مبلغ اصلی: <strong>${formatPrice(selectedPackage.price)} تومان</strong>
+                        - مبلغ با تخفیف: <strong>${formatPrice(finalPrice)} تومان</strong>
+                        <br>✅ کد تخفیف اعمال شد!
+                    `;
+                }
+            } else {
+                discountApplied = false;
+                discountMessage.innerHTML = '<span class="discount-error">❌ کد تخفیف نامعتبر است</span>';
+                
+                if (selectedPackage) {
+                    document.getElementById('selectedInfo').innerHTML = `
+                        ✅ بسته انتخاب شده: <strong>${selectedPackage.size}</strong>
+                        - مبلغ: <strong>${formatPrice(selectedPackage.price)} تومان</strong>
+                    `;
+                }
+            }
         }
 
         // کپی شماره کارت - فوق آسان
@@ -646,12 +918,19 @@
                 return;
             }
             
+            // محاسبه قیمت نهایی با تخفیف
+            let finalPrice = selectedPackage.price;
+            if (discountApplied) {
+                finalPrice = Math.max(selectedPackage.price - 30000, 0);
+            }
+            
             const message = `سلام! 👋
 
 📦 **درخواست خرید فیلترشکن**
 • بسته: ${selectedPackage.size}
-• مبلغ: ${selectedPackage.price} تومان  
 • مدت: ${selectedPackage.duration}
+• مبلغ اصلی: ${formatPrice(selectedPackage.price)} تومان
+${discountApplied ? `• مبلغ با تخفیف: ${formatPrice(finalPrice)} تومان` : ''}
 
 ✅ مبلغ واریز شد.
 لطفاً رسید را ارسال کنید تا سرویس برایتان ارسال شود.
@@ -666,6 +945,7 @@
 
         // راه‌اندازی اولیه
         document.addEventListener('DOMContentLoaded', function() {
+            createDurationTabs();
             createPricingTable();
         });
 
