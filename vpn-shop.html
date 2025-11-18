@@ -6,6 +6,7 @@
     <title>خرید فیلترشکن پرسرعت - کافی نت</title>
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/B-Titr/BTitr.css">
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -22,13 +23,14 @@
         }
         
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 25px;
             padding: 40px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
         
         .header {
@@ -41,6 +43,7 @@
             font-size: 5rem;
             margin-bottom: 20px;
             animation: bounce 2s infinite;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
         }
         
         @keyframes bounce {
@@ -59,6 +62,9 @@
             color: #ffffff;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
             animation: fadeIn 1.5s ease-in;
+            background: linear-gradient(45deg, #fff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         
         @keyframes fadeIn {
@@ -96,6 +102,23 @@
             transition: all 0.3s ease;
             font-size: 1.1rem;
             font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .duration-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .duration-tab:hover::before {
+            left: 100%;
         }
         
         .duration-tab:hover {
@@ -117,15 +140,15 @@
         
         .pricing-table {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
             margin: 20px 0;
         }
         
         .package-btn {
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 25px 15px;
             text-align: center;
             cursor: pointer;
@@ -136,16 +159,32 @@
             overflow: hidden;
         }
         
+        .package-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .package-btn:hover::before {
+            left: 100%;
+        }
+        
         .package-btn:hover {
             background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
         
         .package-btn.selected {
             background: rgba(37, 211, 102, 0.3);
             border-color: #25D366;
             transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
         }
         
         .package-size {
@@ -169,49 +208,79 @@
         }
         
         .package-discount {
-            background: #ff6b6b;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
             color: white;
-            padding: 3px 8px;
-            border-radius: 10px;
+            padding: 5px 12px;
+            border-radius: 15px;
             font-size: 0.8rem;
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 12px;
+            left: 12px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
         }
 
         /* بخش کد تخفیف */
         .discount-section {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 25px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.1));
+            padding: 30px;
             border-radius: 20px;
-            margin: 30px 0;
+            margin: 40px 0;
             border: 2px solid rgba(255, 255, 255, 0.2);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .discount-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: rotate(45deg);
         }
         
         .discount-title {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
             color: #93c5fd;
             font-weight: bold;
+            position: relative;
+        }
+        
+        .discount-title::after {
+            content: '🎁';
+            margin-right: 10px;
+            font-size: 1.8rem;
         }
         
         .discount-input-container {
             display: flex;
-            gap: 10px;
-            max-width: 400px;
+            gap: 15px;
+            max-width: 500px;
             margin: 0 auto;
+            position: relative;
         }
         
         .discount-input {
             flex: 1;
-            padding: 15px;
-            border-radius: 10px;
+            padding: 18px;
+            border-radius: 12px;
             border: 2px solid rgba(255, 255, 255, 0.3);
             background: rgba(255, 255, 255, 0.1);
             color: white;
             font-size: 1.1rem;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .discount-input:focus {
+            outline: none;
+            border-color: #25D366;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
         }
         
         .discount-input::placeholder {
@@ -219,35 +288,46 @@
         }
         
         .apply-discount-btn {
-            background: #25D366;
+            background: linear-gradient(135deg, #25D366, #1ea952);
             color: white;
             border: none;
-            padding: 15px 25px;
-            border-radius: 10px;
+            padding: 18px 30px;
+            border-radius: 12px;
             cursor: pointer;
             font-size: 1.1rem;
             font-weight: bold;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
         }
         
         .apply-discount-btn:hover {
-            background: #1ea952;
+            background: linear-gradient(135deg, #1ea952, #25D366);
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
         }
         
         .discount-message {
-            margin-top: 15px;
+            margin-top: 20px;
             font-size: 1.1rem;
             min-height: 25px;
+            position: relative;
         }
         
         .discount-success {
             color: #25D366;
             font-weight: bold;
+            background: rgba(37, 211, 102, 0.1);
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-block;
         }
         
         .discount-error {
             color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-block;
         }
 
         /* مراحل خرید */
@@ -257,28 +337,34 @@
         
         .step {
             background: rgba(255, 255, 255, 0.15);
-            padding: 25px;
+            padding: 30px;
             border-radius: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             border: 2px solid rgba(255, 255, 255, 0.2);
             position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         
         .step-number {
-            background: #25D366;
+            background: linear-gradient(135deg, #25D366, #1ea952);
             color: white;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             position: absolute;
-            right: -10px;
-            top: -10px;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.4);
+            right: -15px;
+            top: -15px;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
         }
         
         .step-title {
@@ -292,11 +378,11 @@
         .bank-card {
             background: linear-gradient(135deg, #004B8D 0%, #0066CC 100%);
             border-radius: 20px;
-            padding: 30px;
+            padding: 35px;
             text-align: center;
             margin: 20px 0;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
             cursor: pointer;
@@ -305,7 +391,7 @@
         
         .bank-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
         
         .bank-card::before {
@@ -320,14 +406,14 @@
         }
         
         .bank-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 25px;
             font-weight: bold;
             color: #e0f2fe;
         }
         
         .bank-name {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 25px;
             font-weight: bold;
         }
@@ -379,8 +465,8 @@
             background: rgba(255, 255, 255, 0.25);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
+            padding: 18px 30px;
+            border-radius: 12px;
             cursor: pointer;
             margin-top: 20px;
             transition: all 0.3s ease;
@@ -391,6 +477,23 @@
             gap: 8px;
             width: 100%;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .copy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .copy-btn:hover::before {
+            left: 100%;
         }
         
         .copy-btn:hover {
@@ -409,13 +512,34 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: white;
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 1000;
             animation: fadeIn 0.3s ease;
+        }
+        
+        .copy-popup-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: scaleIn 0.3s ease;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
         
         .copy-popup h2 {
@@ -456,6 +580,12 @@
             cursor: pointer;
             margin-top: 30px;
             font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .close-popup:hover {
+            background: #1ea952;
+            transform: translateY(-2px);
         }
         
         /* دکمه واتساپ */
@@ -480,6 +610,23 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .whatsapp-btn:hover::before {
+            left: 100%;
         }
         
         .whatsapp-btn:hover {
@@ -500,13 +647,23 @@
         
         .selected-package-info {
             background: rgba(37, 211, 102, 0.2);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: bold;
-            border: 1px solid rgba(37, 211, 102, 0.5);
+            border: 2px solid rgba(37, 211, 102, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
         }
         
         .back-btn {
@@ -517,15 +674,17 @@
             font-size: 1.1rem;
             text-align: center;
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             background: rgba(255,255,255,0.1);
-            border-radius: 10px;
+            border-radius: 12px;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
         }
         
         .back-btn:hover {
             color: #ffffff;
             background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
         }
         
         @media (max-width: 768px) {
@@ -536,7 +695,7 @@
             
             .pricing-table {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+                gap: 15px;
             }
             
             .card-number-part {
@@ -579,6 +738,10 @@
                 padding: 12px 18px;
                 font-size: 1rem;
             }
+            
+            .discount-input-container {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -608,10 +771,13 @@
 
         <!-- بخش کد تخفیف -->
         <div class="discount-section">
-            <div class="discount-title">🎁 کد تخفیف ویژه</div>
+            <div class="discount-title">کد تخفیف ویژه</div>
             <div class="discount-input-container">
-                <input type="text" class="discount-input" id="discountCode" placeholder="کد تخفیف را وارد کنید">
-                <button class="apply-discount-btn" onclick="applyDiscount()">اعمال تخفیف</button>
+                <input type="text" class="discount-input" id="discountCode" placeholder="cafinett8 را وارد کنید">
+                <button class="apply-discount-btn" onclick="applyDiscount()">
+                    <i class="fas fa-tag"></i>
+                    اعمال تخفیف
+                </button>
             </div>
             <div class="discount-message" id="discountMessage"></div>
         </div>
@@ -649,7 +815,7 @@
                     <div class="card-owner">بنام: امیر محمد حضراتی</div>
                     
                     <button class="copy-btn" onclick="copyCardNumber()" id="copyButton">
-                        <span>📋</span>
+                        <i class="fas fa-copy"></i>
                         کپی شماره کارت
                     </button>
                 </div>
@@ -662,7 +828,7 @@
                 <div class="whatsapp-section">
                     <p>پس از واریز، روی دکمه زیر کلیک کنید</p>
                     <button id="whatsappBtn" class="whatsapp-btn" onclick="sendToWhatsApp()">
-                        <span class="whatsapp-icon">💬</span>
+                        <i class="fab fa-whatsapp whatsapp-icon"></i>
                         ارسال به واتساپ
                     </button>
                     <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
@@ -672,52 +838,60 @@
             </div>
         </div>
         
-        <a href="index.html" class="back-btn">← بازگشت به صفحه اصلی</a>
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به صفحه اصلی
+        </a>
     </div>
 
     <!-- پاپ‌آپ کپی موفق -->
     <div class="copy-popup" id="copyPopup" style="display: none;">
-        <h2>✅ شماره کارت کپی شد</h2>
-        <div class="card-number">6219861987348090</div>
-        <p>شماره کارت با موفقیت کپی شد</p>
-        <p>می‌توانید در برنامه بانکی خود پیست کنید</p>
-        <button class="close-popup" onclick="closeCopyPopup()">باشه</button>
+        <div class="copy-popup-content">
+            <h2>✅ شماره کارت کپی شد</h2>
+            <div class="card-number">6219861987348090</div>
+            <p>شماره کارت با موفقیت کپی شد</p>
+            <p>می‌توانید در برنامه بانکی خود پیست کنید</p>
+            <button class="close-popup" onclick="closeCopyPopup()">باشه</button>
+        </div>
     </div>
 
     <script>
+        // محاسبه درصد افزایش: 42,000 -> 100,000 = 138% افزایش
+        const priceIncreaseMultiplier = 100000 / 42000; // 2.38
+
         // داده‌های بسته‌ها با قیمت‌های جدید
         const packages = {
             "1month": [
-                { size: "20 گیگ", duration: "۱ ماه", originalPrice: 35000, price: 35000, icon: "📱" },
+                { size: "20 گیگ", duration: "۱ ماه", originalPrice: 35000, price: Math.round(35000 * priceIncreaseMultiplier), icon: "📱" },
                 { size: "30 گیگ", duration: "۱ ماه", originalPrice: 42000, price: 100000, icon: "💻" },
-                { size: "40 گیگ", duration: "۱ ماه", originalPrice: 49000, price: 49000, icon: "🚀" },
-                { size: "50 گیگ", duration: "۱ ماه", originalPrice: 56000, price: 56000, icon: "⚡" },
-                { size: "60 گیگ", duration: "۱ ماه", originalPrice: 62999, price: 62999, icon: "🔥" },
-                { size: "70 گیگ", duration: "۱ ماه", originalPrice: 77000, price: 77000, icon: "🎯" },
-                { size: "100 گیگ", duration: "۱ ماه", originalPrice: 105000, price: 105000, icon: "💎" },
-                { size: "200 گیگ", duration: "۱ ماه", originalPrice: 210000, price: 210000, icon: "👑" },
-                { size: "300 گیگ", duration: "۱ ماه", originalPrice: 315000, price: 315000, icon: "🚀" }
+                { size: "40 گیگ", duration: "۱ ماه", originalPrice: 49000, price: Math.round(49000 * priceIncreaseMultiplier), icon: "🚀" },
+                { size: "50 گیگ", duration: "۱ ماه", originalPrice: 56000, price: Math.round(56000 * priceIncreaseMultiplier), icon: "⚡" },
+                { size: "60 گیگ", duration: "۱ ماه", originalPrice: 62999, price: Math.round(62999 * priceIncreaseMultiplier), icon: "🔥" },
+                { size: "70 گیگ", duration: "۱ ماه", originalPrice: 77000, price: Math.round(77000 * priceIncreaseMultiplier), icon: "🎯" },
+                { size: "100 گیگ", duration: "۱ ماه", originalPrice: 105000, price: Math.round(105000 * priceIncreaseMultiplier), icon: "💎" },
+                { size: "200 گیگ", duration: "۱ ماه", originalPrice: 210000, price: Math.round(210000 * priceIncreaseMultiplier), icon: "👑" },
+                { size: "300 گیگ", duration: "۱ ماه", originalPrice: 315000, price: Math.round(315000 * priceIncreaseMultiplier), icon: "🚀" }
             ],
             "2month": [
-                { size: "20 گیگ", duration: "۲ ماه", originalPrice: 45500, price: 45500, icon: "📱" },
-                { size: "40 گیگ", duration: "۲ ماه", originalPrice: 59499, price: 59499, icon: "💻" },
-                { size: "60 گیگ", duration: "۲ ماه", originalPrice: 77000, price: 77000, icon: "🚀" },
-                { size: "80 گیگ", duration: "۲ ماه", originalPrice: 101500, price: 101500, icon: "⚡" },
-                { size: "100 گیگ", duration: "۲ ماه", originalPrice: 118999, price: 118999, icon: "🔥" },
-                { size: "120 گیگ", duration: "۲ ماه", originalPrice: 147000, price: 147000, icon: "🎯" },
-                { size: "150 گیگ", duration: "۲ ماه", originalPrice: 168000, price: 168000, icon: "💎" },
-                { size: "200 گیگ", duration: "۲ ماه", originalPrice: 224000, price: 224000, icon: "👑" },
-                { size: "300 گیگ", duration: "۲ ماه", originalPrice: 322000, price: 322000, icon: "🚀" }
+                { size: "20 گیگ", duration: "۲ ماه", originalPrice: 45500, price: Math.round(45500 * priceIncreaseMultiplier), icon: "📱" },
+                { size: "40 گیگ", duration: "۲ ماه", originalPrice: 59499, price: Math.round(59499 * priceIncreaseMultiplier), icon: "💻" },
+                { size: "60 گیگ", duration: "۲ ماه", originalPrice: 77000, price: Math.round(77000 * priceIncreaseMultiplier), icon: "🚀" },
+                { size: "80 گیگ", duration: "۲ ماه", originalPrice: 101500, price: Math.round(101500 * priceIncreaseMultiplier), icon: "⚡" },
+                { size: "100 گیگ", duration: "۲ ماه", originalPrice: 118999, price: Math.round(118999 * priceIncreaseMultiplier), icon: "🔥" },
+                { size: "120 گیگ", duration: "۲ ماه", originalPrice: 147000, price: Math.round(147000 * priceIncreaseMultiplier), icon: "🎯" },
+                { size: "150 گیگ", duration: "۲ ماه", originalPrice: 168000, price: Math.round(168000 * priceIncreaseMultiplier), icon: "💎" },
+                { size: "200 گیگ", duration: "۲ ماه", originalPrice: 224000, price: Math.round(224000 * priceIncreaseMultiplier), icon: "👑" },
+                { size: "300 گیگ", duration: "۲ ماه", originalPrice: 322000, price: Math.round(322000 * priceIncreaseMultiplier), icon: "🚀" }
             ],
             "3month": [
-                { size: "60 گیگ", duration: "۳ ماه", originalPrice: 84000, price: 84000, icon: "📱" },
-                { size: "80 گیگ", duration: "۳ ماه", originalPrice: 112000, price: 112000, icon: "💻" },
-                { size: "90 گیگ", duration: "۳ ماه", originalPrice: 118999, price: 118999, icon: "🚀" },
-                { size: "100 گیگ", duration: "۳ ماه", originalPrice: 125999, price: 125999, icon: "⚡" },
-                { size: "120 گیگ", duration: "۳ ماه", originalPrice: 154000, price: 154000, icon: "🔥" },
-                { size: "150 گیگ", duration: "۳ ماه", originalPrice: 175000, price: 175000, icon: "🎯" },
-                { size: "200 گیگ", duration: "۳ ماه", originalPrice: 230999, price: 230999, icon: "💎" },
-                { size: "300 گیگ", duration: "۳ ماه", originalPrice: 329000, price: 329000, icon: "👑" }
+                { size: "60 گیگ", duration: "۳ ماه", originalPrice: 84000, price: Math.round(84000 * priceIncreaseMultiplier), icon: "📱" },
+                { size: "80 گیگ", duration: "۳ ماه", originalPrice: 112000, price: Math.round(112000 * priceIncreaseMultiplier), icon: "💻" },
+                { size: "90 گیگ", duration: "۳ ماه", originalPrice: 118999, price: Math.round(118999 * priceIncreaseMultiplier), icon: "🚀" },
+                { size: "100 گیگ", duration: "۳ ماه", originalPrice: 125999, price: Math.round(125999 * priceIncreaseMultiplier), icon: "⚡" },
+                { size: "120 گیگ", duration: "۳ ماه", originalPrice: 154000, price: Math.round(154000 * priceIncreaseMultiplier), icon: "🔥" },
+                { size: "150 گیگ", duration: "۳ ماه", originalPrice: 175000, price: Math.round(175000 * priceIncreaseMultiplier), icon: "🎯" },
+                { size: "200 گیگ", duration: "۳ ماه", originalPrice: 230999, price: Math.round(230999 * priceIncreaseMultiplier), icon: "💎" },
+                { size: "300 گیگ", duration: "۳ ماه", originalPrice: 329000, price: Math.round(329000 * priceIncreaseMultiplier), icon: "👑" }
             ]
         };
 
@@ -847,7 +1021,7 @@
             }
         }
 
-        // کپی شماره کارت - فوق آسان
+        // کپی شماره کارت
         function copyCardNumber() {
             if (copyCooldown) return;
             
@@ -856,14 +1030,11 @@
             // فعال کردن کول‌داون
             copyCooldown = true;
             
-            // روش فوق سریع - مستقیم کپی
             const copyToClipboard = (text) => {
-                // روش 1: Clipboard API
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     return navigator.clipboard.writeText(text);
                 }
                 
-                // روش 2: execCommand
                 const textArea = document.createElement('textarea');
                 textArea.value = text;
                 textArea.style.position = 'fixed';
@@ -884,19 +1055,15 @@
                 }
             };
             
-            // اجرای کپی
             copyToClipboard(cardNumber)
                 .then(() => {
-                    // نمایش پاپ‌آپ موفقیت
                     showCopyPopup();
                 })
                 .catch((err) => {
                     console.log('خطا در کپی:', err);
-                    // حتی اگر خطا هم داد، پاپ‌آپ نشان بده
                     showCopyPopup();
                 })
                 .finally(() => {
-                    // غیرفعال کردن کول‌داون بعد از 500ms
                     setTimeout(() => {
                         copyCooldown = false;
                     }, 500);
