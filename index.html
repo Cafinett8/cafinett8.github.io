@@ -91,7 +91,7 @@
         .user-menu {
             position: fixed;
             top: 20px;
-            right: 20px;
+            right: 80px;
             z-index: 1000;
         }
 
@@ -126,144 +126,190 @@
             background: rgba(59, 130, 246, 0.25);
         }
 
-        /* پاپ‌آپ ثبت‌نام/ورود */
-        .auth-popup {
+        /* سیستم اعلان‌ها */
+        .notification-menu {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            backdrop-filter: blur(5px);
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
         }
 
-        .auth-container {
+        .notification-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            width: 45px;
+            height: 45px;
+            position: relative;
+        }
+
+        .night-mode .notification-btn {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .notification-btn:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .night-mode .notification-btn:hover {
+            background: rgba(59, 130, 246, 0.25);
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .notification-panel {
+            position: absolute;
+            top: 60px;
+            right: 0;
             background: var(--day-card);
             border: 1px solid var(--day-border);
-            border-radius: 20px;
-            padding: 40px;
-            width: 90%;
-            max-width: 400px;
+            border-radius: 15px;
+            width: 350px;
+            max-height: 400px;
+            overflow-y: auto;
             backdrop-filter: blur(10px);
-            transform: scale(0.9);
-            opacity: 0;
-            transition: all 0.3s ease;
+            display: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .night-mode .auth-container {
+        .night-mode .notification-panel {
             background: var(--night-card);
             border: 1px solid var(--night-border);
         }
 
-        .auth-popup.show {
-            display: flex;
-        }
-
-        .auth-popup.show .auth-container {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 30px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .auth-tab {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-        }
-
-        .auth-tab.active {
-            border-bottom: 3px solid #3b82f6;
-            color: #3b82f6;
-        }
-
-        .auth-form {
-            display: none;
-        }
-
-        .auth-form.active {
+        .notification-panel.show {
             display: block;
+            animation: slideDown 0.3s ease;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
+        .notification-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .form-group input {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-family: 'Vazir', sans-serif;
-            transition: all 0.3s ease;
+        .notification-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
         }
 
-        .form-group input:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-        }
-
-        .night-mode .form-group input {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            color: #3b82f6;
-        }
-
-        .auth-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #3b82f6, #1e40af);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-family: 'Vazir', sans-serif;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .auth-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
-        }
-
-        .close-auth {
-            position: absolute;
-            top: 15px;
-            left: 15px;
+        .clear-all {
             background: none;
             border: none;
-            color: white;
-            font-size: 1.5rem;
+            color: #3b82f6;
             cursor: pointer;
+            font-size: 0.8rem;
             transition: all 0.3s ease;
         }
 
-        .close-auth:hover {
+        .clear-all:hover {
             color: #ef4444;
-            transform: scale(1.1);
+        }
+
+        .notification-list {
+            padding: 10px 0;
+        }
+
+        .notification-item {
+            padding: 12px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .notification-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .night-mode .notification-item:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .notification-item.unread {
+            background: rgba(59, 130, 246, 0.2);
+        }
+
+        .notification-icon {
+            color: #3b82f6;
+            font-size: 1rem;
+            margin-top: 2px;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .notification-message {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        .notification-time {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-top: 5px;
+        }
+
+        .notification-empty {
+            padding: 30px 20px;
+            text-align: center;
+            opacity: 0.7;
         }
 
         /* هدر */
@@ -633,8 +679,9 @@
                 font-size: 0.8rem;
             }
 
-            .auth-container {
-                padding: 30px 20px;
+            .notification-panel {
+                width: 300px;
+                right: -50px;
             }
         }
 
@@ -668,6 +715,11 @@
                 padding: 6px 12px;
                 font-size: 0.75rem;
             }
+
+            .notification-panel {
+                width: 280px;
+                right: -70px;
+            }
         }
     </style>
 </head>
@@ -682,6 +734,23 @@
             <i class="fas fa-user"></i>
             <span>ورود / ثبت‌نام</span>
         </button>
+    </div>
+
+    <!-- سیستم اعلان‌ها -->
+    <div class="notification-menu">
+        <button class="notification-btn" onclick="toggleNotifications()">
+            <i class="fas fa-bell"></i>
+            <div class="notification-badge" id="notificationBadge">3</div>
+        </button>
+        <div class="notification-panel" id="notificationPanel">
+            <div class="notification-header">
+                <h3>اعلان‌ها</h3>
+                <button class="clear-all" onclick="clearAllNotifications()">پاک کردن همه</button>
+            </div>
+            <div class="notification-list" id="notificationList">
+                <!-- اعلان‌ها اینجا نمایش داده می‌شوند -->
+            </div>
+        </div>
     </div>
 
     <!-- شمارنده بازدید - پایین سمت راست -->
@@ -752,146 +821,152 @@
         </a>
     </div>
 
-    <!-- پاپ‌آپ ثبت‌نام/ورود -->
-    <div class="auth-popup" id="authPopup">
-        <div class="auth-container">
-            <button class="close-auth" onclick="hideAuthPopup()">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <div class="auth-tabs">
-                <div class="auth-tab active" onclick="switchTab('login')">ورود</div>
-                <div class="auth-tab" onclick="switchTab('register')">ثبت‌نام</div>
-            </div>
-
-            <!-- فرم ورود -->
-            <form class="auth-form active" id="loginForm">
-                <div class="form-group">
-                    <label for="loginUsername">نام کاربری</label>
-                    <input type="text" id="loginUsername" placeholder="نام کاربری خود را وارد کنید" required>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">رمز عبور</label>
-                    <input type="password" id="loginPassword" placeholder="رمز عبور خود را وارد کنید" required>
-                </div>
-                <button type="submit" class="auth-btn">ورود به حساب</button>
-            </form>
-
-            <!-- فرم ثبت‌نام -->
-            <form class="auth-form" id="registerForm">
-                <div class="form-group">
-                    <label for="registerUsername">نام کاربری</label>
-                    <input type="text" id="registerUsername" placeholder="یک نام کاربری انتخاب کنید" required>
-                </div>
-                <div class="form-group">
-                    <label for="registerEmail">ایمیل</label>
-                    <input type="email" id="registerEmail" placeholder="ایمیل خود را وارد کنید" required>
-                </div>
-                <div class="form-group">
-                    <label for="registerPassword">رمز عبور</label>
-                    <input type="password" id="registerPassword" placeholder="یک رمز عبور قوی انتخاب کنید" required>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">تکرار رمز عبور</label>
-                    <input type="password" id="confirmPassword" placeholder="رمز عبور را تکرار کنید" required>
-                </div>
-                <button type="submit" class="auth-btn">ثبت‌نام</button>
-            </form>
-        </div>
-    </div>
-
     <script>
-        // سیستم ثبت‌نام/ورود
-        let currentUser = null;
+        // سیستم اعلان‌ها
+        let notifications = JSON.parse(localStorage.getItem('cafinetNotifications') || '[]');
 
-        function showAuthPopup() {
-            document.getElementById('authPopup').classList.add('show');
-        }
-
-        function hideAuthPopup() {
-            document.getElementById('authPopup').classList.remove('show');
-        }
-
-        function switchTab(tabName) {
-            // غیرفعال کردن همه تب‌ها
-            document.querySelectorAll('.auth-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // غیرفعال کردن همه فرم‌ها
-            document.querySelectorAll('.auth-form').forEach(form => {
-                form.classList.remove('active');
-            });
-            
-            // فعال کردن تب و فرم انتخاب شده
-            document.querySelector(`.auth-tab:nth-child(${tabName === 'login' ? '1' : '2'})`).classList.add('active');
-            document.getElementById(tabName + 'Form').classList.add('active');
-        }
-
-        // مدیریت فرم ورود
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-            
-            // بررسی اطلاعات کاربر
-            const users = JSON.parse(localStorage.getItem('cafinetUsers') || '[]');
-            const user = users.find(u => u.username === username && u.password === password);
-            
-            if (user) {
-                currentUser = user;
-                alert('خوش آمدید ' + username + '!');
-                updateUserMenu();
-                hideAuthPopup();
-            } else {
-                alert('نام کاربری یا رمز عبور اشتباه است!');
+        // اعلان‌های پیش‌فرض
+        const defaultNotifications = [
+            {
+                id: 1,
+                title: "خوش آمدید به کافی نت!",
+                message: "از خدمات ما لذت ببرید. برای شروع می‌تونید از بخش خدمات استفاده کنید.",
+                time: "همین حالا",
+                icon: "fas fa-rocket",
+                unread: true
+            },
+            {
+                id: 2,
+                title: "تخفیف ویژه خدمات",
+                message: "۲۰٪ تخفیف برای اولین سفارش تحقیق دانشجویی!",
+                time: "۵ دقیقه پیش",
+                icon: "fas fa-gift",
+                unread: true
+            },
+            {
+                id: 3,
+                title: "پشتیبانی آنلاین",
+                message: "تیم پشتیبانی ما ۲۴ ساعته آماده پاسخگویی به سوالات شماست.",
+                time: "۱ ساعت پیش",
+                icon: "fas fa-headset",
+                unread: true
             }
-        });
+        ];
 
-        // مدیریت فرم ثبت‌نام
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const username = document.getElementById('registerUsername').value;
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
+        function toggleNotifications() {
+            const panel = document.getElementById('notificationPanel');
+            panel.classList.toggle('show');
             
-            if (password !== confirmPassword) {
-                alert('رمز عبور و تکرار آن مطابقت ندارند!');
+            if (panel.classList.contains('show')) {
+                markAllAsRead();
+            }
+        }
+
+        function loadNotifications() {
+            // اگر اعلانی وجود نداره، اعلان‌های پیش‌فرض رو اضافه کن
+            if (notifications.length === 0) {
+                notifications = [...defaultNotifications];
+                saveNotifications();
+            }
+            
+            updateNotificationBadge();
+            renderNotifications();
+        }
+
+        function renderNotifications() {
+            const list = document.getElementById('notificationList');
+            
+            if (notifications.length === 0) {
+                list.innerHTML = '<div class="notification-empty">هیچ اعلانی وجود ندارد</div>';
                 return;
             }
-            
-            const users = JSON.parse(localStorage.getItem('cafinetUsers') || '[]');
-            
-            // بررسی وجود کاربر
-            if (users.find(u => u.username === username)) {
-                alert('این نام کاربری قبلاً ثبت شده است!');
-                return;
-            }
-            
-            // ثبت کاربر جدید
-            users.push({ username, email, password });
-            localStorage.setItem('cafinetUsers', JSON.stringify(users));
-            
-            alert('ثبت‌نام با موفقیت انجام شد!');
-            switchTab('login');
-        });
 
-        function updateUserMenu() {
-            const userBtn = document.querySelector('.user-btn');
-            if (currentUser) {
-                userBtn.innerHTML = `<i class="fas fa-user-check"></i><span>${currentUser.username}</span>`;
-                userBtn.onclick = function() {
-                    if (confirm('آیا می‌خواهید خارج شوید؟')) {
-                        currentUser = null;
-                        updateUserMenu();
-                    }
-                };
+            list.innerHTML = notifications.map(notification => `
+                <div class="notification-item ${notification.unread ? 'unread' : ''}" onclick="markAsRead(${notification.id})">
+                    <i class="${notification.icon} notification-icon"></i>
+                    <div class="notification-content">
+                        <div class="notification-title">${notification.title}</div>
+                        <div class="notification-message">${notification.message}</div>
+                        <div class="notification-time">${notification.time}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateNotificationBadge() {
+            const badge = document.getElementById('notificationBadge');
+            const unreadCount = notifications.filter(n => n.unread).length;
+            
+            if (unreadCount > 0) {
+                badge.textContent = unreadCount;
+                badge.style.display = 'flex';
             } else {
-                userBtn.innerHTML = `<i class="fas fa-user"></i><span>ورود / ثبت‌نام</span>`;
-                userBtn.onclick = showAuthPopup;
+                badge.style.display = 'none';
             }
         }
+
+        function markAsRead(notificationId) {
+            notifications = notifications.map(notification => 
+                notification.id === notificationId 
+                    ? {...notification, unread: false}
+                    : notification
+            );
+            saveNotifications();
+            updateNotificationBadge();
+            renderNotifications();
+        }
+
+        function markAllAsRead() {
+            notifications = notifications.map(notification => 
+                ({...notification, unread: false})
+            );
+            saveNotifications();
+            updateNotificationBadge();
+            renderNotifications();
+        }
+
+        function clearAllNotifications() {
+            if (confirm('آیا از پاک کردن همه اعلان‌ها مطمئنید؟')) {
+                notifications = [];
+                saveNotifications();
+                renderNotifications();
+                updateNotificationBadge();
+            }
+        }
+
+        function saveNotifications() {
+            localStorage.setItem('cafinetNotifications', JSON.stringify(notifications));
+        }
+
+        // اضافه کردن اعلان جدید (برای تست)
+        function addTestNotification() {
+            const newNotification = {
+                id: Date.now(),
+                title: "اعلان آزمایشی",
+                message: "این یک اعلان آزمایشی است که عملکرد سیستم را نشان می‌دهد.",
+                time: "همین حالا",
+                icon: "fas fa-bell",
+                unread: true
+            };
+            
+            notifications.unshift(newNotification);
+            saveNotifications();
+            updateNotificationBadge();
+            renderNotifications();
+            
+            // نمایش پنل اعلان‌ها
+            document.getElementById('notificationPanel').classList.add('show');
+        }
+
+        // بستن پنل اعلان با کلیک خارج
+        document.addEventListener('click', function(event) {
+            const panel = document.getElementById('notificationPanel');
+            const btn = document.querySelector('.notification-btn');
+            
+            if (!panel.contains(event.target) && !btn.contains(event.target)) {
+                panel.classList.remove('show');
+            }
+        });
 
         // سیستم شمارش بازدید
         function updateVisitCounter() {
@@ -906,7 +981,6 @@
             localStorage.setItem('cafinetVisitCount', visitCount);
             document.getElementById('visitCount').textContent = visitCount.toLocaleString('fa-IR');
             
-            // نمایش انیمیشن هنگام افزایش شمارنده
             const counter = document.getElementById('visitCount');
             counter.style.transform = 'scale(1.3)';
             setTimeout(() => {
@@ -946,22 +1020,14 @@
                 document.querySelector('.theme-toggle i').classList.add('fa-sun');
             }
             
-            // بارگذاری کاربر
-            const savedUser = localStorage.getItem('currentUser');
-            if (savedUser) {
-                currentUser = JSON.parse(savedUser);
-                updateUserMenu();
-            }
+            // بارگذاری اعلان‌ها
+            loadNotifications();
             
             // افزایش شمارنده بازدید
             updateVisitCounter();
-        });
 
-        // بستن پاپ‌آپ با کلیک خارج
-        document.getElementById('authPopup').addEventListener('click', function(e) {
-            if (e.target === this) {
-                hideAuthPopup();
-            }
+            // اضافه کردن اعلان تست بعد از 5 ثانیه
+            setTimeout(addTestNotification, 5000);
         });
     </script>
 </body>
