@@ -87,45 +87,6 @@
             transform: scale(1.1);
         }
 
-        /* منوی کاربر */
-        .user-menu {
-            position: fixed;
-            top: 20px;
-            right: 80px;
-            z-index: 1000;
-        }
-
-        .user-btn {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-family: 'Vazir', sans-serif;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .night-mode .user-btn {
-            background: rgba(59, 130, 246, 0.15);
-            color: #3b82f6;
-            border: 1px solid rgba(59, 130, 246, 0.3);
-        }
-
-        .user-btn:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        .night-mode .user-btn:hover {
-            background: rgba(59, 130, 246, 0.25);
-        }
-
         /* سیستم اعلان‌ها */
         .notification-menu {
             position: fixed;
@@ -197,8 +158,8 @@
             background: var(--day-card);
             border: 1px solid var(--day-border);
             border-radius: 15px;
-            width: 350px;
-            max-height: 400px;
+            width: 380px;
+            max-height: 500px;
             overflow-y: auto;
             backdrop-filter: blur(10px);
             display: none;
@@ -257,13 +218,10 @@
         }
 
         .notification-item {
-            padding: 12px 20px;
+            padding: 15px 20px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
         }
 
         .notification-item:hover {
@@ -278,30 +236,56 @@
             background: rgba(59, 130, 246, 0.2);
         }
 
-        .notification-icon {
-            color: #3b82f6;
-            font-size: 1rem;
-            margin-top: 2px;
-        }
-
         .notification-content {
             flex: 1;
         }
 
         .notification-title {
             font-weight: 600;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: #fbbf24;
         }
 
         .notification-message {
-            font-size: 0.8rem;
-            opacity: 0.8;
-            line-height: 1.4;
+            font-size: 0.85rem;
+            opacity: 0.9;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .discount-code {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px 0;
+            direction: ltr;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
         }
 
         .notification-time {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             opacity: 0.6;
             margin-top: 5px;
         }
@@ -624,6 +608,81 @@
             font-size: 0.9rem;
         }
 
+        /* پاپ‌آپ کپی موفق */
+        .copy-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--day-card);
+            border: 1px solid var(--day-border);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            display: none;
+            z-index: 2000;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .night-mode .copy-popup {
+            background: var(--night-card);
+            border: 1px solid var(--night-border);
+        }
+
+        .copy-popup.show {
+            display: block;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .copy-popup i {
+            font-size: 3rem;
+            color: #10b981;
+            margin-bottom: 15px;
+        }
+
+        .copy-popup h3 {
+            margin-bottom: 10px;
+            color: #10b981;
+        }
+
+        .copy-popup .code {
+            font-family: 'Courier New', monospace;
+            background: rgba(16, 185, 129, 0.2);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            direction: ltr;
+            font-weight: bold;
+        }
+
+        .close-popup {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .close-popup:hover {
+            background: #1e40af;
+            transform: scale(1.05);
+        }
+
         /* رسپانسیو */
         @media (max-width: 768px) {
             .container {
@@ -674,13 +733,8 @@
                 min-width: 70px;
             }
 
-            .user-btn {
-                padding: 8px 15px;
-                font-size: 0.8rem;
-            }
-
             .notification-panel {
-                width: 300px;
+                width: 320px;
                 right: -50px;
             }
         }
@@ -711,11 +765,6 @@
                 font-size: 0.8rem;
             }
 
-            .user-btn {
-                padding: 6px 12px;
-                font-size: 0.75rem;
-            }
-
             .notification-panel {
                 width: 280px;
                 right: -70px;
@@ -728,19 +777,11 @@
         <i class="fas fa-moon"></i>
     </button>
 
-    <!-- منوی کاربر -->
-    <div class="user-menu">
-        <button class="user-btn" onclick="showAuthPopup()">
-            <i class="fas fa-user"></i>
-            <span>ورود / ثبت‌نام</span>
-        </button>
-    </div>
-
     <!-- سیستم اعلان‌ها -->
     <div class="notification-menu">
         <button class="notification-btn" onclick="toggleNotifications()">
             <i class="fas fa-bell"></i>
-            <div class="notification-badge" id="notificationBadge">3</div>
+            <div class="notification-badge" id="notificationBadge">2</div>
         </button>
         <div class="notification-panel" id="notificationPanel">
             <div class="notification-header">
@@ -821,6 +862,16 @@
         </a>
     </div>
 
+    <!-- پاپ‌آپ کپی موفق -->
+    <div class="copy-popup" id="copyPopup">
+        <i class="fas fa-check-circle"></i>
+        <h3>کد تخفیف کپی شد!</h3>
+        <p>کد با موفقیت در حافظه کپی شد</p>
+        <div class="code">CAFINETT8</div>
+        <p>می‌توانید در صفحه خرید پیست کنید</p>
+        <button class="close-popup" onclick="closeCopyPopup()">باشه</button>
+    </div>
+
     <script>
         // سیستم اعلان‌ها
         let notifications = JSON.parse(localStorage.getItem('cafinetNotifications') || '[]');
@@ -829,26 +880,17 @@
         const defaultNotifications = [
             {
                 id: 1,
-                title: "خوش آمدید به کافی نت!",
-                message: "از خدمات ما لذت ببرید. برای شروع می‌تونید از بخش خدمات استفاده کنید.",
+                title: "🎉 ۴۰,۰۰۰ تومان تخفیف ویژه!",
+                message: "برای خرید فیلترشکن از کد تخفیف زیر استفاده کنید و از ۴۰,۰۰۰ تومان تخفیف بهره‌مند شوید. این کد فقط برای اولین خرید معتبر است.",
+                discountCode: "CAFINETT8",
                 time: "همین حالا",
-                icon: "fas fa-rocket",
                 unread: true
             },
             {
                 id: 2,
-                title: "تخفیف ویژه خدمات",
-                message: "۲۰٪ تخفیف برای اولین سفارش تحقیق دانشجویی!",
-                time: "۵ دقیقه پیش",
-                icon: "fas fa-gift",
-                unread: true
-            },
-            {
-                id: 3,
-                title: "پشتیبانی آنلاین",
-                message: "تیم پشتیبانی ما ۲۴ ساعته آماده پاسخگویی به سوالات شماست.",
+                title: "🔥 تخفیف پایان فصل",
+                message: "تا پایان این هفته از ۲۰٪ تخفیف در تمام خدمات تحقیقات دانشجویی بهره‌مند شوید. فرصت را از دست ندهید!",
                 time: "۱ ساعت پیش",
-                icon: "fas fa-headset",
                 unread: true
             }
         ];
@@ -882,15 +924,46 @@
             }
 
             list.innerHTML = notifications.map(notification => `
-                <div class="notification-item ${notification.unread ? 'unread' : ''}" onclick="markAsRead(${notification.id})">
-                    <i class="${notification.icon} notification-icon"></i>
+                <div class="notification-item ${notification.unread ? 'unread' : ''}">
                     <div class="notification-content">
                         <div class="notification-title">${notification.title}</div>
                         <div class="notification-message">${notification.message}</div>
+                        ${notification.discountCode ? `
+                            <div class="discount-code">
+                                <span>${notification.discountCode}</span>
+                                <button class="copy-btn" onclick="copyDiscountCode('${notification.discountCode}')">
+                                    <i class="fas fa-copy"></i> کپی
+                                </button>
+                            </div>
+                        ` : ''}
                         <div class="notification-time">${notification.time}</div>
                     </div>
                 </div>
             `).join('');
+        }
+
+        function copyDiscountCode(code) {
+            // کپی کردن کد به کلیپ‌بورد
+            navigator.clipboard.writeText(code).then(() => {
+                showCopyPopup();
+            }).catch(() => {
+                // روش جایگزین برای مرورگرهای قدیمی
+                const textArea = document.createElement('textarea');
+                textArea.value = code;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopyPopup();
+            });
+        }
+
+        function showCopyPopup() {
+            document.getElementById('copyPopup').classList.add('show');
+        }
+
+        function closeCopyPopup() {
+            document.getElementById('copyPopup').classList.remove('show');
         }
 
         function updateNotificationBadge() {
@@ -903,17 +976,6 @@
             } else {
                 badge.style.display = 'none';
             }
-        }
-
-        function markAsRead(notificationId) {
-            notifications = notifications.map(notification => 
-                notification.id === notificationId 
-                    ? {...notification, unread: false}
-                    : notification
-            );
-            saveNotifications();
-            updateNotificationBadge();
-            renderNotifications();
         }
 
         function markAllAsRead() {
@@ -936,26 +998,6 @@
 
         function saveNotifications() {
             localStorage.setItem('cafinetNotifications', JSON.stringify(notifications));
-        }
-
-        // اضافه کردن اعلان جدید (برای تست)
-        function addTestNotification() {
-            const newNotification = {
-                id: Date.now(),
-                title: "اعلان آزمایشی",
-                message: "این یک اعلان آزمایشی است که عملکرد سیستم را نشان می‌دهد.",
-                time: "همین حالا",
-                icon: "fas fa-bell",
-                unread: true
-            };
-            
-            notifications.unshift(newNotification);
-            saveNotifications();
-            updateNotificationBadge();
-            renderNotifications();
-            
-            // نمایش پنل اعلان‌ها
-            document.getElementById('notificationPanel').classList.add('show');
         }
 
         // بستن پنل اعلان با کلیک خارج
@@ -1025,9 +1067,6 @@
             
             // افزایش شمارنده بازدید
             updateVisitCounter();
-
-            // اضافه کردن اعلان تست بعد از 5 ثانیه
-            setTimeout(addTestNotification, 5000);
         });
     </script>
 </body>
