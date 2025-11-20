@@ -473,7 +473,7 @@
             <h1>مسابقه فیلترشکن رایگان</h1>
             <div class="contest-description">
                 <p>خوش آمدید! شما با موفقیت وارد مسابقه شدید.</p>
-                <p>اگر بتوانید کرنومتر را دقیقاً روی <strong>۱۰ ثانیه</strong> متوقف کنید، برنده یک فیلترشکن رایگان می‌شوید.</p>
+                <p>اگر بتوانید کرنومتر را <strong>دقیقاً روی ۱۰ ثانیه</strong> متوقف کنید، برنده یک فیلترشکن ۳۰ گیگ رایگان می‌شوید.</p>
             </div>
         </div>
         
@@ -490,15 +490,15 @@
             <ul class="rules-list">
                 <li>کرنومتر از ۰ تا ۲۰ ثانیه ادامه دارد</li>
                 <li>هدف توقف دقیق روی ۱۰ ثانیه است</li>
-                <li>تلورانس مجاز: ۰.۲ ثانیه</li>
-                <li>برندگان فیلترشکن ۵۰ گیگ رایگان دریافت می‌کنند</li>
+                <li>فقط توقف دقیق روی ۱۰.۰۰ ثانیه برنده محسوب می‌شود</li>
+                <li>برندگان فیلترشکن ۳۰ گیگ رایگان دریافت می‌کنند</li>
                 <li>هر کد فقط یکبار قابل استفاده است</li>
             </ul>
         </div>
         
         <!-- بخش تایمر مسابقه -->
         <div class="timer-container">
-            <div class="target-time">زمان هدف: <span>۱۰ ثانیه</span></div>
+            <div class="target-time">زمان هدف: <span>دقیقاً ۱۰ ثانیه</span></div>
             <div class="timer-display" id="timer">0.00</div>
             <button class="contest-btn" id="startBtn" onclick="startTimer()">شروع مسابقه</button>
             <button class="contest-btn stop-btn" id="stopBtn" onclick="stopTimer()" disabled>توقف</button>
@@ -507,7 +507,7 @@
         <!-- بخش نتیجه مسابقه -->
         <div class="contest-result" id="contestResult"></div>
         <div class="contest-prize" id="prizeInfo" style="display: none;">
-            <div>🎉 جایزه شما: فیلترشکن ۵۰ گیگ رایگان به مدت ۱ ماه!</div>
+            <div>🎉 جایزه شما: فیلترشکن ۳۰ گیگ رایگان به مدت ۱ ماه!</div>
             <div class="prize-code" id="prizeCode"></div>
             <div>این کد را در واتساپ برای ما ارسال کنید</div>
         </div>
@@ -532,7 +532,6 @@
         let elapsedTime = 0;
         let isRunning = false;
         const TARGET_TIME = 10; // زمان هدف: 10 ثانیه
-        const TOLERANCE = 0.2; // تلورانس: 0.2 ثانیه
 
         // شروع تایمر
         function startTimer() {
@@ -566,15 +565,15 @@
             document.getElementById('startBtn').disabled = false;
             document.getElementById('stopBtn').disabled = true;
             
-            const finalTime = elapsedTime;
+            const finalTime = parseFloat(elapsedTime.toFixed(2));
             
-            // بررسی برنده شدن
-            if (Math.abs(finalTime - TARGET_TIME) <= TOLERANCE) {
+            // بررسی برنده شدن - فقط دقیقاً 10.00 ثانیه
+            if (finalTime === TARGET_TIME) {
                 document.getElementById('contestResult').innerHTML = '<div class="contest-success">🎉 تبریک! شما برنده شدید! دقیقاً در ' + finalTime.toFixed(2) + ' ثانیه توقف کردید.</div>';
                 document.getElementById('prizeInfo').style.display = 'block';
                 
                 // تولید کد جایزه
-                const prizeCode = "FREE50-" + Math.random().toString(36).substr(2, 6).toUpperCase();
+                const prizeCode = "FREE30-" + Math.random().toString(36).substr(2, 6).toUpperCase();
                 document.getElementById('prizeCode').textContent = prizeCode;
                 
                 // نمایش انیمیشن موفقیت
@@ -583,7 +582,7 @@
                 // علامت‌گذاری کد به عنوان استفاده شده
                 markCodeAsUsed();
             } else {
-                document.getElementById('contestResult').innerHTML = '<div class="contest-fail">متأسفانه برنده نشدید! زمان توقف: ' + finalTime.toFixed(2) + ' ثانیه</div>';
+                document.getElementById('contestResult').innerHTML = '<div class="contest-fail">متأسفانه برنده نشدید! زمان توقف: ' + finalTime.toFixed(2) + ' ثانیه<br>شما باید دقیقاً روی ۱۰.۰۰ ثانیه توقف می‌کردید.</div>';
                 markCodeAsUsed();
             }
             
