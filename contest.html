@@ -23,23 +23,23 @@
             overflow-x: hidden;
         }
         
-        /* پنل مدیریت مخفی */
+        /* پنل مدیریت */
         .admin-panel {
             position: fixed;
-            top: 10px;
-            left: 10px;
+            top: 20px;
+            left: 20px;
             z-index: 1000;
         }
         
         .admin-toggle {
-            background: transparent;
-            color: transparent;
+            background: linear-gradient(135deg, #ff6b6b, #ff4757);
+            color: white;
             border: none;
-            padding: 5px;
-            border-radius: 5px;
+            padding: 12px 20px;
+            border-radius: 10px;
             cursor: pointer;
-            width: 30px;
-            height: 30px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
         }
         
         .admin-section {
@@ -49,11 +49,11 @@
             left: 50%;
             transform: translate(-50%, -50%);
             background: rgba(0, 0, 0, 0.95);
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 30px;
-            border: 2px solid #25D366;
+            border: 3px solid #25D366;
             width: 90%;
-            max-width: 500px;
+            max-width: 600px;
             max-height: 80vh;
             overflow-y: auto;
             z-index: 1001;
@@ -68,6 +68,23 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
+        }
+        
+        .login-section {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .login-input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border: 2px solid #25D366;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
         }
         
         .admin-input {
@@ -89,6 +106,7 @@
             cursor: pointer;
             margin: 5px;
             font-weight: bold;
+            width: 100%;
         }
         
         .code-list {
@@ -122,14 +140,22 @@
         
         .close-admin {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 15px;
+            left: 15px;
             background: #ff6b6b;
             color: white;
             border: none;
-            padding: 8px 12px;
+            padding: 10px 15px;
             border-radius: 50%;
             cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .admin-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #25D366;
+            font-size: 1.5rem;
         }
         
         .contest-container {
@@ -291,39 +317,57 @@
             .contest-header h1 { font-size: 2.2rem; }
             .contest-icon { font-size: 4rem; }
             .contest-btn { padding: 15px 30px; font-size: 1.2rem; }
+            .admin-toggle { padding: 10px 15px; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
-    <!-- پنل مدیریت مخفی -->
+    <!-- پنل مدیریت -->
     <div class="admin-panel">
-        <button class="admin-toggle" onclick="toggleAdminPanel()"></button>
+        <button class="admin-toggle" onclick="toggleAdminPanel()">
+            🛠️ مدیریت کدها
+        </button>
     </div>
     
     <div class="admin-overlay" id="adminOverlay" onclick="closeAdminPanel()"></div>
     
     <div class="admin-section" id="adminSection">
         <button class="close-admin" onclick="closeAdminPanel()">✕</button>
-        <h3>🛠️ پنل مدیریت کدها</h3>
         
-        <div>
-            <input type="text" class="admin-input" id="newCodeInput" placeholder="کد جدید (مثال: MYCODE123)">
-            <button class="admin-btn" onclick="addNewCode()">➕ افزودن کد</button>
+        <div id="loginSection" class="login-section">
+            <div class="admin-title">🔐 ورود به پنل مدیریت</div>
+            <input type="password" class="login-input" id="adminPassword" placeholder="رمز عبور مدیریت" autocomplete="off">
+            <button class="admin-btn" onclick="loginToAdmin()">🚪 ورود به پنل</button>
         </div>
         
-        <div>
-            <input type="number" class="admin-input" id="expiryTimeInput" placeholder="زمان انقضا (ثانیه)" value="40">
-            <button class="admin-btn" onclick="updateExpiryTime()">⏰ بروزرسانی زمان</button>
-        </div>
-        
-        <div class="code-list" id="codeList">
-            <!-- لیست کدها اینجا نمایش داده می‌شود -->
-        </div>
-        
-        <div>
-            <button class="admin-btn" onclick="generateRandomCodes()">🎲 تولید کدهای تصادفی</button>
-            <button class="admin-btn" onclick="clearAllCodes()">🗑️ حذف همه کدها</button>
-            <button class="admin-btn" onclick="resetAllCodes()">🔄 ریست همه کدها</button>
+        <div id="adminContent" style="display: none;">
+            <div class="admin-title">🛠️ پنل مدیریت کدها</div>
+            
+            <div>
+                <input type="text" class="admin-input" id="newCodeInput" placeholder="کد جدید (مثال: MYCODE123)">
+                <button class="admin-btn" onclick="addNewCode()">➕ افزودن کد</button>
+            </div>
+            
+            <div>
+                <input type="number" class="admin-input" id="expiryTimeInput" placeholder="زمان انقضا (ثانیه)" value="40">
+                <button class="admin-btn" onclick="updateExpiryTime()">⏰ بروزرسانی زمان</button>
+            </div>
+            
+            <div class="code-list" id="codeList">
+                <!-- لیست کدها اینجا نمایش داده می‌شود -->
+            </div>
+            
+            <div>
+                <button class="admin-btn" onclick="generateRandomCodes()">🎲 تولید کدهای تصادفی</button>
+                <button class="admin-btn" onclick="clearAllCodes()">🗑️ حذف همه کدها</button>
+                <button class="admin-btn" onclick="resetAllCodes()">🔄 ریست همه کدها</button>
+            </div>
+            
+            <div style="margin-top: 20px; text-align: center;">
+                <button class="admin-btn" onclick="logoutAdmin()" style="background: linear-gradient(135deg, #ff6b6b, #ff4757);">
+                    🚪 خروج از پنل
+                </button>
+            </div>
         </div>
     </div>
 
@@ -362,6 +406,9 @@
         let CONTEST_CODES = JSON.parse(localStorage.getItem('contest_codes')) || [];
         let EXPIRY_TIME = parseInt(localStorage.getItem('contest_expiry_time')) || 40;
         let ACTIVE_CODES = JSON.parse(localStorage.getItem('active_codes')) || {};
+        
+        // رمز عبور مدیریت - اینجا می‌توانید تغییر دهید
+        const ADMIN_PASSWORD = "123456";
 
         // دریافت کد از URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -383,24 +430,38 @@
             const adminSection = document.getElementById('adminSection');
             const adminOverlay = document.getElementById('adminOverlay');
             
-            if (adminSection.style.display === 'block') {
-                closeAdminPanel();
-            } else {
-                // درخواست رمز عبور
-                const password = prompt('لطفاً رمز عبور مدیریت را وارد کنید:');
-                if (password === 'admin123') { // رمز عبور اینجا تنظیم کنید
-                    adminSection.style.display = 'block';
-                    adminOverlay.style.display = 'block';
-                    updateCodeList();
-                } else {
-                    alert('❌ رمز عبور اشتباه است');
-                }
-            }
+            adminSection.style.display = 'block';
+            adminOverlay.style.display = 'block';
+            
+            // همیشه لاگین section رو نشون بده
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('adminContent').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
         }
 
         function closeAdminPanel() {
             document.getElementById('adminSection').style.display = 'none';
             document.getElementById('adminOverlay').style.display = 'none';
+        }
+
+        function loginToAdmin() {
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('adminContent').style.display = 'block';
+                updateCodeList();
+            } else {
+                alert('❌ رمز عبور اشتباه است!');
+                document.getElementById('adminPassword').value = '';
+                document.getElementById('adminPassword').focus();
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('adminContent').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
         }
 
         function addNewCode() {
