@@ -820,7 +820,7 @@
             <div class="contest-section">
                 <div class="contest-title">مسابقه فیلترشکن رایگان</div>
                 <div class="contest-input-container">
-                    <input type="text" class="contest-input" id="contestCode" placeholder= کد مسابقه رو وارد کنید">
+                    <input type="text" class="contest-input" id="contestCode" placeholder="کد مسابقه را وارد کنید">
                     <button class="enter-contest-btn" onclick="enterContest()">
                         <i class="fas fa-trophy"></i>
                         ورود به مسابقه
@@ -904,7 +904,7 @@
     </div>
 
     <script>
-        // قیمت‌های نهایی (افزایش یافته)
+        // قیمت‌های نهایی
         const packages = {
             "1month": [
                 { size: "20 گیگ", duration: "۱ ماه", price: 83000, icon: "📱" },
@@ -939,12 +939,6 @@
                 { size: "300 گیگ", duration: "۳ ماه", price: 782000, icon: "👑" }
             ]
         };
-
-        // کدهای معتبر مسابقه
-        const CONTEST_CODES = [];
-        for (let i = 1; i <= 30; i++) {
-            CONTEST_CODES.push(`VPN${i}`);
-        }
 
         let selectedPackage = null;
         let selectedDuration = "1month";
@@ -1030,7 +1024,7 @@
             `;
         }
 
-        // اعمال کد تخفیف - آپدیت شده
+        // اعمال کد تخفیف
         function applyDiscount() {
             const discountCode = document.getElementById('discountCode').value.trim();
             const discountMessage = document.getElementById('discountMessage');
@@ -1072,8 +1066,10 @@
                 return;
             }
             
-            // بررسی معتبر بودن کد
-            if (CONTEST_CODES.includes(contestCode)) {
+            // بررسی معتبر بودن کد از localStorage
+            const validCodes = JSON.parse(localStorage.getItem('contest_codes')) || [];
+            
+            if (validCodes.includes(contestCode)) {
                 contestMessage.innerHTML = '<span class="contest-success">✅ کد معتبر است! در حال انتقال...</span>';
                 
                 // انتقال به صفحه مسابقه با پارامتر کد
@@ -1081,7 +1077,7 @@
                     window.location.href = `contest.html?code=${contestCode}`;
                 }, 1500);
             } else {
-                contestMessage.innerHTML = '<span class="contest-error">❌ کد مسابقه نامعتبر است. کدهای معتبر: VPN1 تا VPN30</span>';
+                contestMessage.innerHTML = '<span class="contest-error">❌ کد مسابقه نامعتبر است</span>';
             }
         }
 
@@ -1142,7 +1138,7 @@
             document.getElementById('copyPopup').style.display = 'none';
         }
 
-        // ارسال به واتساپ - آپدیت شده
+        // ارسال به واتساپ
         function sendToWhatsApp() {
             if (!selectedPackage) {
                 alert('لطفاً ابتدا یک بسته انتخاب کنید');
