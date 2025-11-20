@@ -207,19 +207,30 @@
             margin-top: 5px;
         }
 
-        /* بخش کد تخفیف */
-        .discount-section {
+        /* بخش کد تخفیف و مسابقه */
+        .promo-sections {
+            display: flex;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .discount-section, .contest-section {
+            flex: 1;
             background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.1));
             padding: 30px;
             border-radius: 20px;
-            margin: 40px 0;
             border: 2px solid rgba(255, 255, 255, 0.2);
             text-align: center;
             position: relative;
             overflow: hidden;
         }
         
-        .discount-section::before {
+        .contest-section {
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,165,0,0.1));
+            border-color: rgba(255,215,0,0.3);
+        }
+        
+        .discount-section::before, .contest-section::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -230,12 +241,15 @@
             transform: rotate(45deg);
         }
         
-        .discount-title {
+        .discount-title, .contest-title {
             font-size: 1.5rem;
             margin-bottom: 25px;
-            color: #93c5fd;
             font-weight: bold;
             position: relative;
+        }
+        
+        .discount-title {
+            color: #93c5fd;
         }
         
         .discount-title::after {
@@ -244,7 +258,17 @@
             font-size: 1.8rem;
         }
         
-        .discount-input-container {
+        .contest-title {
+            color: #FFD700;
+        }
+        
+        .contest-title::after {
+            content: '🏆';
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .discount-input-container, .contest-input-container {
             display: flex;
             gap: 15px;
             max-width: 500px;
@@ -252,7 +276,7 @@
             position: relative;
         }
         
-        .discount-input {
+        .discount-input, .contest-input {
             flex: 1;
             padding: 18px;
             border-radius: 12px;
@@ -264,17 +288,22 @@
             transition: all 0.3s ease;
         }
         
-        .discount-input:focus {
+        .discount-input:focus, .contest-input:focus {
             outline: none;
             border-color: #25D366;
             box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
         }
         
-        .discount-input::placeholder {
+        .contest-input:focus {
+            border-color: #FFD700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+        }
+        
+        .discount-input::placeholder, .contest-input::placeholder {
             color: rgba(255, 255, 255, 0.6);
         }
         
-        .apply-discount-btn {
+        .apply-discount-btn, .enter-contest-btn {
             background: linear-gradient(135deg, #25D366, #1ea952);
             color: white;
             border: none;
@@ -287,20 +316,31 @@
             box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
         }
         
+        .enter-contest-btn {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+        
         .apply-discount-btn:hover {
             background: linear-gradient(135deg, #1ea952, #25D366);
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
         }
         
-        .discount-message {
+        .enter-contest-btn:hover {
+            background: linear-gradient(135deg, #FFA500, #FFD700);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        .discount-message, .contest-message {
             margin-top: 20px;
             font-size: 1.1rem;
             min-height: 25px;
             position: relative;
         }
         
-        .discount-success {
+        .discount-success, .contest-success {
             color: #25D366;
             font-weight: bold;
             background: rgba(37, 211, 102, 0.1);
@@ -309,7 +349,7 @@
             display: inline-block;
         }
         
-        .discount-error {
+        .discount-error, .contest-error {
             color: #ff6b6b;
             background: rgba(255, 107, 107, 0.1);
             padding: 12px 20px;
@@ -675,6 +715,131 @@
             transform: translateY(-2px);
         }
         
+        /* استایل‌های صفحه مسابقه */
+        .contest-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .contest-header {
+            margin-bottom: 40px;
+        }
+        
+        .contest-icon {
+            font-size: 6rem;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        .contest-header h1 {
+            font-family: 'B Titr', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .contest-description {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .timer-container {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timer-display {
+            font-size: 5rem;
+            font-weight: bold;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .target-time {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #93c5fd;
+        }
+        
+        .target-time span {
+            color: #FFD700;
+            font-weight: bold;
+        }
+        
+        .contest-btn {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .contest-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(255, 215, 0, 0.5);
+        }
+        
+        .contest-btn:disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .contest-result {
+            margin-top: 30px;
+            font-size: 1.3rem;
+            min-height: 50px;
+        }
+        
+        .contest-success {
+            color: #25D366;
+            font-weight: bold;
+            background: rgba(37, 211, 102, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .contest-fail {
+            color: #ff6b6b;
+            font-weight: bold;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .contest-prize {
+            font-size: 1.8rem;
+            color: #FFD700;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 25px;
@@ -727,8 +892,24 @@
                 font-size: 1rem;
             }
             
-            .discount-input-container {
+            .discount-input-container, .contest-input-container {
                 flex-direction: column;
+            }
+            
+            .promo-sections {
+                flex-direction: column;
+            }
+            
+            .timer-display {
+                font-size: 3.5rem;
+            }
+            
+            .contest-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .contest-icon {
+                font-size: 4rem;
             }
         }
     </style>
@@ -757,17 +938,33 @@
             </div>
         </div>
 
-        <!-- بخش کد تخفیف -->
-        <div class="discount-section">
-            <div class="discount-title">کد تخفیف ویژه</div>
-            <div class="discount-input-container">
-                <input type="text" class="discount-input" id="discountCode" placeholder="کد تخفیف را وارد کنید">
-                <button class="apply-discount-btn" onclick="applyDiscount()">
-                    <i class="fas fa-tag"></i>
-                    اعمال تخفیف
-                </button>
+        <!-- بخش کد تخفیف و مسابقه -->
+        <div class="promo-sections">
+            <!-- بخش کد تخفیف -->
+            <div class="discount-section">
+                <div class="discount-title">کد تخفیف ویژه</div>
+                <div class="discount-input-container">
+                    <input type="text" class="discount-input" id="discountCode" placeholder="کد تخفیف را وارد کنید">
+                    <button class="apply-discount-btn" onclick="applyDiscount()">
+                        <i class="fas fa-tag"></i>
+                        اعمال تخفیف
+                    </button>
+                </div>
+                <div class="discount-message" id="discountMessage"></div>
             </div>
-            <div class="discount-message" id="discountMessage"></div>
+            
+            <!-- بخش مسابقه -->
+            <div class="contest-section">
+                <div class="contest-title">مسابقه فیلترشکن رایگان</div>
+                <div class="contest-input-container">
+                    <input type="text" class="contest-input" id="contestCode" placeholder="کد مسابقه را وارد کنید">
+                    <button class="enter-contest-btn" onclick="enterContest()">
+                        <i class="fas fa-trophy"></i>
+                        ورود به مسابقه
+                    </button>
+                </div>
+                <div class="contest-message" id="contestMessage"></div>
+            </div>
         </div>
         
         <!-- مراحل خرید -->
@@ -879,6 +1076,10 @@
                 { size: "300 گیگ", duration: "۳ ماه", price: 782000, icon: "👑" }
             ]
         };
+
+        // کدهای مسابقه
+        const CONTEST_CODES = ["WIN2024", "FREEVPN", "CONTEST1", "LUCKYUSER", "GOLDENVIP"];
+        const TARGET_TIME = 10; // زمان هدف: 10 ثانیه
 
         let selectedPackage = null;
         let selectedDuration = "1month";
@@ -993,6 +1194,23 @@
                         - مبلغ: <strong>${formatPrice(selectedPackage.price)} تومان</strong>
                     `;
                 }
+            }
+        }
+
+        // ورود به مسابقه
+        function enterContest() {
+            const contestCode = document.getElementById('contestCode').value.trim().toUpperCase();
+            const contestMessage = document.getElementById('contestMessage');
+            
+            if (CONTEST_CODES.includes(contestCode)) {
+                contestMessage.innerHTML = '<span class="contest-success">✅ کد مسابقه صحیح است! در حال انتقال...</span>';
+                
+                // انتقال به صفحه مسابقه بعد از 2 ثانیه
+                setTimeout(() => {
+                    window.location.href = 'contest.html';
+                }, 2000);
+            } else {
+                contestMessage.innerHTML = '<span class="contest-error">❌ کد مسابقه نامعتبر است</span>';
             }
         }
 
