@@ -530,6 +530,18 @@
             font-size: 1.5rem;
         }
         
+        .debug-section {
+            background: rgba(255, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            text-align: left;
+            direction: ltr;
+            display: none;
+        }
+        
         @media (max-width: 768px) {
             .contest-container {
                 padding: 25px;
@@ -594,6 +606,7 @@
                 <li>هدف توقف دقیق روی ۱۰ ثانیه است</li>
                 <li>تلورانس مجاز: ۰.۲ ثانیه</li>
                 <li>برندگان فیلترشکن ۵۰ گیگ رایگان دریافت می‌کنند</li>
+                <li>کدهای معتبر: VPN1 تا VPN30</li>
             </ul>
         </div>
         
@@ -626,6 +639,13 @@
             <div>این کد را در واتساپ برای ما ارسال کنید</div>
         </div>
         
+        <!-- بخش دیباگ (برای تست) -->
+        <div class="debug-section" id="debugSection">
+            <strong>اطلاعات دیباگ:</strong>
+            <div id="debugInfo"></div>
+            <button onclick="resetUsedCodes()" style="margin-top: 10px; padding: 5px 10px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer;">بازنشانی کدهای استفاده شده</button>
+        </div>
+        
         <a href="index.html" class="back-btn">
             <i class="fas fa-arrow-right"></i>
             بازگشت به صفحه اصلی
@@ -634,11 +654,40 @@
 
     <script>
         // کدهای معتبر مسابقه (VPN1 تا VPN30)
-        const validCodes = Array.from({length: 30}, (_, i) => `VPN${i+1}`);
-        
-        // ذخیره کدهای استفاده شده در localStorage
-        let usedCodes = JSON.parse(localStorage.getItem('usedContestCodes') || '[]');
-        
+        const validCodes = [];
+        for (let i = 1; i <= 30; i++) {
+            validCodes.push(`VPN${i}`);
+        }
+
+        // تابع برای دریافت کدهای استفاده شده
+        function getUsedCodes() {
+            try {
+                const stored = localStorage.getItem('usedContestCodes');
+                console.log('ذخیره شده در localStorage:', stored);
+                
+                if (!stored) {
+                    return [];
+                }
+                
+                const parsed = JSON.parse(stored);
+                console.log('کدهای استفاده شده:', parsed);
+                return Array.isArray(parsed) ? parsed : [];
+            } catch (error) {
+                console.error('خطا در خواندن localStorage:', error);
+                return [];
+            }
+        }
+
+        // تابع برای ذخیره کدهای استفاده شده
+        function saveUsedCodes(codes) {
+            try {
+                localStorage.setItem('usedContestCodes', JSON.stringify(codes));
+                console.log('کدها ذخیره شدند:', codes);
+            } catch (error) {
+                console.error('خطا در ذخیره localStorage:', error);
+            }
+        }
+
         // متغیرهای تایمر
         let timer;
         let startTime;
@@ -648,10 +697,24 @@
         const TOLERANCE = 0.2; // تلورانس: 0.2 ثانیه
         let currentCode = null;
 
+        // نمایش اطلاعات دیباگ
+        function updateDebugInfo() {
+            const usedCodes = getUsedCodes();
+            document.getElementById('debugInfo').innerHTML = `
+                کدهای معتبر: ${validCodes.join(', ')}<br>
+                کدهای استفاده شده: ${usedCodes.join(', ') || 'هیچکدام'}<br>
+                کد فعلی: ${currentCode || 'تعیین نشده'}
+            `;
+        }
+
         // ورود به مسابقه با کد
         function enterContest() {
             const contestCode = document.getElementById('contestCode').value.trim().toUpperCase();
             const codeMessage = document.getElementById('codeMessage');
+            
+            // نمایش بخش دیباگ
+            document.getElementById('debugSection').style.display = 'block';
+            updateDebugInfo();
             
             if (!contestCode) {
                 codeMessage.innerHTML = '<span class="code-error">لطفاً کد مسابقه را وارد کنید</span>';
@@ -660,11 +723,12 @@
             
             // بررسی معتبر بودن کد
             if (!validCodes.includes(contestCode)) {
-                codeMessage.innerHTML = '<span class="code-error">❌ کد مسابقه نامعتبر است</span>';
+                codeMessage.innerHTML = '<span class="code-error">❌ کد مسابقه نامعتبر است. کدهای معتبر: VPN1 تا VPN30</span>';
                 return;
             }
             
             // بررسی استفاده نشدن کد
+            const usedCodes = getUsedCodes();
             if (usedCodes.includes(contestCode)) {
                 codeMessage.innerHTML = '<span class="code-error">❌ این کد قبلاً استفاده شده است</span>';
                 return;
@@ -674,6 +738,9 @@
             currentCode = contestCode;
             codeMessage.innerHTML = '<span class="code-success">✅ کد معتبر است! آماده مسابقه هستید</span>';
             document.getElementById('timerContainer').style.display = 'block';
+            
+            // به‌روزرسانی اطلاعات دیباگ
+            updateDebugInfo();
             
             // اسکرول به بخش تایمر
             setTimeout(() => {
@@ -735,6 +802,9 @@
                 markCodeAsUsed();
             }
             
+            // به‌روزرسانی اطلاعات دیباگ
+            updateDebugInfo();
+            
             // ریست تایمر برای دور بعد (اگر کد جدیدی وارد شود)
             setTimeout(() => {
                 elapsedTime = 0;
@@ -744,10 +814,21 @@
 
         // علامت‌گذاری کد به عنوان استفاده شده
         function markCodeAsUsed() {
-            if (currentCode && !usedCodes.includes(currentCode)) {
-                usedCodes.push(currentCode);
-                localStorage.setItem('usedContestCodes', JSON.stringify(usedCodes));
+            if (currentCode) {
+                const usedCodes = getUsedCodes();
+                if (!usedCodes.includes(currentCode)) {
+                    usedCodes.push(currentCode);
+                    saveUsedCodes(usedCodes);
+                    console.log('کد استفاده شده ذخیره شد:', currentCode);
+                }
             }
+        }
+
+        // بازنشانی کدهای استفاده شده (برای تست)
+        function resetUsedCodes() {
+            localStorage.removeItem('usedContestCodes');
+            alert('کدهای استفاده شده بازنشانی شدند!');
+            updateDebugInfo();
         }
 
         // انیمیشن جشن برنده شدن
@@ -809,6 +890,9 @@
                     enterContest();
                 }
             });
+            
+            // نمایش اطلاعات دیباگ در ابتدا
+            updateDebugInfo();
         });
     </script>
 </body>
