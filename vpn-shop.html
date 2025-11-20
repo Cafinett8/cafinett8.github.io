@@ -715,131 +715,6 @@
             transform: translateY(-2px);
         }
         
-        /* استایل‌های صفحه مسابقه */
-        .contest-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 40px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        
-        .contest-header {
-            margin-bottom: 40px;
-        }
-        
-        .contest-icon {
-            font-size: 6rem;
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-        
-        .contest-header h1 {
-            font-family: 'B Titr', sans-serif;
-            font-size: 3rem;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .contest-description {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            line-height: 1.8;
-        }
-        
-        .timer-container {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 40px 0;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .timer-display {
-            font-size: 5rem;
-            font-weight: bold;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            color: #FFD700;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-        }
-        
-        .target-time {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #93c5fd;
-        }
-        
-        .target-time span {
-            color: #FFD700;
-            font-weight: bold;
-        }
-        
-        .contest-btn {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: white;
-            border: none;
-            padding: 20px 50px;
-            border-radius: 15px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 20px 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
-        }
-        
-        .contest-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(255, 215, 0, 0.5);
-        }
-        
-        .contest-btn:disabled {
-            background: #6b7280;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .contest-result {
-            margin-top: 30px;
-            font-size: 1.3rem;
-            min-height: 50px;
-        }
-        
-        .contest-success {
-            color: #25D366;
-            font-weight: bold;
-            background: rgba(37, 211, 102, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            font-size: 1.5rem;
-        }
-        
-        .contest-fail {
-            color: #ff6b6b;
-            font-weight: bold;
-            background: rgba(255, 107, 107, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            font-size: 1.5rem;
-        }
-        
-        .contest-prize {
-            font-size: 1.8rem;
-            color: #FFD700;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-        
         @media (max-width: 768px) {
             .container {
                 padding: 25px;
@@ -899,18 +774,6 @@
             .promo-sections {
                 flex-direction: column;
             }
-            
-            .timer-display {
-                font-size: 3.5rem;
-            }
-            
-            .contest-header h1 {
-                font-size: 2.2rem;
-            }
-            
-            .contest-icon {
-                font-size: 4rem;
-            }
         }
     </style>
 </head>
@@ -957,7 +820,7 @@
             <div class="contest-section">
                 <div class="contest-title">مسابقه فیلترشکن رایگان</div>
                 <div class="contest-input-container">
-                    <input type="text" class="contest-input" id="contestCode" placeholder="کد مسابقه را وارد کنید">
+                    <input type="text" class="contest-input" id="contestCode" placeholder="کد مسابقه (VPN1-VPN30)">
                     <button class="enter-contest-btn" onclick="enterContest()">
                         <i class="fas fa-trophy"></i>
                         ورود به مسابقه
@@ -1077,9 +940,11 @@
             ]
         };
 
-        // کدهای مسابقه
-        const CONTEST_CODES = ["WIN2024", "FREEVPN", "CONTEST1", "LUCKYUSER", "GOLDENVIP"];
-        const TARGET_TIME = 10; // زمان هدف: 10 ثانیه
+        // کدهای معتبر مسابقه
+        const CONTEST_CODES = [];
+        for (let i = 1; i <= 30; i++) {
+            CONTEST_CODES.push(`VPN${i}`);
+        }
 
         let selectedPackage = null;
         let selectedDuration = "1month";
@@ -1197,20 +1062,26 @@
             }
         }
 
-        // ورود به مسابقه
+        // ورود به مسابقه - انتقال به صفحه مسابقه
         function enterContest() {
             const contestCode = document.getElementById('contestCode').value.trim().toUpperCase();
             const contestMessage = document.getElementById('contestMessage');
             
+            if (!contestCode) {
+                contestMessage.innerHTML = '<span class="contest-error">لطفاً کد مسابقه را وارد کنید</span>';
+                return;
+            }
+            
+            // بررسی معتبر بودن کد
             if (CONTEST_CODES.includes(contestCode)) {
-                contestMessage.innerHTML = '<span class="contest-success">✅ کد مسابقه صحیح است! در حال انتقال...</span>';
+                contestMessage.innerHTML = '<span class="contest-success">✅ کد معتبر است! در حال انتقال...</span>';
                 
-                // انتقال به صفحه مسابقه بعد از 2 ثانیه
+                // انتقال به صفحه مسابقه با پارامتر کد
                 setTimeout(() => {
-                    window.location.href = 'contest.html';
-                }, 2000);
+                    window.location.href = `contest.html?code=${contestCode}`;
+                }, 1500);
             } else {
-                contestMessage.innerHTML = '<span class="contest-error">❌ کد مسابقه نامعتبر است</span>';
+                contestMessage.innerHTML = '<span class="contest-error">❌ کد مسابقه نامعتبر است. کدهای معتبر: VPN1 تا VPN30</span>';
             }
         }
 
