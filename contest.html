@@ -23,76 +23,81 @@
             overflow-x: hidden;
         }
         
-        .floating-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        
-        .shape {
-            position: absolute;
-            border-radius: 50%;
+        .admin-panel {
             background: rgba(255, 255, 255, 0.1);
-            animation: float 15s infinite linear;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
-        .shape:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
+        .admin-toggle {
+            background: linear-gradient(135deg, #ff6b6b, #ff4757);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            font-weight: bold;
         }
         
-        .shape:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 70%;
-            left: 80%;
-            animation-delay: 2s;
+        .admin-section {
+            display: none;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
         }
         
-        .shape:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 40%;
-            left: 30%;
-            animation-delay: 4s;
+        .admin-input {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
         }
         
-        .shape:nth-child(4) {
-            width: 100px;
-            height: 100px;
-            top: 20%;
-            left: 70%;
-            animation-delay: 6s;
+        .admin-btn {
+            background: linear-gradient(135deg, #25D366, #1ea952);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: bold;
         }
         
-        .shape:nth-child(5) {
-            width: 90px;
-            height: 90px;
-            top: 60%;
-            left: 20%;
-            animation-delay: 8s;
+        .code-list {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            max-height: 200px;
+            overflow-y: auto;
         }
         
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            50% {
-                transform: translateY(-20px) rotate(180deg);
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(0) rotate(360deg);
-                opacity: 1;
-            }
+        .code-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 12px;
+            margin: 5px 0;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .delete-code {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
         }
         
         .contest-container {
@@ -105,50 +110,21 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .contest-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
-            transform: rotate(45deg);
-            animation: shine 6s infinite linear;
-        }
-        
-        @keyframes shine {
-            0% {
-                transform: rotate(45deg) translateX(-100%);
-            }
-            100% {
-                transform: rotate(45deg) translateX(100%);
-            }
         }
         
         .contest-header {
             margin-bottom: 40px;
-            position: relative;
         }
         
         .contest-icon {
             font-size: 6rem;
             margin-bottom: 20px;
             animation: bounce 2s infinite;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
         }
         
         @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         
         .contest-header h1 {
@@ -158,17 +134,6 @@
             background: linear-gradient(45deg, #25D366, #93c5fd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        
-        .contest-description {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            line-height: 1.8;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .user-info {
@@ -177,7 +142,6 @@
             padding: 25px;
             margin: 30px 0;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            font-size: 1.3rem;
         }
         
         .user-code {
@@ -199,7 +163,6 @@
             padding: 15px;
             margin: 20px 0;
             border: 2px solid rgba(255, 107, 107, 0.3);
-            font-size: 1.1rem;
         }
         
         .expiry-timer {
@@ -216,8 +179,6 @@
             padding: 40px;
             margin: 40px 0;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
         }
         
         .timer-display {
@@ -226,22 +187,7 @@
             margin: 20px 0;
             font-family: 'Courier New', monospace;
             color: #25D366;
-            text-shadow: 0 0 10px rgba(37, 211, 102, 0.5);
             direction: ltr;
-        }
-        
-        .target-time {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #93c5fd;
-        }
-        
-        .target-time span {
-            color: #25D366;
-            font-weight: bold;
-            background: rgba(37, 211, 102, 0.2);
-            padding: 5px 15px;
-            border-radius: 10px;
         }
         
         .contest-btn {
@@ -255,45 +201,15 @@
             cursor: pointer;
             margin: 20px 10px;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .contest-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-        
-        .contest-btn:hover::before {
-            left: 100%;
-        }
-        
-        .contest-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
         }
         
         .contest-btn:disabled {
             background: #6b7280;
             cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
         
         .stop-btn {
             background: linear-gradient(135deg, #ff6b6b, #ff4757);
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
-        }
-        
-        .stop-btn:hover {
-            box-shadow: 0 12px 30px rgba(255, 107, 107, 0.5);
         }
         
         .contest-result {
@@ -310,7 +226,6 @@
             border-radius: 15px;
             font-size: 1.5rem;
             border: 2px solid rgba(37, 211, 102, 0.3);
-            animation: pulse 2s infinite;
         }
         
         .contest-fail {
@@ -321,59 +236,6 @@
             border-radius: 15px;
             font-size: 1.5rem;
             border: 2px solid rgba(255, 107, 107, 0.3);
-        }
-        
-        .expired-message {
-            color: #ffa500;
-            font-weight: bold;
-            background: rgba(255, 165, 0, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            font-size: 1.5rem;
-            border: 2px solid rgba(255, 165, 0, 0.3);
-            margin: 20px 0;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
-            }
-        }
-        
-        .contest-prize {
-            font-size: 1.8rem;
-            color: #25D366;
-            font-weight: bold;
-            margin: 20px 0;
-            background: rgba(37, 211, 102, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            border: 2px solid rgba(37, 211, 102, 0.3);
-        }
-        
-        .prize-code {
-            font-family: 'Courier New', monospace;
-            font-size: 2rem;
-            letter-spacing: 3px;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 15px 30px;
-            border-radius: 10px;
-            margin: 15px 0;
-            display: inline-block;
-            border: 2px dashed #25D366;
-            animation: glow 2s infinite alternate;
-        }
-        
-        @keyframes glow {
-            from {
-                box-shadow: 0 0 5px #25D366;
-            }
-            to {
-                box-shadow: 0 0 20px #25D366;
-            }
         }
         
         .back-btn {
@@ -389,170 +251,72 @@
             border-radius: 12px;
             transition: all 0.3s ease;
             border: 1px solid rgba(255,255,255,0.2);
-            position: relative;
-            overflow: hidden;
         }
-        
-        .back-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: left 0.5s;
-        }
-        
-        .back-btn:hover::before {
-            left: 100%;
-        }
-        
-        .back-btn:hover {
-            color: #ffffff;
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-        }
-        
-        .rules-section {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 15px;
-            margin: 30px 0;
-            text-align: right;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .rules-title {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: #93c5fd;
-            font-weight: bold;
-        }
-        
-        .rules-list {
-            list-style-type: none;
-            padding-right: 20px;
-        }
-        
-        .rules-list li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-right: 25px;
-        }
-        
-        .rules-list li::before {
-            content: '•';
-            position: absolute;
-            right: 0;
-            color: #25D366;
-            font-size: 1.5rem;
-        }
-        
+
         @media (max-width: 768px) {
-            .contest-container {
-                padding: 25px;
-                margin: 10px;
-            }
-            
-            .timer-display {
-                font-size: 3.5rem;
-            }
-            
-            .contest-header h1 {
-                font-size: 2.2rem;
-            }
-            
-            .contest-icon {
-                font-size: 4rem;
-            }
-            
-            .contest-btn {
-                padding: 15px 30px;
-                font-size: 1.2rem;
-                margin: 10px 5px;
-            }
-            
-            .prize-code {
-                font-size: 1.5rem;
-                padding: 12px 20px;
-            }
-            
-            .user-code {
-                font-size: 1.5rem;
-                padding: 12px 20px;
-            }
+            .contest-container { padding: 25px; }
+            .timer-display { font-size: 3.5rem; }
+            .contest-header h1 { font-size: 2.2rem; }
+            .contest-icon { font-size: 4rem; }
+            .contest-btn { padding: 15px 30px; font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
-    <!-- اشکال شناور در پس‌زمینه -->
-    <div class="floating-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
+    <!-- پنل ادمین -->
+    <div class="admin-panel">
+        <button class="admin-toggle" onclick="toggleAdminPanel()">
+            🛠️ پنل مدیریت کدها
+        </button>
+        <div class="admin-section" id="adminSection">
+            <h3>مدیریت کدهای مسابقه</h3>
+            
+            <div>
+                <input type="text" class="admin-input" id="newCodeInput" placeholder="کد جدید (مثال: MYCODE123)">
+                <button class="admin-btn" onclick="addNewCode()">➕ افزودن کد</button>
+            </div>
+            
+            <div>
+                <input type="number" class="admin-input" id="expiryTimeInput" placeholder="زمان انقضا (ثانیه)" value="40">
+                <button class="admin-btn" onclick="updateExpiryTime()">⏰ بروزرسانی زمان</button>
+            </div>
+            
+            <div class="code-list" id="codeList">
+                <!-- لیست کدها اینجا نمایش داده می‌شود -->
+            </div>
+            
+            <div>
+                <button class="admin-btn" onclick="generateRandomCodes()">🎲 تولید کدهای تصادفی</button>
+                <button class="admin-btn" onclick="clearAllCodes()">🗑️ حذف همه کدها</button>
+                <button class="admin-btn" onclick="resetAllCodes()">🔄 ریست همه کدها</button>
+            </div>
+        </div>
     </div>
-    
+
     <div class="contest-container">
         <div class="contest-header">
             <div class="contest-icon">🏆</div>
             <h1>مسابقه فیلترشکن رایگان</h1>
-            <div class="contest-description">
-                <p>خوش آمدید! شما با موفقیت وارد مسابقه شدید.</p>
-                <p>اگر بتوانید کرنومتر را <strong>دقیقاً روی ۱۰ ثانیه</strong> متوقف کنید، برنده یک فیلترشکن ۳۰ گیگ رایگان می‌شوید.</p>
-            </div>
+            <p>کد مسابقه خود را وارد کنید</p>
         </div>
         
-        <!-- اطلاعات کاربر -->
         <div class="user-info">
             <div>کد مسابقه شما:</div>
             <div class="user-code" id="userCode">...</div>
-            <div>شروع مسابقه:</div>
         </div>
         
-        <!-- اطلاعات انقضا -->
         <div class="expiry-info">
-            <div>⏰ توجه: این کد فقط <strong>۴۰ ثانیه</strong> اعتبار دارد</div>
-            <div class="expiry-timer" id="expiryTimer">زمان باقی‌مانده: ۴۰ ثانیه</div>
+            <div>⏰ زمان باقی‌مانده: <span class="expiry-timer" id="expiryTimer">۴۰ ثانیه</span></div>
         </div>
         
-        <!-- بخش قوانین -->
-        <div class="rules-section">
-            <div class="rules-title">📋 قوانین مسابقه</div>
-            <ul class="rules-list">
-                <li>کرنومتر از ۰ تا ۲۰ ثانیه ادامه دارد</li>
-                <li>هدف توقف دقیق روی ۱۰ ثانیه است</li>
-                <li>فقط توقف دقیق روی ۱۰.۰۰ ثانیه برنده محسوب می‌شود</li>
-                <li>برندگان فیلترشکن ۳۰ گیگ رایگان دریافت می‌کنند</li>
-                <li>هر کد فقط ۴۰ ثانیه اعتبار دارد و یکبار قابل استفاده است</li>
-            </ul>
-        </div>
-        
-        <!-- بخش تایمر مسابقه -->
         <div class="timer-container">
-            <div class="target-time">زمان هدف: <span>دقیقاً ۱۰ ثانیه</span></div>
             <div class="timer-display" id="timer">0.00</div>
             <button class="contest-btn" id="startBtn" onclick="startTimer()">شروع مسابقه</button>
             <button class="contest-btn stop-btn" id="stopBtn" onclick="stopTimer()" disabled>توقف</button>
         </div>
         
-        <!-- بخش نتیجه مسابقه -->
         <div class="contest-result" id="contestResult"></div>
-        
-        <!-- پیام انقضا -->
-        <div class="expired-message" id="expiredMessage" style="display: none;">
-            <i class="fas fa-exclamation-triangle"></i>
-            کد مسابقه منقضی شد! زمان شما به پایان رسید.
-        </div>
-        
-        <div class="contest-prize" id="prizeInfo" style="display: none;">
-            <div>🎉 جایزه شما: فیلترشکن ۳۰ گیگ رایگان به مدت ۱ ماه!</div>
-            <div class="prize-code" id="prizeCode"></div>
-            <div>این کد را در واتساپ برای ما ارسال کنید</div>
-        </div>
-        
+
         <a href="vpn-shop.html" class="back-btn">
             <i class="fas fa-arrow-right"></i>
             بازگشت به صفحه اصلی
@@ -560,11 +324,10 @@
     </div>
 
     <script>
-        // کدهای معتبر مسابقه
-        const CONTEST_CODES = [];
-        for (let i = 1; i <= 30; i++) {
-            CONTEST_CODES.push(`VPN${i}`);
-        }
+        // سیستم مدیریت کدها با timestamp سراسری
+        let CONTEST_CODES = JSON.parse(localStorage.getItem('contest_codes')) || [];
+        let EXPIRY_TIME = parseInt(localStorage.getItem('contest_expiry_time')) || 40;
+        let ACTIVE_CODES = JSON.parse(localStorage.getItem('active_codes')) || {};
 
         // دریافت کد از URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -573,67 +336,161 @@
         // نمایش کد کاربر
         document.getElementById('userCode').textContent = userCode || 'نامشخص';
         
-        // متغیرهای全局
+        // متغیرهای تایمر
         let expiryTimer = null;
         let gameTimer = null;
         let startTime = null;
         let elapsedTime = 0;
         let isRunning = false;
-        let timeLeft = 40; // ۴۰ ثانیه
+        let timeLeft = EXPIRY_TIME;
 
-        // بررسی اعتبار کد
+        // توابع مدیریت کدها
+        function toggleAdminPanel() {
+            const adminSection = document.getElementById('adminSection');
+            adminSection.style.display = adminSection.style.display === 'block' ? 'none' : 'block';
+            updateCodeList();
+        }
+
+        function addNewCode() {
+            const newCode = document.getElementById('newCodeInput').value.trim().toUpperCase();
+            if (newCode && !CONTEST_CODES.includes(newCode)) {
+                CONTEST_CODES.push(newCode);
+                saveCodesToStorage();
+                updateCodeList();
+                document.getElementById('newCodeInput').value = '';
+                alert('✅ کد با موفقیت اضافه شد');
+            } else {
+                alert('❌ کد تکراری یا نامعتبر است');
+            }
+        }
+
+        function updateExpiryTime() {
+            const newTime = parseInt(document.getElementById('expiryTimeInput').value);
+            if (newTime > 0) {
+                EXPIRY_TIME = newTime;
+                localStorage.setItem('contest_expiry_time', EXPIRY_TIME);
+                timeLeft = EXPIRY_TIME;
+                document.getElementById('expiryTimer').textContent = `${EXPIRY_TIME} ثانیه`;
+                alert('✅ زمان انقضا بروزرسانی شد');
+            }
+        }
+
+        function deleteCode(code) {
+            CONTEST_CODES = CONTEST_CODES.filter(c => c !== code);
+            delete ACTIVE_CODES[code];
+            saveCodesToStorage();
+            updateCodeList();
+        }
+
+        function generateRandomCodes() {
+            const count = 10;
+            for (let i = 0; i < count; i++) {
+                const randomCode = 'CODE' + Math.random().toString(36).substr(2, 6).toUpperCase();
+                if (!CONTEST_CODES.includes(randomCode)) {
+                    CONTEST_CODES.push(randomCode);
+                }
+            }
+            saveCodesToStorage();
+            updateCodeList();
+            alert(`✅ ${count} کد تصادفی تولید شد`);
+        }
+
+        function clearAllCodes() {
+            if (confirm('⚠️ آیا از حذف همه کدها مطمئنید؟')) {
+                CONTEST_CODES = [];
+                ACTIVE_CODES = {};
+                saveCodesToStorage();
+                updateCodeList();
+                alert('✅ همه کدها حذف شدند');
+            }
+        }
+
+        function resetAllCodes() {
+            if (confirm('⚠️ آیا از ریست همه کدها مطمئنید؟ این کار کدهای استفاده شده را مجدداً فعال می‌کند')) {
+                ACTIVE_CODES = {};
+                saveCodesToStorage();
+                alert('✅ همه کدها ریست شدند');
+            }
+        }
+
+        function updateCodeList() {
+            const codeList = document.getElementById('codeList');
+            codeList.innerHTML = CONTEST_CODES.map(code => {
+                const codeData = ACTIVE_CODES[code];
+                const status = codeData ? '🔴 استفاده شده' : '🟢 فعال';
+                const timeInfo = codeData ? ` (${Math.floor((Date.now() - codeData.startTime) / 1000)}ثانیه گذشته)` : '';
+                
+                return `
+                    <div class="code-item">
+                        <div>
+                            <span>${code}</span>
+                            <small style="color: ${codeData ? '#ff6b6b' : '#25D366'}">${status}${timeInfo}</small>
+                        </div>
+                        <button class="delete-code" onclick="deleteCode('${code}')">🗑️</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function saveCodesToStorage() {
+            localStorage.setItem('contest_codes', JSON.stringify(CONTEST_CODES));
+            localStorage.setItem('active_codes', JSON.stringify(ACTIVE_CODES));
+        }
+
+        // سیستم اعتبارسنجی پیشرفته
         function validateCode() {
             if (!userCode) {
                 disableContest('کد مسابقه نامعتبر است');
                 return false;
             }
             
-            if (!CONTEST_CODES.includes(userCode.toUpperCase())) {
+            const upperCode = userCode.toUpperCase();
+            
+            // بررسی وجود کد در لیست
+            if (!CONTEST_CODES.includes(upperCode)) {
                 disableContest('کد مسابقه نامعتبر است');
                 return false;
             }
             
-            // بررسی اینکه آیا این کد قبلاً استفاده شده
-            const codeData = getCodeData(userCode);
+            // بررسی اینکه آیا کد قبلاً فعال شده
+            const codeData = ACTIVE_CODES[upperCode];
             if (codeData) {
-                // محاسبه زمان گذشته از ایجاد کد
-                const now = Date.now();
-                const codeCreatedAt = codeData.createdAt;
-                const timePassed = now - codeCreatedAt;
+                const timePassed = Date.now() - codeData.startTime;
+                const timePassedSeconds = Math.floor(timePassed / 1000);
                 
-                // اگر ۴۰ ثانیه گذشته باشد، کد منقضی شده
-                if (timePassed > 40000) { // 40 ثانیه
-                    disableContest('این کد منقضی شده است');
+                // اگر کمتر از ۴۰ ثانیه گذشته، اجازه بازی نده
+                if (timePassedSeconds < EXPIRY_TIME) {
+                    const remainingTime = EXPIRY_TIME - timePassedSeconds;
+                    disableContest(`این کد قبلاً استفاده شده! ${remainingTime} ثانیه دیگر منقضی می‌شود`);
                     return false;
+                } else {
+                    // اگر ۴۰ ثانیه گذشته، کد را حذف کن
+                    delete ACTIVE_CODES[upperCode];
+                    saveCodesToStorage();
                 }
-                
-                // اگر قبلاً استفاده شده
-                if (codeData.used) {
-                    disableContest('این کد قبلاً استفاده شده است');
-                    return false;
-                }
-            } else {
-                // اگر کد جدید است، آن را ثبت کن
-                createCodeData(userCode);
             }
             
-            // شروع تایمر انقضا
+            // ثبت کد به عنوان فعال
+            ACTIVE_CODES[upperCode] = {
+                startTime: Date.now(),
+                used: false
+            };
+            saveCodesToStorage();
+            
             startExpiryTimer();
             return true;
         }
 
-        // شروع تایمر انقضای ۴۰ ثانیه‌ای
         function startExpiryTimer() {
             const expiryTimerElement = document.getElementById('expiryTimer');
+            timeLeft = EXPIRY_TIME;
             
             expiryTimer = setInterval(() => {
                 timeLeft--;
-                expiryTimerElement.textContent = `زمان باقی‌مانده: ${timeLeft} ثانیه`;
+                expiryTimerElement.textContent = `${timeLeft} ثانیه`;
                 
-                // تغییر رنگ هنگام نزدیک شدن به انقضا
                 if (timeLeft <= 10) {
                     expiryTimerElement.style.color = '#ff6b6b';
-                    expiryTimerElement.style.animation = 'pulse 0.5s infinite';
                 }
                 
                 if (timeLeft <= 0) {
@@ -643,29 +500,22 @@
             }, 1000);
         }
 
-        // انقضای کد
         function expireCode() {
             clearInterval(expiryTimer);
             if (gameTimer) clearInterval(gameTimer);
             
-            // غیرفعال کردن دکمه‌ها
             document.getElementById('startBtn').disabled = true;
             document.getElementById('stopBtn').disabled = true;
+            document.getElementById('contestResult').innerHTML = 
+                '<div class="contest-fail">⏰ کد منقضی شد! زمان شما به پایان رسید.</div>';
             
-            // نمایش پیام انقضا
-            document.getElementById('expiredMessage').style.display = 'block';
-            document.getElementById('contestResult').innerHTML = '';
-            
-            // علامت‌گذاری کد به عنوان منقضی شده
-            markCodeAsExpired();
-            
-            // ریست صفحه بعد از ۵ ثانیه
-            setTimeout(() => {
-                window.location.href = 'vpn-shop.html';
-            }, 5000);
+            // حذف کد از لیست فعال
+            if (userCode) {
+                delete ACTIVE_CODES[userCode.toUpperCase()];
+                saveCodesToStorage();
+            }
         }
 
-        // شروع تایمر بازی
         function startTimer() {
             if (isRunning) return;
             
@@ -673,14 +523,11 @@
             startTime = Date.now() - elapsedTime;
             document.getElementById('startBtn').disabled = true;
             document.getElementById('stopBtn').disabled = false;
-            document.getElementById('contestResult').innerHTML = '';
-            document.getElementById('prizeInfo').style.display = 'none';
             
             gameTimer = setInterval(() => {
                 elapsedTime = (Date.now() - startTime) / 1000;
                 document.getElementById('timer').textContent = elapsedTime.toFixed(2);
                 
-                // اگر زمان از 20 ثانیه گذشت، تایمر را متوقف کن
                 if (elapsedTime >= 20) {
                     stopTimer();
                     document.getElementById('contestResult').innerHTML = 
@@ -690,7 +537,6 @@
             }, 10);
         }
 
-        // توقف تایمر بازی
         function stopTimer() {
             if (!isRunning) return;
             
@@ -701,129 +547,50 @@
             
             const finalTime = parseFloat(elapsedTime.toFixed(2));
             
-            // بررسی برنده شدن - فقط دقیقاً 10.00 ثانیه
             if (finalTime === 10.00) {
                 document.getElementById('contestResult').innerHTML = 
-                    '<div class="contest-success">🎉 تبریک! شما برنده شدید! دقیقاً در ' + finalTime.toFixed(2) + ' ثانیه توقف کردید.</div>';
-                document.getElementById('prizeInfo').style.display = 'block';
-                
-                // تولید کد جایزه
-                const prizeCode = "FREE30-" + Math.random().toString(36).substr(2, 6).toUpperCase();
-                document.getElementById('prizeCode').textContent = prizeCode;
-                
-                // نمایش انیمیشن موفقیت
-                celebrateWin();
+                    '<div class="contest-success">🎉 تبریک! شما برنده شدید! فیلترشکن ۳۰ گیگ رایگان دریافت کردید.</div>';
             } else {
                 document.getElementById('contestResult').innerHTML = 
-                    '<div class="contest-fail">متأسفانه برنده نشدید! زمان توقف: ' + finalTime.toFixed(2) + 
-                    ' ثانیه<br>شما باید دقیقاً روی ۱۰.۰۰ ثانیه توقف می‌کردید.</div>';
+                    '<div class="contest-fail">متأسفانه برنده نشدید! زمان: ' + finalTime.toFixed(2) + ' ثانیه</div>';
             }
             
-            // علامت‌گذاری کد به عنوان استفاده شده
             markCodeAsUsed();
-            
-            // توقف تایمر انقضا
             clearInterval(expiryTimer);
         }
 
-        // مدیریت داده‌های کد در localStorage
-        function getCodeData(code) {
-            const data = localStorage.getItem(`contest_code_${code}`);
-            return data ? JSON.parse(data) : null;
-        }
-
-        function createCodeData(code) {
-            const codeData = {
-                code: code,
-                createdAt: Date.now(),
-                used: false,
-                expired: false
-            };
-            localStorage.setItem(`contest_code_${code}`, JSON.stringify(codeData));
-        }
-
         function markCodeAsUsed() {
-            const codeData = getCodeData(userCode) || {};
-            codeData.used = true;
-            codeData.usedAt = Date.now();
-            localStorage.setItem(`contest_code_${userCode}`, JSON.stringify(codeData));
+            if (userCode) {
+                ACTIVE_CODES[userCode.toUpperCase()] = {
+                    startTime: Date.now(),
+                    used: true
+                };
+                saveCodesToStorage();
+            }
         }
 
-        function markCodeAsExpired() {
-            const codeData = getCodeData(userCode) || {};
-            codeData.expired = true;
-            codeData.expiredAt = Date.now();
-            localStorage.setItem(`contest_code_${userCode}`, JSON.stringify(codeData));
-        }
-
-        // غیرفعال کردن مسابقه
         function disableContest(message) {
             document.getElementById('startBtn').disabled = true;
             document.getElementById('stopBtn').disabled = true;
-            document.getElementById('expiry-info').style.display = 'none';
             document.getElementById('contestResult').innerHTML = 
                 `<div class="contest-fail">${message}</div>`;
         }
 
-        // انیمیشن جشن برنده شدن
-        function celebrateWin() {
-            const confettiCount = 50;
-            
-            for (let i = 0; i < confettiCount; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.cssText = `
-                    position: fixed;
-                    width: 10px;
-                    height: 10px;
-                    background: ${getRandomColor()};
-                    top: -10px;
-                    left: ${Math.random() * 100}%;
-                    animation: confettiFall ${Math.random() * 3 + 2}s linear forwards;
-                    z-index: 1000;
-                    border-radius: 50%;
-                `;
-                
-                document.body.appendChild(confetti);
-                
-                setTimeout(() => {
-                    confetti.remove();
-                }, 5000);
-            }
-            
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes confettiFall {
-                    0% {
-                        transform: translateY(0) rotate(0deg);
-                        opacity: 1;
-                    }
-                    100% {
-                        transform: translateY(100vh) rotate(360deg);
-                        opacity: 0;
-                    }
-                }
-                @keyframes pulse {
-                    0%, 100% { opacity: 1; }
-                    50% { opacity: 0.5; }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
-        // تولید رنگ تصادفی برای کنفتی
-        function getRandomColor() {
-            const colors = ['#25D366', '#93c5fd', '#FFD700', '#FF6B6B', '#A363D9'];
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
-
         // راه‌اندازی اولیه
         document.addEventListener('DOMContentLoaded', function() {
-            const isValid = validateCode();
+            // پاکسازی کدهای قدیمی (بیشتر از ۲ دقیقه)
+            const now = Date.now();
+            Object.keys(ACTIVE_CODES).forEach(code => {
+                const codeData = ACTIVE_CODES[code];
+                if (now - codeData.startTime > 120000) { // 2 دقیقه
+                    delete ACTIVE_CODES[code];
+                }
+            });
+            saveCodesToStorage();
             
-            if (!isValid) {
-                document.getElementById('expiry-info').style.display = 'none';
-            }
+            validateCode();
+            document.getElementById('expiryTimer').textContent = `${EXPIRY_TIME} ثانیه`;
+            document.getElementById('expiryTimeInput').value = EXPIRY_TIME;
         });
     </script>
 </body>
