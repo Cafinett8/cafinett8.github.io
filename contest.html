@@ -193,6 +193,23 @@
             border: 2px solid #25D366;
         }
         
+        .expiry-info {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 165, 0, 0.2));
+            border-radius: 15px;
+            padding: 15px;
+            margin: 20px 0;
+            border: 2px solid rgba(255, 107, 107, 0.3);
+            font-size: 1.1rem;
+        }
+        
+        .expiry-timer {
+            font-size: 1.4rem;
+            color: #ff6b6b;
+            margin: 10px 0;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        
         .timer-container {
             background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(147, 197, 253, 0.2));
             border-radius: 20px;
@@ -306,7 +323,7 @@
             border: 2px solid rgba(255, 107, 107, 0.3);
         }
         
-        .used-code-message {
+        .expired-message {
             color: #ffa500;
             font-weight: bold;
             background: rgba(255, 165, 0, 0.1);
@@ -495,10 +512,10 @@
             <div>شروع مسابقه:</div>
         </div>
         
-        <!-- پیام استفاده شده -->
-        <div class="used-code-message" id="usedCodeMessage" style="display: none;">
-            <i class="fas fa-exclamation-triangle"></i>
-            این کد قبلاً استفاده شده است و فقط یکبار امکان شرکت در مسابقه وجود دارد
+        <!-- اطلاعات انقضا -->
+        <div class="expiry-info">
+            <div>⏰ توجه: این کد فقط <strong>۱ دقیقه</strong> اعتبار دارد</div>
+            <div class="expiry-timer" id="expiryTimer">زمان باقی‌مانده: ۶۰ ثانیه</div>
         </div>
         
         <!-- بخش قوانین -->
@@ -509,12 +526,12 @@
                 <li>هدف توقف دقیق روی ۱۰ ثانیه است</li>
                 <li>فقط توقف دقیق روی ۱۰.۰۰ ثانیه برنده محسوب می‌شود</li>
                 <li>برندگان فیلترشکن ۳۰ گیگ رایگان دریافت می‌کنند</li>
-                <li>هر کد فقط یکبار قابل استفاده است</li>
+                <li>هر کد فقط ۱ دقیقه اعتبار دارد و یکبار قابل استفاده است</li>
             </ul>
         </div>
         
         <!-- بخش تایمر مسابقه -->
-        <div class="timer-container" id="timerContainer">
+        <div class="timer-container">
             <div class="target-time">زمان هدف: <span>دقیقاً ۱۰ ثانیه</span></div>
             <div class="timer-display" id="timer">0.00</div>
             <button class="contest-btn" id="startBtn" onclick="startTimer()">شروع مسابقه</button>
@@ -523,6 +540,13 @@
         
         <!-- بخش نتیجه مسابقه -->
         <div class="contest-result" id="contestResult"></div>
+        
+        <!-- پیام انقضا -->
+        <div class="expired-message" id="expiredMessage" style="display: none;">
+            <i class="fas fa-exclamation-triangle"></i>
+            کد مسابقه منقضی شد! زمان شما به پایان رسید.
+        </div>
+        
         <div class="contest-prize" id="prizeInfo" style="display: none;">
             <div>🎉 جایزه شما: فیلترشکن ۳۰ گیگ رایگان به مدت ۱ ماه!</div>
             <div class="prize-code" id="prizeCode"></div>
@@ -549,16 +573,16 @@
         // نمایش کد کاربر
         document.getElementById('userCode').textContent = userCode || 'نامشخص';
         
-        // متغیرهای تایمر
-        let timer;
-        let startTime;
+        // متغیرهای全局
+        let expiryTimer = null;
+        let gameTimer = null;
+        let startTime = null;
         let elapsedTime = 0;
         let isRunning = false;
-        let hasParticipated = false;
-        const TARGET_TIME = 10; // زمان هدف: 10 ثانیه
+        let timeLeft = 60; // 1 دقیقه
 
-        // بررسی اعتبار کد و وضعیت استفاده
-        function checkCodeValidityAndUsage() {
+        // بررسی اعتبار کد
+        function validateCode() {
             if (!userCode) {
                 disableContest('کد مسابقه نامعتبر است');
                 return false;
@@ -570,36 +594,62 @@
             }
             
             // بررسی اینکه آیا این کد قبلاً استفاده شده
-            const usedCodes = JSON.parse(localStorage.getItem('usedContestCodes') || '[]');
-            if (usedCodes.includes(userCode.toUpperCase())) {
-                disableContest('used');
+            const codeData = getCodeData(userCode);
+            if (codeData && codeData.used) {
+                disableContest('این کد قبلاً استفاده شده است');
                 return false;
             }
             
+            // شروع تایمر انقضا
+            startExpiryTimer();
             return true;
         }
 
-        // غیرفعال کردن مسابقه
-        function disableContest(reason) {
+        // شروع تایمر انقضای ۱ دقیقه‌ای
+        function startExpiryTimer() {
+            const expiryTimerElement = document.getElementById('expiryTimer');
+            
+            expiryTimer = setInterval(() => {
+                timeLeft--;
+                expiryTimerElement.textContent = `زمان باقی‌مانده: ${timeLeft} ثانیه`;
+                
+                // تغییر رنگ هنگام نزدیک شدن به انقضا
+                if (timeLeft <= 10) {
+                    expiryTimerElement.style.color = '#ff6b6b';
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(expiryTimer);
+                    expireCode();
+                }
+            }, 1000);
+        }
+
+        // انقضای کد
+        function expireCode() {
+            clearInterval(expiryTimer);
+            if (gameTimer) clearInterval(gameTimer);
+            
+            // غیرفعال کردن دکمه‌ها
             document.getElementById('startBtn').disabled = true;
             document.getElementById('stopBtn').disabled = true;
             
-            if (reason === 'used') {
-                document.getElementById('usedCodeMessage').style.display = 'block';
-                document.getElementById('timerContainer').style.opacity = '0.5';
-            } else {
-                document.getElementById('contestResult').innerHTML = 
-                    `<div class="contest-fail">${reason}</div>`;
-            }
+            // نمایش پیام انقضا
+            document.getElementById('expiredMessage').style.display = 'block';
+            document.getElementById('contestResult').innerHTML = '';
+            
+            // علامت‌گذاری کد به عنوان منقضی شده
+            markCodeAsExpired();
+            
+            // ریست صفحه بعد از ۵ ثانیه
+            setTimeout(() => {
+                window.location.href = 'vpn-shop.html';
+            }, 5000);
         }
 
-        // شروع تایمر
+        // شروع تایمر بازی
         function startTimer() {
-            if (isRunning || hasParticipated) return;
-            
-            // علامت‌گذاری کد به عنوان استفاده شده
-            markCodeAsUsed();
-            hasParticipated = true;
+            if (isRunning) return;
             
             isRunning = true;
             startTime = Date.now() - elapsedTime;
@@ -608,7 +658,7 @@
             document.getElementById('contestResult').innerHTML = '';
             document.getElementById('prizeInfo').style.display = 'none';
             
-            timer = setInterval(() => {
+            gameTimer = setInterval(() => {
                 elapsedTime = (Date.now() - startTime) / 1000;
                 document.getElementById('timer').textContent = elapsedTime.toFixed(2);
                 
@@ -617,23 +667,24 @@
                     stopTimer();
                     document.getElementById('contestResult').innerHTML = 
                         '<div class="contest-fail">⏰ زمان تمام شد! متأسفانه برنده نشدید.</div>';
+                    markCodeAsUsed();
                 }
             }, 10);
         }
 
-        // توقف تایمر
+        // توقف تایمر بازی
         function stopTimer() {
             if (!isRunning) return;
             
             isRunning = false;
-            clearInterval(timer);
+            clearInterval(gameTimer);
             document.getElementById('startBtn').disabled = true;
             document.getElementById('stopBtn').disabled = true;
             
             const finalTime = parseFloat(elapsedTime.toFixed(2));
             
             // بررسی برنده شدن - فقط دقیقاً 10.00 ثانیه
-            if (finalTime === TARGET_TIME) {
+            if (finalTime === 10.00) {
                 document.getElementById('contestResult').innerHTML = 
                     '<div class="contest-success">🎉 تبریک! شما برنده شدید! دقیقاً در ' + finalTime.toFixed(2) + ' ثانیه توقف کردید.</div>';
                 document.getElementById('prizeInfo').style.display = 'block';
@@ -650,22 +701,43 @@
                     ' ثانیه<br>شما باید دقیقاً روی ۱۰.۰۰ ثانیه توقف می‌کردید.</div>';
             }
             
-            // ریست تایمر برای نمایش
-            setTimeout(() => {
-                elapsedTime = 0;
-                document.getElementById('timer').textContent = '0.00';
-            }, 3000);
+            // علامت‌گذاری کد به عنوان استفاده شده
+            markCodeAsUsed();
+            
+            // توقف تایمر انقضا
+            clearInterval(expiryTimer);
         }
 
-        // علامت‌گذاری کد به عنوان استفاده شده
+        // مدیریت داده‌های کد در localStorage
+        function getCodeData(code) {
+            const data = localStorage.getItem(`contest_${code}`);
+            return data ? JSON.parse(data) : null;
+        }
+
         function markCodeAsUsed() {
-            if (userCode) {
-                let usedCodes = JSON.parse(localStorage.getItem('usedContestCodes') || '[]');
-                if (!usedCodes.includes(userCode.toUpperCase())) {
-                    usedCodes.push(userCode.toUpperCase());
-                    localStorage.setItem('usedContestCodes', JSON.stringify(usedCodes));
-                }
-            }
+            const codeData = {
+                used: true,
+                usedAt: new Date().toISOString(),
+                userCode: userCode
+            };
+            localStorage.setItem(`contest_${userCode}`, JSON.stringify(codeData));
+        }
+
+        function markCodeAsExpired() {
+            const codeData = {
+                expired: true,
+                expiredAt: new Date().toISOString(),
+                userCode: userCode
+            };
+            localStorage.setItem(`contest_${userCode}`, JSON.stringify(codeData));
+        }
+
+        // غیرفعال کردن مسابقه
+        function disableContest(message) {
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('stopBtn').disabled = true;
+            document.getElementById('contestResult').innerHTML = 
+                `<div class="contest-fail">${message}</div>`;
         }
 
         // انیمیشن جشن برنده شدن
@@ -689,13 +761,11 @@
                 
                 document.body.appendChild(confetti);
                 
-                // حذف کنفتی بعد از انیمیشن
                 setTimeout(() => {
                     confetti.remove();
                 }, 5000);
             }
             
-            // اضافه کردن استایل انیمیشن کنفتی
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes confettiFall {
@@ -720,12 +790,10 @@
 
         // راه‌اندازی اولیه
         document.addEventListener('DOMContentLoaded', function() {
-            const isValid = checkCodeValidityAndUsage();
+            const isValid = validateCode();
             
             if (!isValid) {
-                // اگر کد معتبر نیست یا استفاده شده، همه چیز غیرفعال شود
-                document.getElementById('startBtn').disabled = true;
-                document.getElementById('stopBtn').disabled = true;
+                document.getElementById('expiry-info').style.display = 'none';
             }
         });
     </script>
