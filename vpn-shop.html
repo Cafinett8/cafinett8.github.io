@@ -9,931 +9,894 @@
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #1e3c72;
-            --secondary: #2a5298;
-            --accent: #FFD700;
-            --success: #25D366;
-            --danger: #FF6B6B;
-            --text: #ffffff;
-            --card-bg: rgba(255, 255, 255, 0.08);
-            --border: rgba(255, 255, 255, 0.15);
-            --radius: 16px;
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Vazir', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Vazir', 'Segoe UI', sans-serif;
         }
-
+        
         body {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: var(--text);
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
             min-height: 100vh;
-            line-height: 1.5;
-            padding: 0;
+            padding: 20px;
         }
-
-        .mobile-container {
-            max-width: 100%;
+        
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 16px;
-            min-height: 100vh;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
-
-        /* هدر */
+        
         .header {
             text-align: center;
-            padding: 24px 16px;
-            margin-bottom: 24px;
+            margin-bottom: 40px;
+            position: relative;
         }
-
+        
         .vpn-icon {
-            font-size: 3.5rem;
-            margin-bottom: 16px;
+            font-size: 5rem;
+            margin-bottom: 20px;
             animation: bounce 2s infinite;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
         }
-
+        
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
-
+        
         .header h1 {
             font-family: 'B Titr', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 8px;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: fadeIn 1.5s ease-in;
             background: linear-gradient(45deg, #fff, #93c5fd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         .header p {
-            font-size: 0.95rem;
+            font-size: 1.2rem;
             opacity: 0.9;
-            max-width: 280px;
-            margin: 0 auto;
         }
 
-        /* کارت‌ها */
-        .card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            padding: 20px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-        }
-
-        .free-vpn-card {
-            background: linear-gradient(135deg, rgba(255,215,0,0.12), rgba(255,165,0,0.08));
-            border: 1px solid rgba(255, 215, 0, 0.25);
-        }
-
-        .section-header {
+        /* تب‌های مدت زمان */
+        .duration-tabs {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
-
-        .section-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .section-icon {
-            font-size: 1.5rem;
-        }
-
-        /* فرم‌ها */
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .form-input {
-            padding: 16px;
-            border-radius: 12px;
-            border: 1.5px solid var(--border);
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text);
-            font-size: 1rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent);
+        
+        .duration-tab {
             background: rgba(255, 255, 255, 0.15);
-        }
-
-        .form-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* دکمه‌ها */
-        .btn {
-            padding: 16px 24px;
-            border-radius: 12px;
-            border: none;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent), #FFA500);
-            color: var(--primary);
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, var(--success), #1ea952);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             color: white;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn:disabled {
-            background: #6b7280;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* پیام‌ها */
-        .message {
-            margin-top: 12px;
-            font-size: 0.9rem;
-            text-align: center;
-            min-height: 20px;
-        }
-
-        .message-success {
-            color: var(--success);
-            background: rgba(37, 211, 102, 0.1);
-            padding: 12px 16px;
-            border-radius: 10px;
-            border: 1px solid rgba(37, 211, 102, 0.3);
-        }
-
-        .message-error {
-            color: var(--danger);
-            background: rgba(255, 107, 107, 0.1);
-            padding: 12px 16px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 107, 107, 0.3);
-        }
-
-        /* تب‌ها */
-        .tabs-container {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .tab {
-            flex: 1;
-            min-width: 100px;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1.5px solid var(--border);
-            border-radius: 12px;
-            color: var(--text);
-            font-size: 0.9rem;
-            font-weight: 600;
+            padding: 15px 25px;
+            border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .tab.active {
-            background: rgba(37, 211, 102, 0.2);
-            border-color: var(--success);
-            color: var(--success);
-        }
-
-        /* شبکه قیمت‌ها */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin: 16px 0;
-        }
-
-        .package-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1.5px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .package-card.selected {
-            background: rgba(37, 211, 102, 0.15);
-            border-color: var(--success);
-            transform: scale(1.02);
-        }
-
-        .package-size {
             font-size: 1.1rem;
             font-weight: bold;
-            color: var(--accent);
-            margin-bottom: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .duration-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .duration-tab:hover::before {
+            left: 100%;
+        }
+        
+        .duration-tab:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+        
+        .duration-tab.active {
+            background: rgba(37, 211, 102, 0.3);
+            border-color: #25D366;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
         }
 
-        .package-price {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #93c5fd;
-            margin-bottom: 4px;
+        /* جدول قیمت */
+        .pricing-container {
+            margin-bottom: 40px;
         }
-
-        .package-duration {
-            font-size: 0.8rem;
-            opacity: 0.8;
+        
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
         }
-
-        /* اطلاعات انتخاب شده */
-        .selected-info {
-            background: rgba(37, 211, 102, 0.1);
-            padding: 16px;
-            border-radius: 12px;
-            margin: 16px 0;
+        
+        .package-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 25px 15px;
             text-align: center;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border: 1.5px solid rgba(37, 211, 102, 0.3);
-            display: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .package-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .package-btn:hover::before {
+            left: 100%;
+        }
+        
+        .package-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .package-btn.selected {
+            background: rgba(37, 211, 102, 0.3);
+            border-color: #25D366;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        .package-size {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .package-price {
+            font-size: 1.3rem;
+            color: #93c5fd;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .package-duration {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* بخش کد تخفیف */
+        .discount-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.1));
+            padding: 30px;
+            border-radius: 20px;
+            margin: 40px 0;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .discount-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: rotate(45deg);
+        }
+        
+        .discount-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: #93c5fd;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .discount-title::after {
+            content: '🎁';
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .discount-input-container {
+            display: flex;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .discount-input {
+            flex: 1;
+            padding: 18px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .discount-input:focus {
+            outline: none;
+            border-color: #25D366;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
+        }
+        
+        .discount-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .apply-discount-btn {
+            background: linear-gradient(135deg, #25D366, #1ea952);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .apply-discount-btn:hover {
+            background: linear-gradient(135deg, #1ea952, #25D366);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .discount-message {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            min-height: 25px;
+            position: relative;
+        }
+        
+        .discount-success {
+            color: #25D366;
+            font-weight: bold;
+            background: rgba(37, 211, 102, 0.1);
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .discount-error {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-block;
         }
 
         /* مراحل خرید */
-        .steps-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+        .steps-container {
+            margin-bottom: 40px;
         }
-
-        .step-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1.5px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
+        
+        .step {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             position: relative;
+            transition: all 0.3s ease;
         }
-
+        
+        .step:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
         .step-number {
-            background: linear-gradient(135deg, var(--success), #1ea952);
+            background: linear-gradient(135deg, #25D366, #1ea952);
             color: white;
-            width: 32px;
-            height: 32px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
             position: absolute;
-            right: -8px;
-            top: -8px;
-            font-size: 0.9rem;
+            right: -15px;
+            top: -15px;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
         }
-
+        
         .step-title {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
             color: #93c5fd;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-weight: bold;
         }
-
+        
         /* کارت بانکی */
         .bank-card {
             background: linear-gradient(135deg, #004B8D 0%, #0066CC 100%);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 35px;
             text-align: center;
-            margin: 12px 0;
-            border: 1.5px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-
-        .card-number {
+        
+        .bank-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .bank-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+        }
+        
+        .bank-title {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+            color: #e0f2fe;
+        }
+        
+        .bank-name {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        
+        .card-number-section {
             direction: ltr;
             text-align: center;
-            margin: 16px 0;
+            margin: 25px 0;
+        }
+        
+        .card-number-line {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+            direction: ltr;
+        }
+        
+        .card-number-part {
             font-family: 'Courier New', monospace;
-            font-size: 1.1rem;
-            letter-spacing: 1px;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            background: rgba(255,255,255,0.2);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .card-number-dash {
+            font-size: 1.8rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: bold;
+        }
+        
+        .card-owner {
+            font-size: 1.3rem;
+            margin: 20px 0;
+            font-weight: bold;
             background: rgba(255,255,255,0.15);
             padding: 12px;
             border-radius: 8px;
+            display: inline-block;
         }
-
-        .card-owner {
-            font-size: 1rem;
-            margin: 12px 0;
-            font-weight: 600;
-            background: rgba(255,255,255,0.1);
-            padding: 10px;
-            border-radius: 8px;
-        }
-
-        /* واتساپ */
-        .whatsapp-btn {
-            background: linear-gradient(135deg, var(--success), #128C7E);
+        
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.25);
             color: white;
-            padding: 16px 24px;
+            border: none;
+            padding: 18px 30px;
             border-radius: 12px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .copy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .copy-btn:hover::before {
+            left: 100%;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: rgba(37, 211, 102, 0.6);
+        }
+        
+        /* پاپ‌آپ کپی موفق */
+        .copy-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .copy-popup-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: scaleIn 0.3s ease;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .copy-popup h2 {
+            font-family: 'B Titr', sans-serif;
+            font-size: 2.5rem;
+            color: #25D366;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .copy-popup .card-number {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-radius: 15px;
+            border: 3px solid #25D366;
+            direction: ltr;
+            margin: 20px 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #1e3c72;
+        }
+        
+        .copy-popup p {
+            font-size: 1.3rem;
+            color: #333;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .close-popup {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .close-popup:hover {
+            background: #1ea952;
+            transform: translateY(-2px);
+        }
+        
+        /* دکمه واتساپ */
+        .whatsapp-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .whatsapp-btn:hover::before {
+            left: 100%;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+        }
+        
+        .whatsapp-btn:disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .whatsapp-icon {
+            font-size: 2rem;
+        }
+        
+        .selected-package-info {
+            background: rgba(37, 211, 102, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px solid rgba(37, 211, 102, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #93c5fd;
             text-decoration: none;
             font-size: 1.1rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin: 12px 0;
+            text-align: center;
+            width: 100%;
+            padding: 18px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
             transition: all 0.3s ease;
-            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255,255,255,0.2);
         }
-
-        .whatsapp-btn:active {
-            transform: scale(0.98);
+        
+        .back-btn:hover {
+            color: #ffffff;
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
         }
-
-        /* صفحه تورنمنت */
-        .tournament-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0c1a3a 0%, #1a3a7a 100%);
-            z-index: 1000;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .tournament-card {
-            background: rgba(0, 0, 0, 0.85);
-            border-radius: 20px;
-            padding: 30px 20px;
-            border: 2px solid var(--accent);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-        }
-
-        .tournament-title {
-            font-family: 'B Titr', sans-serif;
-            font-size: 1.8rem;
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-
-        .target-display {
-            font-size: 1.1rem;
-            color: #93c5fd;
-            margin-bottom: 20px;
-        }
-
-        .target-value {
-            background: rgba(255, 215, 0, 0.2);
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: 1.5px solid var(--accent);
-            font-weight: bold;
-        }
-
-        .neon-timer {
-            font-size: 3.5rem;
-            font-weight: bold;
-            color: var(--accent);
-            direction: ltr;
-            margin: 24px 0;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 10px var(--accent);
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: 12px;
-            border: 2px solid var(--accent);
-        }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        .tournament-message {
-            font-size: 1rem;
-            margin: 16px 0;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* پاپ‌آپ‌ها */
-        .popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            padding: 20px;
-        }
-
-        .popup-content {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            padding: 30px 20px;
-            border-radius: 20px;
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-            border: 2px solid var(--accent);
-        }
-
-        .winner-code {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 12px;
-            font-family: 'Courier New', monospace;
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: var(--accent);
-            margin: 20px 0;
-            border: 1.5px solid var(--accent);
-            direction: ltr;
-            word-break: break-all;
-        }
-
-        /* اسکرول بار مخفی */
-        .tabs-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* رسپانسیو برای تبلت */
-        @media (min-width: 768px) {
-            .mobile-container {
-                max-width: 600px;
-                padding: 24px;
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
             }
             
-            .pricing-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 16px;
+            .pricing-table {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
             }
             
-            .button-group {
-                flex-direction: row;
+            .card-number-part {
+                font-size: 1.2rem;
+                padding: 10px 15px;
+                min-width: 90px;
             }
             
-            .input-group {
-                flex-direction: row;
+            .header h1 {
+                font-size: 2.2rem;
             }
             
-            .input-group .form-input {
-                flex: 1;
+            .vpn-icon {
+                font-size: 4rem;
             }
             
-            .input-group .btn {
-                width: auto;
-                min-width: 140px;
+            .whatsapp-btn {
+                padding: 18px 30px;
+                font-size: 1.2rem;
             }
-        }
-
-        /* انیمیشن‌ها */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card {
-            animation: fadeIn 0.6s ease-out;
+            
+            .card-number-line {
+                gap: 5px;
+            }
+            
+            .copy-popup h2 {
+                font-size: 2rem;
+            }
+            
+            .copy-popup .card-number {
+                font-size: 1.5rem;
+                padding: 15px 25px;
+            }
+            
+            .duration-tabs {
+                gap: 8px;
+            }
+            
+            .duration-tab {
+                padding: 12px 18px;
+                font-size: 1rem;
+            }
+            
+            .discount-input-container {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="mobile-container">
+    <div class="container">
         <!-- هدر -->
-        <header class="header">
+        <div class="header">
             <div class="vpn-icon">🚀</div>
             <h1>فروشگاه فیلترشکن</h1>
             <p>اتصال امن و پرسرعت به اینترنت جهانی</p>
-        </header>
+        </div>
 
-        <!-- بخش فیلترشکن رایگان -->
-        <section class="card free-vpn-card">
-            <div class="section-header">
-                <div class="section-icon">🎯</div>
-                <div class="section-title">فیلترشکن رایگان</div>
-            </div>
-            
-            <div class="input-group">
-                <input type="text" class="form-input" id="freeVpnCode" placeholder="کد ورود (vpn1 تا vpn30)">
-                <button class="btn btn-primary" onclick="validateFreeVpnCode()">
-                    <i class="fas fa-play"></i>
-                    شروع
-                </button>
-            </div>
-            <div class="message" id="freeVpnMessage"></div>
-        </section>
-
-        <!-- بسته‌های اینترنتی -->
-        <section class="card">
-            <div class="section-header">
-                <div class="section-title">🎁 بسته‌های اینترنتی</div>
-            </div>
-            
-            <div class="tabs-container" id="durationTabs">
-                <!-- تب‌ها با JavaScript پر می‌شوند -->
-            </div>
-            
-            <div class="pricing-grid" id="pricingTable">
+        <!-- تب‌های مدت زمان -->
+        <div class="duration-tabs" id="durationTabs">
+            <!-- با JavaScript پر می‌شود -->
+        </div>
+        
+        <!-- جدول قیمت -->
+        <div class="pricing-container">
+            <div class="pricing-table" id="pricingTable">
                 <!-- بسته‌ها با JavaScript پر می‌شوند -->
             </div>
-            
-            <div class="selected-info" id="selectedInfo">
+            <div id="selectedInfo" class="selected-package-info" style="display: none;">
                 <!-- اطلاعات بسته انتخاب شده -->
             </div>
-        </section>
+        </div>
 
-        <!-- کد تخفیف -->
-        <section class="card">
-            <div class="section-header">
-                <div class="section-title">🏷️ کد تخفیف</div>
-            </div>
-            
-            <div class="input-group">
-                <input type="text" class="form-input" id="discountCode" placeholder="کد تخفیف را وارد کنید">
-                <button class="btn btn-success" onclick="applyDiscount()">
+        <!-- بخش کد تخفیف -->
+        <div class="discount-section">
+            <div class="discount-title">کد تخفیف ویژه</div>
+            <div class="discount-input-container">
+                <input type="text" class="discount-input" id="discountCode" placeholder="کد تخفیف را وارد کنید">
+                <button class="apply-discount-btn" onclick="applyDiscount()">
                     <i class="fas fa-tag"></i>
-                    اعمال
+                    اعمال تخفیف
                 </button>
             </div>
-            <div class="message" id="discountMessage"></div>
-        </section>
-
+            <div class="discount-message" id="discountMessage"></div>
+        </div>
+        
         <!-- مراحل خرید -->
-        <section class="card">
-            <div class="section-header">
-                <div class="section-title">📋 مراحل خرید</div>
+        <div class="steps-container">
+            <!-- مرحله ۱: انتخاب بسته -->
+            <div class="step">
+                <div class="step-number">۱</div>
+                <div class="step-title">📦 انتخاب بسته اینترنتی</div>
+                <p>یکی از بسته‌های بالا را انتخاب کنید</p>
             </div>
             
-            <div class="steps-grid">
-                <!-- مرحله ۱ -->
-                <div class="step-card">
-                    <div class="step-number">۱</div>
-                    <div class="step-title">📦 انتخاب بسته</div>
-                    <p>یکی از بسته‌های بالا را انتخاب کنید</p>
-                </div>
-                
-                <!-- مرحله ۲ -->
-                <div class="step-card">
-                    <div class="step-number">۲</div>
-                    <div class="step-title">💳 واریز مبلغ</div>
-                    <div class="bank-card" onclick="copyCardNumber()">
-                        <div class="card-number">6219 8619 8734 8090</div>
-                        <div class="card-owner">بنام: امیر محمد حضراتی</div>
-                        <button class="btn btn-primary" style="margin-top: 12px;">
-                            <i class="fas fa-copy"></i>
-                            کپی شماره کارت
-                        </button>
+            <!-- مرحله ۲: واریز مبلغ -->
+            <div class="step">
+                <div class="step-number">۲</div>
+                <div class="step-title">💳 واریز مبلغ به حساب بانکی</div>
+                <div class="bank-card" onclick="copyCardNumber()">
+                    <div class="bank-title">واریز مبلغ به حساب بانکی</div>
+                    <div class="bank-name">بانک سامان</div>
+                    
+                    <div class="card-number-section">
+                        <div class="card-number-line">
+                            <div class="card-number-part">6219</div>
+                            <div class="card-number-dash">-</div>
+                            <div class="card-number-part">8619</div>
+                        </div>
+                        <div class="card-number-line">
+                            <div class="card-number-part">8734</div>
+                            <div class="card-number-dash">-</div>
+                            <div class="card-number-part">8090</div>
+                        </div>
                     </div>
+                    
+                    <div class="card-owner">بنام: امیر محمد حضراتی</div>
+                    
+                    <button class="copy-btn" onclick="copyCardNumber()" id="copyButton">
+                        <i class="fas fa-copy"></i>
+                        کپی شماره کارت
+                    </button>
                 </div>
-                
-                <!-- مرحله ۳ -->
-                <div class="step-card">
-                    <div class="step-number">۳</div>
-                    <div class="step-title">📱 ارسال درخواست</div>
+            </div>
+            
+            <!-- مرحله ۳: ارسال به واتساپ -->
+            <div class="step">
+                <div class="step-number">۳</div>
+                <div class="step-title">📱 ارسال درخواست خرید</div>
+                <div class="whatsapp-section">
                     <p>پس از واریز، روی دکمه زیر کلیک کنید</p>
-                    <button class="whatsapp-btn" onclick="sendToWhatsApp()">
-                        <i class="fab fa-whatsapp"></i>
+                    <button id="whatsappBtn" class="whatsapp-btn" onclick="sendToWhatsApp()">
+                        <i class="fab fa-whatsapp whatsapp-icon"></i>
                         ارسال به واتساپ
                     </button>
-                    <div style="text-align: center; margin-top: 8px;">
-                        <small>شماره: ۰۹۲۲۴۰۴۴۸۴۲</small>
+                    <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
+                        شماره واتساپ: ۰۹۲۲۴۰۴۴۸۴۲
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
-
-    <!-- صفحه تورنمنت -->
-    <div class="tournament-page" id="tournamentPage">
-        <div class="tournament-card">
-            <div class="tournament-title">🎯 تورنمنت فیلترشکن</div>
-            <div class="target-display">
-                هدف: توقف در دقیقاً <span class="target-value">۱۰.۰۰ ثانیه</span>
-            </div>
-            <div class="neon-timer" id="neonTimer">۰.۰۰</div>
-            <div class="button-group">
-                <button class="btn btn-success" id="startButton" onclick="startTimer()">
-                    <i class="fas fa-play"></i>
-                    شروع تایمر
-                </button>
-                <button class="btn btn-danger" id="stopButton" onclick="stopTimer()" disabled>
-                    <i class="fas fa-stop"></i>
-                    توقف
-                </button>
-            </div>
-            <div class="tournament-message" id="timerMessage"></div>
-            <button class="btn btn-primary" onclick="closeTournament()">
-                <i class="fas fa-times"></i>
-                بستن
-            </button>
         </div>
+        
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به صفحه اصلی
+        </a>
     </div>
 
-    <!-- پاپ‌آپ برنده -->
-    <div class="popup" id="winnerPopup">
-        <div class="popup-content">
-            <div class="tournament-title" style="font-size: 1.5rem; margin-bottom: 16px;">🎉 تبریک! برنده شدید</div>
-            <div class="winner-code" id="winnerVpnCode"></div>
-            <p style="margin-bottom: 20px;">برای فعال‌سازی کد، روی دکمه زیر کلیک کنید:</p>
-            <button class="whatsapp-btn" onclick="sendWinnerToWhatsApp()">
-                <i class="fab fa-whatsapp"></i>
-                ارسال به واتساپ
-            </button>
-            <button class="btn btn-primary" style="margin-top: 12px;" onclick="closeWinnerPopup()">
-                <i class="fas fa-times"></i>
-                بستن
-            </button>
-        </div>
-    </div>
-
-    <!-- پاپ‌آپ کپی -->
-    <div class="popup" id="copyPopup">
-        <div class="popup-content">
-            <div class="tournament-title" style="font-size: 1.5rem; margin-bottom: 16px;">✅ کپی شد</div>
-            <div class="winner-code">6219 8619 8734 8090</div>
-            <p style="margin-bottom: 20px;">شماره کارت با موفقیت کپی شد</p>
-            <button class="btn btn-primary" onclick="closeCopyPopup()">
-                <i class="fas fa-check"></i>
-                متوجه شدم
-            </button>
+    <!-- پاپ‌آپ کپی موفق -->
+    <div class="copy-popup" id="copyPopup" style="display: none;">
+        <div class="copy-popup-content">
+            <h2>✅ شماره کارت کپی شد</h2>
+            <div class="card-number">6219861987348090</div>
+            <p>شماره کارت با موفقیت کپی شد</p>
+            <p>می‌توانید در برنامه بانکی خود پیست کنید</p>
+            <button class="close-popup" onclick="closeCopyPopup()">باشه</button>
         </div>
     </div>
 
     <script>
-        // سیستم مدیریت کدها - فقط یکبار استفاده
-        const FREE_VPN_CODES = {};
-        for (let i = 1; i <= 30; i++) {
-            FREE_VPN_CODES[`vpn${i}`] = { 
-                used: false,
-                vpnCode: `FREE-VPN-${i.toString().padStart(2, '0')}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`
-            };
-        }
-
-        // بارگذاری وضعیت از localStorage
-        function loadCodeStatus() {
-            Object.keys(FREE_VPN_CODES).forEach(code => {
-                const saved = localStorage.getItem(`vpn_code_${code}`);
-                if (saved === 'used') {
-                    FREE_VPN_CODES[code].used = true;
-                }
-            });
-        }
-
-        // ذخیره وضعیت در localStorage
-        function saveCodeStatus(code) {
-            localStorage.setItem(`vpn_code_${code}`, 'used');
-        }
-
-        // بررسی کد فیلترشکن
-        function validateFreeVpnCode() {
-            const freeVpnCode = document.getElementById('freeVpnCode').value.trim().toLowerCase();
-            const freeVpnMessage = document.getElementById('freeVpnMessage');
-            
-            if (FREE_VPN_CODES[freeVpnCode]) {
-                if (FREE_VPN_CODES[freeVpnCode].used) {
-                    freeVpnMessage.innerHTML = '<div class="message-error">❌ این کد قبلاً استفاده شده است</div>';
-                    return;
-                }
-                
-                freeVpnMessage.innerHTML = '<div class="message-success">✅ کد معتبر است! در حال انتقال...</div>';
-                currentWinnerCode = freeVpnCode;
-                
-                setTimeout(() => {
-                    document.getElementById('tournamentPage').style.display = 'flex';
-                    resetTimer();
-                }, 1000);
-                
-            } else {
-                freeVpnMessage.innerHTML = '<div class="message-error">❌ کد ورود نامعتبر است</div>';
-            }
-        }
-
-        // بقیه توابع تایمر و مدیریت...
-        let timer = null;
-        let currentTime = 0;
-        const TARGET_TIME = 10.00;
-        const MAX_TIME = 20.00;
-        let currentWinnerCode = "";
-
-        function startTimer() {
-            const startButton = document.getElementById('startButton');
-            const stopButton = document.getElementById('stopButton');
-            const neonTimer = document.getElementById('neonTimer');
-            const timerMessage = document.getElementById('timerMessage');
-            
-            startButton.disabled = true;
-            stopButton.disabled = false;
-            timerMessage.innerHTML = '';
-            
-            currentTime = 0;
-            neonTimer.textContent = '۰.۰۰';
-            neonTimer.style.color = '#FFD700';
-            
-            timer = setInterval(() => {
-                currentTime += 0.01;
-                neonTimer.textContent = currentTime.toFixed(2);
-                
-                if (currentTime >= 9.80 && currentTime <= 10.20) {
-                    neonTimer.style.color = '#25D366';
-                } else {
-                    neonTimer.style.color = '#FFD700';
-                }
-                
-                if (currentTime >= MAX_TIME) {
-                    stopTimer();
-                    timerMessage.innerHTML = '<div class="message-error">⏰ زمان تمام شد!</div>';
-                }
-            }, 10);
-        }
-
-        function stopTimer() {
-            if (timer) {
-                clearInterval(timer);
-                timer = null;
-            }
-            
-            const startButton = document.getElementById('startButton');
-            const stopButton = document.getElementById('stopButton');
-            const timerMessage = document.getElementById('timerMessage');
-            
-            startButton.disabled = false;
-            stopButton.disabled = true;
-            
-            if (Math.abs(currentTime - TARGET_TIME) <= 0.05) {
-                userWins();
-            } else {
-                const difference = Math.abs(currentTime - TARGET_TIME).toFixed(2);
-                if (currentTime < TARGET_TIME) {
-                    timerMessage.innerHTML = `<div class="message-error">❌ زود توقف کردید! ${difference} ثانیه زودتر</div>`;
-                } else {
-                    timerMessage.innerHTML = `<div class="message-error">❌ دیر توقف کردید! ${difference} ثانیه دیرتر</div>`;
-                }
-                
-                // کد منقضی می‌شود
-                FREE_VPN_CODES[currentWinnerCode].used = true;
-                saveCodeStatus(currentWinnerCode);
-            }
-        }
-
-        function userWins() {
-            const winnerVpnCode = document.getElementById('winnerVpnCode');
-            const timerMessage = document.getElementById('timerMessage');
-            
-            FREE_VPN_CODES[currentWinnerCode].used = true;
-            saveCodeStatus(currentWinnerCode);
-            
-            winnerVpnCode.textContent = FREE_VPN_CODES[currentWinnerCode].vpnCode;
-            
-            document.getElementById('tournamentPage').style.display = 'none';
-            document.getElementById('winnerPopup').style.display = 'flex';
-            
-            timerMessage.innerHTML = '<div class="message-success">🎉 عالی! در دقیقاً ۱۰ ثانیه توقف کردید</div>';
-        }
-
-        function closeTournament() {
-            document.getElementById('tournamentPage').style.display = 'none';
-            resetTimer();
-        }
-
-        function resetTimer() {
-            if (timer) {
-                clearInterval(timer);
-                timer = null;
-            }
-            
-            const startButton = document.getElementById('startButton');
-            const stopButton = document.getElementById('stopButton');
-            const neonTimer = document.getElementById('neonTimer');
-            const timerMessage = document.getElementById('timerMessage');
-            
-            startButton.disabled = false;
-            stopButton.disabled = true;
-            neonTimer.textContent = '۰.۰۰';
-            neonTimer.style.color = '#FFD700';
-            timerMessage.innerHTML = '';
-            currentTime = 0;
-        }
-
-        // بقیه توابع...
-        function sendWinnerToWhatsApp() {
-            const vpnCode = FREE_VPN_CODES[currentWinnerCode].vpnCode;
-            const message = `سلام! 👋\n\n🎉 برنده فیلترشکن رایگان\n• کد: ${vpnCode}\n• تاریخ: ${new Date().toLocaleDateString('fa-IR')}\n• زمان: ${currentTime.toFixed(2)} ثانیه\n\nلطفاً برای فعال‌سازی تأیید کنید.`;
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/989224044842?text=${encodedMessage}`, '_blank');
-        }
-
-        function closeWinnerPopup() {
-            document.getElementById('winnerPopup').style.display = 'none';
-            document.getElementById('freeVpnCode').value = '';
-            document.getElementById('freeVpnMessage').innerHTML = '';
-        }
-
-        function copyCardNumber() {
-            navigator.clipboard.writeText("6219861987348090").then(() => {
-                document.getElementById('copyPopup').style.display = 'flex';
-            });
-        }
-
-        function closeCopyPopup() {
-            document.getElementById('copyPopup').style.display = 'none';
-        }
-
-        // سیستم قیمت‌گذاری
+        // قیمت‌های نهایی (افزایش یافته)
         const packages = {
             "1month": [
-                { size: "20 گیگ", price: 83000 },
-                { size: "30 گیگ", price: 100000 },
-                { size: "40 گیگ", price: 117000 },
-                { size: "50 گیگ", price: 133000 },
-                { size: "60 گیگ", price: 150000 },
-                { size: "100 گیگ", price: 250000 }
+                { size: "20 گیگ", duration: "۱ ماه", price: 83000, icon: "📱" },
+                { size: "30 گیگ", duration: "۱ ماه", price: 100000, icon: "💻" },
+                { size: "40 گیگ", duration: "۱ ماه", price: 117000, icon: "🚀" },
+                { size: "50 گیگ", duration: "۱ ماه", price: 133000, icon: "⚡" },
+                { size: "60 گیگ", duration: "۱ ماه", price: 150000, icon: "🔥" },
+                { size: "70 گیگ", duration: "۱ ماه", price: 183000, icon: "🎯" },
+                { size: "100 گیگ", duration: "۱ ماه", price: 250000, icon: "💎" },
+                { size: "200 گیگ", duration: "۱ ماه", price: 500000, icon: "👑" },
+                { size: "300 گیگ", duration: "۱ ماه", price: 750000, icon: "🚀" }
             ],
             "2month": [
-                { size: "40 گیگ", price: 141000 },
-                { size: "60 گیگ", price: 183000 },
-                { size: "80 گیگ", price: 241000 },
-                { size: "100 گیگ", price: 283000 },
-                { size: "120 گیگ", price: 349000 }
+                { size: "20 گیگ", duration: "۲ ماه", price: 108000, icon: "📱" },
+                { size: "40 گیگ", duration: "۲ ماه", price: 141000, icon: "💻" },
+                { size: "60 گیگ", duration: "۲ ماه", price: 183000, icon: "🚀" },
+                { size: "80 گیگ", duration: "۲ ماه", price: 241000, icon: "⚡" },
+                { size: "100 گیگ", duration: "۲ ماه", price: 283000, icon: "🔥" },
+                { size: "120 گیگ", duration: "۲ ماه", price: 349000, icon: "🎯" },
+                { size: "150 گیگ", duration: "۲ ماه", price: 399000, icon: "💎" },
+                { size: "200 گیگ", duration: "۲ ماه", price: 532000, icon: "👑" },
+                { size: "300 گیگ", duration: "۲ ماه", price: 765000, icon: "🚀" }
             ],
             "3month": [
-                { size: "60 گیگ", price: 200000 },
-                { size: "80 گیگ", price: 266000 },
-                { size: "100 گیگ", price: 299000 },
-                { size: "120 گیگ", price: 366000 }
+                { size: "60 گیگ", duration: "۳ ماه", price: 200000, icon: "📱" },
+                { size: "80 گیگ", duration: "۳ ماه", price: 266000, icon: "💻" },
+                { size: "90 گیگ", duration: "۳ ماه", price: 283000, icon: "🚀" },
+                { size: "100 گیگ", duration: "۳ ماه", price: 299000, icon: "⚡" },
+                { size: "120 گیگ", duration: "۳ ماه", price: 366000, icon: "🔥" },
+                { size: "150 گیگ", duration: "۳ ماه", price: 416000, icon: "🎯" },
+                { size: "200 گیگ", duration: "۳ ماه", price: 549000, icon: "💎" },
+                { size: "300 گیگ", duration: "۳ ماه", price: 782000, icon: "👑" }
             ]
         };
 
         let selectedPackage = null;
         let selectedDuration = "1month";
+        let copyCooldown = false;
+        let discountApplied = false;
 
+        // ایجاد تب‌های مدت زمان
         function createDurationTabs() {
             const durationTabs = document.getElementById('durationTabs');
             const durations = [
-                { id: "1month", name: "یک ماهه" },
-                { id: "2month", name: "دو ماهه" },
-                { id: "3month", name: "سه ماهه" }
+                { id: "1month", name: "🔷 یک ماهه" },
+                { id: "2month", name: "🔷 دو ماهه" },
+                { id: "3month", name: "🔷 سه ماهه" }
             ];
             
             durations.forEach(duration => {
                 const tab = document.createElement('button');
-                tab.className = 'tab';
+                tab.className = 'duration-tab';
                 if (duration.id === selectedDuration) {
                     tab.classList.add('active');
                 }
@@ -942,7 +905,7 @@
                 
                 tab.addEventListener('click', () => {
                     selectedDuration = duration.id;
-                    document.querySelectorAll('.tab').forEach(t => {
+                    document.querySelectorAll('.duration-tab').forEach(t => {
                         t.classList.remove('active');
                     });
                     tab.classList.add('active');
@@ -953,6 +916,7 @@
             });
         }
 
+        // ایجاد جدول قیمت
         function createPricingTable() {
             const pricingTable = document.getElementById('pricingTable');
             pricingTable.innerHTML = '';
@@ -960,45 +924,178 @@
             const currentPackages = packages[selectedDuration];
             
             currentPackages.forEach((pkg, index) => {
-                const card = document.createElement('div');
-                card.className = 'package-card';
+                const button = document.createElement('button');
+                button.className = 'package-btn';
                 
-                card.innerHTML = `
+                button.innerHTML = `
                     <div class="package-size">${pkg.size}</div>
                     <div class="package-price">${formatPrice(pkg.price)} تومان</div>
-                    <div class="package-duration">${selectedDuration === '1month' ? '۱ ماه' : selectedDuration === '2month' ? '۲ ماه' : '۳ ماه'}</div>
+                    <div class="package-duration">${pkg.duration}</div>
                 `;
                 
-                card.addEventListener('click', () => selectPackage(index));
-                pricingTable.appendChild(card);
+                button.addEventListener('click', () => selectPackage(index));
+                pricingTable.appendChild(button);
             });
         }
 
+        // قالب‌بندی قیمت
         function formatPrice(price) {
             return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
 
+        // انتخاب بسته
         function selectPackage(index) {
-            document.querySelectorAll('.package-card').forEach(card => {
-                card.classList.remove('selected');
+            // حذف انتخاب قبلی
+            document.querySelectorAll('.package-btn').forEach(btn => {
+                btn.classList.remove('selected');
             });
             
+            // انتخاب جدید
             const currentPackages = packages[selectedDuration];
             selectedPackage = currentPackages[index];
-            document.querySelectorAll('.package-card')[index].classList.add('selected');
+            document.querySelectorAll('.package-btn')[index].classList.add('selected');
             
+            // نمایش اطلاعات بسته انتخاب شده
             document.getElementById('selectedInfo').style.display = 'block';
             document.getElementById('selectedInfo').innerHTML = `
                 ✅ بسته انتخاب شده: <strong>${selectedPackage.size}</strong>
                 - مبلغ: <strong>${formatPrice(selectedPackage.price)} تومان</strong>
+                ${discountApplied ? '<br>✅ کد تخفیف اعمال شد!' : ''}
             `;
+        }
+
+        // اعمال کد تخفیف - آپدیت شده
+        function applyDiscount() {
+            const discountCode = document.getElementById('discountCode').value.trim();
+            const discountMessage = document.getElementById('discountMessage');
+            
+            if (discountCode.toUpperCase() === DISCOUNT_CONFIG.VALID_CODE) {
+                discountApplied = true;
+                discountMessage.innerHTML = `<span class="discount-success">✅ کد تخفیف با موفقیت اعمال شد! ${DISCOUNT_CONFIG.DISCOUNT_MESSAGE}</span>`;
+                
+                // اگر بسته‌ای انتخاب شده، قیمت نهایی را محاسبه کن
+                if (selectedPackage) {
+                    const finalPrice = Math.max(selectedPackage.price - DISCOUNT_CONFIG.DISCOUNT_AMOUNT, 0);
+                    document.getElementById('selectedInfo').innerHTML = `
+                        ✅ بسته انتخاب شده: <strong>${selectedPackage.size}</strong>
+                        - مبلغ اصلی: <strong>${formatPrice(selectedPackage.price)} تومان</strong>
+                        - مبلغ با تخفیف: <strong>${formatPrice(finalPrice)} تومان</strong>
+                        <br>✅ کد تخفیف اعمال شد!
+                    `;
+                }
+            } else {
+                discountApplied = false;
+                discountMessage.innerHTML = '<span class="discount-error">❌ کد تخفیف نامعتبر است</span>';
+                
+                if (selectedPackage) {
+                    document.getElementById('selectedInfo').innerHTML = `
+                        ✅ بسته انتخاب شده: <strong>${selectedPackage.size}</strong>
+                        - مبلغ: <strong>${formatPrice(selectedPackage.price)} تومان</strong>
+                    `;
+                }
+            }
+        }
+
+        // کپی شماره کارت
+        function copyCardNumber() {
+            if (copyCooldown) return;
+            
+            const cardNumber = "6219861987348090";
+            
+            // فعال کردن کول‌داون
+            copyCooldown = true;
+            
+            const copyToClipboard = (text) => {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.top = '0';
+                textArea.style.left = '0';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    const successful = document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    return Promise.resolve();
+                } catch (err) {
+                    document.body.removeChild(textArea);
+                    return Promise.reject(err);
+                }
+            };
+            
+            copyToClipboard(cardNumber)
+                .then(() => {
+                    showCopyPopup();
+                })
+                .catch((err) => {
+                    console.log('خطا در کپی:', err);
+                    showCopyPopup();
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        copyCooldown = false;
+                    }, 500);
+                });
+        }
+
+        function showCopyPopup() {
+            document.getElementById('copyPopup').style.display = 'flex';
+        }
+
+        function closeCopyPopup() {
+            document.getElementById('copyPopup').style.display = 'none';
+        }
+
+        // ارسال به واتساپ - آپدیت شده
+        function sendToWhatsApp() {
+            if (!selectedPackage) {
+                alert('لطفاً ابتدا یک بسته انتخاب کنید');
+                return;
+            }
+            
+            // محاسبه قیمت نهایی با تخفیف
+            let finalPrice = selectedPackage.price;
+            if (discountApplied) {
+                finalPrice = Math.max(selectedPackage.price - DISCOUNT_CONFIG.DISCOUNT_AMOUNT, 0);
+            }
+            
+            const message = `سلام! 👋
+
+📦 **درخواست خرید فیلترشکن**
+• بسته: ${selectedPackage.size}
+• مدت: ${selectedPackage.duration}
+• مبلغ اصلی: ${formatPrice(selectedPackage.price)} تومان
+${discountApplied ? `• مبلغ با تخفیف: ${formatPrice(finalPrice)} تومان` : ''}
+
+✅ مبلغ واریز شد.
+لطفاً رسید را ارسال کنید تا سرویس برایتان ارسال شود.
+
+با تشکر`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/989224044842?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
         }
 
         // راه‌اندازی اولیه
         document.addEventListener('DOMContentLoaded', function() {
             createDurationTabs();
             createPricingTable();
-            loadCodeStatus();
+        });
+
+        // اضافه کردن event listener برای کلیک روی کل کارت
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.bank-card')) {
+                copyCardNumber();
+            }
         });
     </script>
 </body>
