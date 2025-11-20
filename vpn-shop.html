@@ -117,17 +117,31 @@
         
         .free-vpn-title {
             font-size: 2rem;
-            color: #FFD700;
             font-weight: bold;
             white-space: nowrap;
             display: flex;
             align-items: center;
             gap: 10px;
+            animation: colorChange 3s infinite, moveText 2s infinite;
+        }
+        
+        @keyframes colorChange {
+            0% { color: #FFD700; }
+            25% { color: #FFA500; }
+            50% { color: #FF6B6B; }
+            75% { color: #25D366; }
+            100% { color: #FFD700; }
+        }
+        
+        @keyframes moveText {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
         
         .free-vpn-icon {
             font-size: 2.5rem;
-            animation: pulse 2s infinite;
+            animation: pulse 2s infinite, rotate 4s infinite;
         }
         
         @keyframes pulse {
@@ -135,7 +149,16 @@
                 transform: scale(1);
             }
             50% {
-                transform: scale(1.1);
+                transform: scale(1.2);
+            }
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
             }
         }
         
@@ -220,25 +243,42 @@
             display: inline-block;
         }
         
-        .timer-section {
+        .tournament-section {
             margin: 30px 0;
             display: none;
         }
         
-        .timer-display {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #FFD700;
-            direction: ltr;
-            margin: 20px 0;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            font-family: 'Courier New', monospace;
+        .tournament-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tournament-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,215,0,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
         }
         
         .target-time {
             font-size: 1.3rem;
             color: #93c5fd;
             margin-bottom: 20px;
+            text-align: center;
         }
         
         .target-time span {
@@ -246,30 +286,70 @@
             padding: 8px 15px;
             border-radius: 8px;
             border: 2px solid #FFD700;
+            font-weight: bold;
+        }
+        
+        .timer-display {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #FFD700;
+            direction: ltr;
+            margin: 30px 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            animation: glow 2s infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px #FFD700, 0 0 20px #FFD700;
+            }
+            50% {
+                text-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
+            }
         }
         
         .timer-buttons {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
-            margin: 25px 0;
+            margin: 30px 0;
         }
         
         .timer-button {
             background: linear-gradient(135deg, #25D366, #1ea952);
             color: white;
             border: none;
-            padding: 20px 35px;
-            border-radius: 12px;
+            padding: 20px 40px;
+            border-radius: 15px;
             font-size: 1.3rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 150px;
+            min-width: 180px;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .timer-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .timer-button:hover::before {
+            left: 100%;
         }
         
         .timer-button:active {
-            transform: scale(0.98);
+            transform: scale(0.95);
         }
         
         .timer-button.start {
@@ -284,29 +364,62 @@
             background: #6b7280;
             cursor: not-allowed;
             transform: none;
+            box-shadow: none;
+        }
+        
+        .timer-button:disabled::before {
+            display: none;
         }
         
         .timer-message {
-            font-size: 1.3rem;
-            margin-top: 15px;
+            font-size: 1.4rem;
+            margin-top: 20px;
             font-weight: bold;
-            min-height: 40px;
+            min-height: 50px;
+            text-align: center;
         }
         
         .timer-success {
             color: #25D366;
             background: rgba(37, 211, 102, 0.1);
-            padding: 12px 20px;
+            padding: 15px 25px;
             border-radius: 10px;
             display: inline-block;
+            animation: successPulse 1s infinite;
+        }
+        
+        @keyframes successPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
         }
         
         .timer-fail {
             color: #ff6b6b;
             background: rgba(255, 107, 107, 0.1);
-            padding: 12px 20px;
+            padding: 15px 25px;
             border-radius: 10px;
             display: inline-block;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 6px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #25D366, #1ea952);
+            border-radius: 6px;
+            width: 0%;
+            transition: width 0.1s;
         }
         
         .winner-popup {
@@ -334,6 +447,20 @@
             border: 3px solid #FFD700;
             box-shadow: 0 20px 50px rgba(255, 215, 0, 0.3);
             animation: scaleIn 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .winner-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,215,0,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
         }
         
         .winner-title {
@@ -342,12 +469,14 @@
             color: #FFD700;
             margin-bottom: 30px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: relative;
         }
         
         .winner-message {
             font-size: 1.3rem;
             margin-bottom: 30px;
             line-height: 1.6;
+            position: relative;
         }
         
         .winner-vpn-code {
@@ -362,6 +491,17 @@
             border: 2px solid #FFD700;
             direction: ltr;
             letter-spacing: 2px;
+            position: relative;
+            animation: codeGlow 2s infinite;
+        }
+        
+        @keyframes codeGlow {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            }
         }
         
         .whatsapp-winner-btn {
@@ -380,6 +520,7 @@
             border: 2px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
             cursor: pointer;
+            position: relative;
         }
         
         .whatsapp-winner-btn:hover {
@@ -397,6 +538,7 @@
             cursor: pointer;
             margin-top: 15px;
             transition: all 0.3s ease;
+            position: relative;
         }
         
         .close-winner-popup:hover {
@@ -1076,6 +1218,10 @@
                 width: 100%;
                 max-width: 250px;
             }
+            
+            .timer-display {
+                font-size: 3.5rem;
+            }
         }
     </style>
 </head>
@@ -1104,26 +1250,31 @@
             </div>
             <div class="free-vpn-message" id="freeVpnMessage"></div>
             
-            <div class="timer-section" id="timerSection">
-                <div class="target-time">
-                    هدف: توقف در دقیقاً <span>۱۰ ثانیه</span>
+            <div class="tournament-section" id="tournamentSection">
+                <div class="tournament-container">
+                    <div class="target-time">
+                        هدف: توقف در دقیقاً <span>۱۰ ثانیه</span>
+                    </div>
+                    <div class="timer-display" id="timerDisplay">0.0</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="timer-buttons">
+                        <button class="timer-button start" id="startButton" onclick="startTimer()">
+                            <i class="fas fa-play"></i>
+                            شروع تایمر
+                        </button>
+                        <button class="timer-button stop" id="stopButton" onclick="stopTimer()" disabled>
+                            <i class="fas fa-stop"></i>
+                            توقف
+                        </button>
+                    </div>
+                    <div class="timer-message" id="timerMessage"></div>
                 </div>
-                <div class="timer-display" id="timerDisplay">0.0</div>
-                <div class="timer-buttons">
-                    <button class="timer-button start" id="startButton" onclick="startTimer()">
-                        <i class="fas fa-play"></i>
-                        شروع
-                    </button>
-                    <button class="timer-button stop" id="stopButton" onclick="stopTimer()" disabled>
-                        <i class="fas fa-stop"></i>
-                        توقف
-                    </button>
-                </div>
-                <div class="timer-message" id="timerMessage"></div>
             </div>
         </div>
 
-        <!-- بقیه محتوای سایت بدون تغییر -->
+        <!-- بقیه محتوای سایت -->
         <!-- تب‌های مدت زمان -->
         <div class="duration-tabs" id="durationTabs">
             <!-- با JavaScript پر می‌شود -->
@@ -1261,18 +1412,19 @@
         let timer = null;
         let currentTime = 0;
         const TARGET_TIME = 10; // 10 ثانیه
+        const MAX_TIME = 12; // حداکثر زمان
         let currentWinnerCode = "";
 
         // بررسی کد فیلترشکن رایگان
         function validateFreeVpnCode() {
             const freeVpnCode = document.getElementById('freeVpnCode').value.trim().toLowerCase();
             const freeVpnMessage = document.getElementById('freeVpnMessage');
-            const timerSection = document.getElementById('timerSection');
+            const tournamentSection = document.getElementById('tournamentSection');
             
             if (FREE_VPN_CODES[freeVpnCode]) {
                 if (!FREE_VPN_CODES[freeVpnCode].used) {
                     freeVpnMessage.innerHTML = '<span class="free-vpn-success">✅ کد معتبر است! حالا مسابقه را شروع کنید</span>';
-                    timerSection.style.display = 'block';
+                    tournamentSection.style.display = 'block';
                     currentWinnerCode = freeVpnCode;
                     
                     // ریست کردن تایمر
@@ -1291,6 +1443,7 @@
             const stopButton = document.getElementById('stopButton');
             const timerDisplay = document.getElementById('timerDisplay');
             const timerMessage = document.getElementById('timerMessage');
+            const progressFill = document.getElementById('progressFill');
             
             // غیرفعال کردن دکمه شروع و فعال کردن دکمه توقف
             startButton.disabled = true;
@@ -1302,10 +1455,15 @@
             currentTime = 0;
             timerDisplay.textContent = '0.0';
             timerDisplay.style.color = '#FFD700';
+            progressFill.style.width = '0%';
             
             timer = setInterval(() => {
                 currentTime += 0.1;
                 timerDisplay.textContent = currentTime.toFixed(1);
+                
+                // آپدیت نوار پیشرفت
+                const progress = (currentTime / MAX_TIME) * 100;
+                progressFill.style.width = progress + '%';
                 
                 // تغییر رنگ در نزدیکی زمان هدف
                 if (currentTime >= 9.5 && currentTime <= 10.5) {
@@ -1315,7 +1473,7 @@
                 }
                 
                 // توقف خودکار در 12 ثانیه
-                if (currentTime >= 12) {
+                if (currentTime >= MAX_TIME) {
                     stopTimer();
                     timerMessage.innerHTML = '<span class="timer-fail">⏰ زمان تمام شد! دوباره تلاش کنید</span>';
                 }
@@ -1361,12 +1519,14 @@
             const stopButton = document.getElementById('stopButton');
             const timerDisplay = document.getElementById('timerDisplay');
             const timerMessage = document.getElementById('timerMessage');
+            const progressFill = document.getElementById('progressFill');
             
             startButton.disabled = false;
             stopButton.disabled = true;
             timerDisplay.textContent = '0.0';
             timerDisplay.style.color = '#FFD700';
             timerMessage.innerHTML = '';
+            progressFill.style.width = '0%';
             currentTime = 0;
         }
 
@@ -1419,7 +1579,7 @@
             // ریست کردن فرم
             document.getElementById('freeVpnCode').value = '';
             document.getElementById('freeVpnMessage').innerHTML = '';
-            document.getElementById('timerSection').style.display = 'none';
+            document.getElementById('tournamentSection').style.display = 'none';
             resetTimer();
         }
 
