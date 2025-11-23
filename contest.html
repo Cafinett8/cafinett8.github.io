@@ -59,12 +59,57 @@
             -webkit-text-fill-color: transparent;
         }
         
+        .code-input-container {
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(147, 197, 253, 0.2));
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .code-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 15px 20px;
+            font-size: 1.2rem;
+            border: 2px solid #25D366;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            text-align: center;
+            margin: 15px 0;
+            direction: ltr;
+        }
+        
+        .code-input::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #25D366, #1ea952);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+        
         .user-info {
             background: linear-gradient(135deg, rgba(37, 211, 102, 0.2), rgba(147, 197, 253, 0.2));
             border-radius: 20px;
             padding: 25px;
             margin: 30px 0;
             border: 2px solid rgba(255, 255, 255, 0.3);
+            display: none;
         }
         
         .user-code {
@@ -86,6 +131,7 @@
             padding: 40px;
             margin: 40px 0;
             border: 2px solid rgba(255, 255, 255, 0.3);
+            display: none;
         }
         
         .timer-display {
@@ -177,12 +223,22 @@
             <p>کد مسابقه خود را وارد کنید</p>
         </div>
         
-        <div class="user-info">
+        <!-- فرم ورود کد -->
+        <div class="code-input-container" id="codeInputContainer">
+            <h3>لطفاً کد مسابقه را وارد کنید:</h3>
+            <input type="text" class="code-input" id="codeInput" placeholder="VPN1" maxlength="10">
+            <br>
+            <button class="submit-btn" onclick="validateAndStart()">تأیید و شروع مسابقه</button>
+        </div>
+        
+        <!-- اطلاعات کاربر پس از ورود کد -->
+        <div class="user-info" id="userInfo">
             <div>کد مسابقه شما:</div>
             <div class="user-code" id="userCode">...</div>
         </div>
         
-        <div class="timer-container">
+        <!-- بخش تایمر مسابقه -->
+        <div class="timer-container" id="timerContainer">
             <div class="timer-display" id="timer">0.00</div>
             <button class="contest-btn" id="startBtn" onclick="startTimer()">شروع مسابقه</button>
             <button class="contest-btn stop-btn" id="stopBtn" onclick="stopTimer()" disabled>توقف</button>
@@ -200,35 +256,34 @@
         // کد ورود معتبر
         const validCode = 'VPN1';
         
-        // دریافت کد از URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const userCode = urlParams.get('code');
-        
-        // نمایش کد کاربر
-        document.getElementById('userCode').textContent = userCode || 'نامشخص';
-        
         // متغیرهای تایمر
         let gameTimer = null;
         let startTime = null;
         let elapsedTime = 0;
         let isRunning = false;
+        let userEnteredCode = '';
 
-        // بررسی اعتبار کد
-        function validateCode() {
-            if (!userCode) {
-                disableContest('کد مسابقه نامعتبر است');
-                return false;
+        function validateAndStart() {
+            const codeInput = document.getElementById('codeInput');
+            userEnteredCode = codeInput.value.trim().toUpperCase();
+            
+            if (!userEnteredCode) {
+                showResult('لطفاً کد مسابقه را وارد کنید', 'fail');
+                return;
             }
             
-            const upperCode = userCode.toUpperCase();
-            
-            // بررسی کد معتبر
-            if (upperCode !== validCode) {
-                disableContest('کد مسابقه نامعتبر است');
-                return false;
+            if (userEnteredCode !== validCode) {
+                showResult('کد مسابقه نامعتبر است! کد صحیح: VPN1', 'fail');
+                return;
             }
             
-            return true;
+            // کد معتبر است
+            document.getElementById('userCode').textContent = userEnteredCode;
+            document.getElementById('codeInputContainer').style.display = 'none';
+            document.getElementById('userInfo').style.display = 'block';
+            document.getElementById('timerContainer').style.display = 'block';
+            
+            showResult('کد معتبر است! حالا می‌توانید مسابقه را شروع کنید.', 'success');
         }
 
         function startTimer() {
@@ -242,8 +297,6 @@
             gameTimer = setInterval(() => {
                 elapsedTime = (Date.now() - startTime) / 1000;
                 document.getElementById('timer').textContent = elapsedTime.toFixed(2);
-                
-                // حذف محدودیت زمانی 20 ثانیه
             }, 10);
         }
 
@@ -259,24 +312,30 @@
             
             // شرط برنده شدن: توقف دقیقاً در 10 ثانیه
             if (finalTime === 10.00) {
-                document.getElementById('contestResult').innerHTML = 
-                    '<div class="contest-success">🎉 تبریک! شما برنده شدید! فیلترشکن ۳۰ گیگ رایگان دریافت کردید.</div>';
+                showResult('🎉 تبریک! شما برنده شدید! فیلترشکن ۳۰ گیگ رایگان دریافت کردید.', 'success');
             } else {
-                document.getElementById('contestResult').innerHTML = 
-                    '<div class="contest-fail">متأسفانه برنده نشدید! زمان: ' + finalTime.toFixed(2) + ' ثانیه</div>';
+                showResult('متأسفانه برنده نشدید! زمان: ' + finalTime.toFixed(2) + ' ثانیه. باید دقیقاً در 10.00 ثانیه توقف می‌کردید.', 'fail');
             }
         }
 
-        function disableContest(message) {
-            document.getElementById('startBtn').disabled = true;
-            document.getElementById('stopBtn').disabled = true;
-            document.getElementById('contestResult').innerHTML = 
-                `<div class="contest-fail">${message}</div>`;
+        function showResult(message, type) {
+            const resultElement = document.getElementById('contestResult');
+            if (type === 'success') {
+                resultElement.innerHTML = `<div class="contest-success">${message}</div>`;
+            } else {
+                resultElement.innerHTML = `<div class="contest-fail">${message}</div>`;
+            }
         }
 
-        // راه‌اندازی اولیه
+        // اگر کد از طریق URL آمده باشد
         document.addEventListener('DOMContentLoaded', function() {
-            validateCode();
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlCode = urlParams.get('code');
+            
+            if (urlCode) {
+                document.getElementById('codeInput').value = urlCode;
+                validateAndStart();
+            }
         });
     </script>
 </body>
