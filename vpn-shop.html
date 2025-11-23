@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <script src="discount-config.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>فروشگاه فیلترشکن - کافی نت</title>
@@ -9,12 +8,898 @@
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* استایل‌ها همون قبلی */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazir', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .vpn-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .header h1 {
+            font-family: 'B Titr', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: fadeIn 1.5s ease-in;
+            background: linear-gradient(45deg, #fff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* تب‌های مدت زمان */
+        .duration-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .duration-tab {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .duration-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .duration-tab:hover::before {
+            left: 100%;
+        }
+        
+        .duration-tab:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+        
+        .duration-tab.active {
+            background: rgba(37, 211, 102, 0.3);
+            border-color: #25D366;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        /* جدول قیمت */
+        .pricing-container {
+            margin-bottom: 40px;
+        }
+        
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .package-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .package-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .package-btn:hover::before {
+            left: 100%;
+        }
+        
+        .package-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .package-btn.selected {
+            background: rgba(37, 211, 102, 0.3);
+            border-color: #25D366;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        .package-size {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .package-price {
+            font-size: 1.3rem;
+            color: #93c5fd;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .package-duration {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* بخش کد تخفیف و مسابقه */
+        .promo-sections {
+            display: flex;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .discount-section, .contest-section {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.1));
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contest-section {
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,165,0,0.1));
+            border-color: rgba(255,215,0,0.3);
+        }
+        
+        .discount-section::before, .contest-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: rotate(45deg);
+        }
+        
+        .discount-title, .contest-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .discount-title {
+            color: #93c5fd;
+        }
+        
+        .discount-title::after {
+            content: '🎁';
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .contest-title {
+            color: #FFD700;
+        }
+        
+        .contest-title::after {
+            content: '🏆';
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .discount-input-container, .contest-input-container {
+            display: flex;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .discount-input, .contest-input {
+            flex: 1;
+            padding: 18px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1.1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .discount-input:focus, .contest-input:focus {
+            outline: none;
+            border-color: #25D366;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
+        }
+        
+        .contest-input:focus {
+            border-color: #FFD700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+        }
+        
+        .discount-input::placeholder, .contest-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .apply-discount-btn, .enter-contest-btn {
+            background: linear-gradient(135deg, #25D366, #1ea952);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .enter-contest-btn {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+        }
+        
+        .apply-discount-btn:hover {
+            background: linear-gradient(135deg, #1ea952, #25D366);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .enter-contest-btn:hover {
+            background: linear-gradient(135deg, #FFA500, #FFD700);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        .discount-message, .contest-message {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            min-height: 25px;
+            position: relative;
+        }
+        
+        .discount-success, .contest-success {
+            color: #25D366;
+            font-weight: bold;
+            background: rgba(37, 211, 102, 0.1);
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .discount-error, .contest-error {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        /* مراحل خرید */
+        .steps-container {
+            margin-bottom: 40px;
+        }
+        
+        .step {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .step-number {
+            background: linear-gradient(135deg, #25D366, #1ea952);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            position: absolute;
+            right: -15px;
+            top: -15px;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+        
+        .step-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #93c5fd;
+            font-weight: bold;
+        }
+        
+        /* کارت بانکی */
+        .bank-card {
+            background: linear-gradient(135deg, #004B8D 0%, #0066CC 100%);
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
+            margin: 20px 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .bank-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .bank-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+        }
+        
+        .bank-title {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+            color: #e0f2fe;
+        }
+        
+        .bank-name {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        
+        .card-number-section {
+            direction: ltr;
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .card-number-line {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+            direction: ltr;
+        }
+        
+        .card-number-part {
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            background: rgba(255,255,255,0.2);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .card-number-dash {
+            font-size: 1.8rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: bold;
+        }
+        
+        .card-owner {
+            font-size: 1.3rem;
+            margin: 20px 0;
+            font-weight: bold;
+            background: rgba(255,255,255,0.15);
+            padding: 12px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .copy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .copy-btn:hover::before {
+            left: 100%;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: rgba(37, 211, 102, 0.6);
+        }
+        
+        /* پاپ‌آپ کپی موفق */
+        .copy-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .copy-popup-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: scaleIn 0.3s ease;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .copy-popup h2 {
+            font-family: 'B Titr', sans-serif;
+            font-size: 2.5rem;
+            color: #25D366;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .copy-popup .card-number {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-radius: 15px;
+            border: 3px solid #25D366;
+            direction: ltr;
+            margin: 20px 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #1e3c72;
+        }
+        
+        .copy-popup p {
+            font-size: 1.3rem;
+            color: #333;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .close-popup {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .close-popup:hover {
+            background: #1ea952;
+            transform: translateY(-2px);
+        }
+        
+        /* دکمه واتساپ */
+        .whatsapp-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .whatsapp-btn:hover::before {
+            left: 100%;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+        }
+        
+        .whatsapp-btn:disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .whatsapp-icon {
+            font-size: 2rem;
+        }
+        
+        .selected-package-info {
+            background: rgba(37, 211, 102, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px solid rgba(37, 211, 102, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #93c5fd;
+            text-decoration: none;
+            font-size: 1.1rem;
+            text-align: center;
+            width: 100%;
+            padding: 18px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .back-btn:hover {
+            color: #ffffff;
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
+            }
+            
+            .pricing-table {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .card-number-part {
+                font-size: 1.2rem;
+                padding: 10px 15px;
+                min-width: 90px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .vpn-icon {
+                font-size: 4rem;
+            }
+            
+            .whatsapp-btn {
+                padding: 18px 30px;
+                font-size: 1.2rem;
+            }
+            
+            .card-number-line {
+                gap: 5px;
+            }
+            
+            .copy-popup h2 {
+                font-size: 2rem;
+            }
+            
+            .copy-popup .card-number {
+                font-size: 1.5rem;
+                padding: 15px 25px;
+            }
+            
+            .duration-tabs {
+                gap: 8px;
+            }
+            
+            .duration-tab {
+                padding: 12px 18px;
+                font-size: 1rem;
+            }
+            
+            .discount-input-container, .contest-input-container {
+                flex-direction: column;
+            }
+            
+            .promo-sections {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- محتوای همون قبلی -->
+        <!-- هدر -->
+        <div class="header">
+            <div class="vpn-icon">🚀</div>
+            <h1>فروشگاه فیلترشکن</h1>
+            <p>اتصال امن و پرسرعت به اینترنت جهانی</p>
+        </div>
+
+        <!-- تب‌های مدت زمان -->
+        <div class="duration-tabs" id="durationTabs">
+            <!-- با JavaScript پر می‌شود -->
+        </div>
+        
+        <!-- جدول قیمت -->
+        <div class="pricing-container">
+            <div class="pricing-table" id="pricingTable">
+                <!-- بسته‌ها با JavaScript پر می‌شوند -->
+            </div>
+            <div id="selectedInfo" class="selected-package-info" style="display: none;">
+                <!-- اطلاعات بسته انتخاب شده -->
+            </div>
+        </div>
+
+        <!-- بخش کد تخفیف و مسابقه -->
+        <div class="promo-sections">
+            <!-- بخش کد تخفیف -->
+            <div class="discount-section">
+                <div class="discount-title">کد تخفیف ویژه</div>
+                <div class="discount-input-container">
+                    <input type="text" class="discount-input" id="discountCode" placeholder="کد تخفیف را وارد کنید">
+                    <button class="apply-discount-btn" onclick="applyDiscount()">
+                        <i class="fas fa-tag"></i>
+                        اعمال تخفیف
+                    </button>
+                </div>
+                <div class="discount-message" id="discountMessage"></div>
+            </div>
+            
+            <!-- بخش مسابقه -->
+            <div class="contest-section">
+                <div class="contest-title">مسابقه فیلترشکن رایگان</div>
+                <div class="contest-input-container">
+                    <input type="text" class="contest-input" id="contestCode" placeholder="کد مسابقه را وارد کنید">
+                    <button class="enter-contest-btn" onclick="enterContest()">
+                        <i class="fas fa-trophy"></i>
+                        ورود به مسابقه
+                    </button>
+                </div>
+                <div class="contest-message" id="contestMessage"></div>
+            </div>
+        </div>
+        
+        <!-- مراحل خرید -->
+        <div class="steps-container">
+            <!-- مرحله ۱: انتخاب بسته -->
+            <div class="step">
+                <div class="step-number">۱</div>
+                <div class="step-title">📦 انتخاب بسته اینترنتی</div>
+                <p>یکی از بسته‌های بالا را انتخاب کنید</p>
+            </div>
+            
+            <!-- مرحله ۲: واریز مبلغ -->
+            <div class="step">
+                <div class="step-number">۲</div>
+                <div class="step-title">💳 واریز مبلغ به حساب بانکی</div>
+                <div class="bank-card" onclick="copyCardNumber()">
+                    <div class="bank-title">واریز مبلغ به حساب بانکی</div>
+                    <div class="bank-name">بانک سامان</div>
+                    
+                    <div class="card-number-section">
+                        <div class="card-number-line">
+                            <div class="card-number-part">6219</div>
+                            <div class="card-number-dash">-</div>
+                            <div class="card-number-part">8619</div>
+                        </div>
+                        <div class="card-number-line">
+                            <div class="card-number-part">8734</div>
+                            <div class="card-number-dash">-</div>
+                            <div class="card-number-part">8090</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-owner">بنام: امیر محمد حضراتی</div>
+                    
+                    <button class="copy-btn" onclick="copyCardNumber()" id="copyButton">
+                        <i class="fas fa-copy"></i>
+                        کپی شماره کارت
+                    </button>
+                </div>
+            </div>
+            
+            <!-- مرحله ۳: ارسال به واتساپ -->
+            <div class="step">
+                <div class="step-number">۳</div>
+                <div class="step-title">📱 ارسال درخواست خرید</div>
+                <div class="whatsapp-section">
+                    <p>پس از واریز، روی دکمه زیر کلیک کنید</p>
+                    <button id="whatsappBtn" class="whatsapp-btn" onclick="sendToWhatsApp()">
+                        <i class="fab fa-whatsapp whatsapp-icon"></i>
+                        ارسال به واتساپ
+                    </button>
+                    <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
+                        شماره واتساپ: ۰۹۲۲۴۰۴۴۸۴۲
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به صفحه اصلی
+        </a>
+    </div>
+
+    <!-- پاپ‌آپ کپی موفق -->
+    <div class="copy-popup" id="copyPopup" style="display: none;">
+        <div class="copy-popup-content">
+            <h2>✅ شماره کارت کپی شد</h2>
+            <div class="card-number">6219861987348090</div>
+            <p>شماره کارت با موفقیت کپی شد</p>
+            <p>می‌توانید در برنامه بانکی خود پیست کنید</p>
+            <button class="close-popup" onclick="closeCopyPopup()">باشه</button>
+        </div>
     </div>
 
     <script>
@@ -52,6 +937,13 @@
                 { size: "200 گیگ", duration: "۳ ماه", price: 549000, icon: "💎" },
                 { size: "300 گیگ", duration: "۳ ماه", price: 782000, icon: "👑" }
             ]
+        };
+
+        // تنظیمات تخفیف
+        const DISCOUNT_CONFIG = {
+            VALID_CODE: "VPN50",
+            DISCOUNT_AMOUNT: 50000,
+            DISCOUNT_MESSAGE: "۵۰,۰۰۰ تومان تخفیف اعمال شد!"
         };
 
         let selectedPackage = null;
