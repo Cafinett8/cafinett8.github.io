@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>گردونه شانس - کافی نت</title>
+    <title>فروشگاه فیلترشکن - کافی نت</title>
+    <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/B-Titr/BTitr.css">
     <link rel="stylesheet" href="https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Vazir', sans-serif;
+            font-family: 'Vazir', 'Segoe UI', sans-serif;
         }
         
         body {
@@ -18,147 +20,677 @@
             color: white;
             min-height: 100vh;
             padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         
         .container {
-            max-width: 500px;
+            max-width: 1200px;
+            margin: 0 auto;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 25px;
             padding: 40px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
         
         .header {
-            margin-bottom: 30px;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .vpn-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
         
         .header h1 {
-            font-size: 2.5rem;
+            font-family: 'B Titr', sans-serif;
+            font-size: 3rem;
             margin-bottom: 10px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: fadeIn 1.5s ease-in;
+            background: linear-gradient(45deg, #fff, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* تب‌های مدت زمان */
+        .duration-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .duration-tab {
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .duration-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .duration-tab:hover::before {
+            left: 100%;
+        }
+        
+        .duration-tab:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+        
+        .duration-tab.active {
+            background: rgba(37, 211, 102, 0.3);
+            border-color: #25D366;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        /* جدول قیمت */
+        .pricing-container {
+            margin-bottom: 40px;
+        }
+        
+        .pricing-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .package-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .package-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .package-btn:hover::before {
+            left: 100%;
+        }
+        
+        .package-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .package-btn.selected {
+            background: rgba(37, 211, 102, 0.3);
+            border-color: #25D366;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        .package-size {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .package-price {
+            font-size: 1.3rem;
+            color: #93c5fd;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .package-duration {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* بخش کد تخفیف و مسابقه */
+        .promo-sections {
+            display: flex;
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .discount-section, .contest-section {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.1));
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contest-section {
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,165,0,0.1));
+            border-color: rgba(255,215,0,0.3);
+        }
+        
+        .discount-section::before, .contest-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: rotate(45deg);
+        }
+        
+        .discount-title, .contest-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .discount-title {
+            color: #93c5fd;
+        }
+        
+        .discount-title::after {
+            content: '🎁';
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .contest-title {
             color: #FFD700;
         }
         
-        .wheel-container {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            margin: 0 auto 40px;
+        .contest-title::after {
+            content: '🏆';
+            margin-right: 10px;
+            font-size: 1.8rem;
         }
         
-        .wheel {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(
-                #ff6b6b 0deg 36deg,
-                #4ecdc4 36deg 72deg,
-                #ff6b6b 72deg 108deg,
-                #4ecdc4 108deg 144deg,
-                #ff6b6b 144deg 180deg,
-                #4ecdc4 180deg 216deg,
-                #ff6b6b 216deg 252deg,
-                #4ecdc4 252deg 288deg,
-                #ff6b6b 288deg 324deg,
-                #4ecdc4 324deg 360deg
-            );
-            position: relative;
-            transition: transform 4s cubic-bezier(0.3, 0.1, 0.3, 1);
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
-        }
-        
-        .wheel-item {
-            position: absolute;
-            width: 50%;
-            height: 50%;
-            transform-origin: bottom right;
-            text-align: center;
+        .discount-input-container, .contest-input-container {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .discount-input, .contest-input {
+            flex: 1;
+            padding: 18px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
             color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-        }
-        
-        .pointer {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            background: #FFD700;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            z-index: 10;
-        }
-        
-        .spin-btn {
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            color: #1e3c72;
-            border: none;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin: 20px 0;
+            font-size: 1.1rem;
+            text-align: center;
             transition: all 0.3s ease;
+        }
+        
+        .discount-input:focus, .contest-input:focus {
+            outline: none;
+            border-color: #25D366;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
+        }
+        
+        .contest-input:focus {
+            border-color: #FFD700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
+        }
+        
+        .discount-input::placeholder, .contest-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .apply-discount-btn, .enter-contest-btn {
+            background: linear-gradient(135deg, #25D366, #1ea952);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+        
+        .enter-contest-btn {
+            background: linear-gradient(135deg, #FFD700, #FFA500);
             box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
         }
         
-        .spin-btn:hover {
+        .apply-discount-btn:hover {
+            background: linear-gradient(135deg, #1ea952, #25D366);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+        }
+        
+        .enter-contest-btn:hover {
+            background: linear-gradient(135deg, #FFA500, #FFD700);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        .discount-message, .contest-message {
+            margin-top: 20px;
+            font-size: 1.1rem;
+            min-height: 25px;
+            position: relative;
+        }
+        
+        .discount-success, .contest-success {
+            color: #25D366;
+            font-weight: bold;
+            background: rgba(37, 211, 102, 0.1);
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .discount-error, .contest-error {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 12px 20px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        /* مراحل خرید */
+        .steps-container {
+            margin-bottom: 40px;
+        }
+        
+        .step {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .step:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         
-        .spin-btn:disabled {
-            background: #6b7280;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .result {
-            margin: 30px 0;
-            font-size: 1.4rem;
-            min-height: 80px;
+        .step-number {
+            background: linear-gradient(135deg, #25D366, #1ea952);
+            color: white;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-        }
-        
-        .prize {
-            color: #25D366;
             font-weight: bold;
-            font-size: 1.6rem;
+            position: absolute;
+            right: -15px;
+            top: -15px;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
         }
         
-        .discount {
+        .step-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
             color: #93c5fd;
             font-weight: bold;
-            font-size: 1.5rem;
         }
         
-        .code-display {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 1.3rem;
-            letter-spacing: 2px;
-            display: none;
-        }
-        
-        .attempts {
+        /* کارت بانکی */
+        .bank-card {
+            background: linear-gradient(135deg, #004B8D 0%, #0066CC 100%);
+            border-radius: 20px;
+            padding: 35px;
+            text-align: center;
             margin: 20px 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .bank-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .bank-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+        }
+        
+        .bank-title {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+            color: #e0f2fe;
+        }
+        
+        .bank-name {
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        
+        .card-number-section {
+            direction: ltr;
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .card-number-line {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 8px 0;
+            direction: ltr;
+        }
+        
+        .card-number-part {
+            font-family: 'Courier New', monospace;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            background: rgba(255,255,255,0.2);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .card-number-dash {
+            font-size: 1.8rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: bold;
+        }
+        
+        .card-owner {
+            font-size: 1.3rem;
+            margin: 20px 0;
+            font-weight: bold;
+            background: rgba(255,255,255,0.15);
+            padding: 12px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
             font-size: 1.1rem;
-            opacity: 0.8;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .copy-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .copy-btn:hover::before {
+            left: 100%;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-2px);
+        }
+        
+        .copy-btn.copied {
+            background: rgba(37, 211, 102, 0.6);
+        }
+        
+        /* پاپ‌آپ کپی موفق */
+        .copy-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .copy-popup-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            animation: scaleIn 0.3s ease;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .copy-popup h2 {
+            font-family: 'B Titr', sans-serif;
+            font-size: 2.5rem;
+            color: #25D366;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .copy-popup .card-number {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-radius: 15px;
+            border: 3px solid #25D366;
+            direction: ltr;
+            margin: 20px 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #1e3c72;
+        }
+        
+        .copy-popup p {
+            font-size: 1.3rem;
+            color: #333;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .close-popup {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .close-popup:hover {
+            background: #1ea952;
+            transform: translateY(-2px);
+        }
+        
+        /* دکمه واتساپ */
+        .whatsapp-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 1.4rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .whatsapp-btn:hover::before {
+            left: 100%;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
+        }
+        
+        .whatsapp-btn:disabled {
+            background: #6b7280;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .whatsapp-icon {
+            font-size: 2rem;
+        }
+        
+        .selected-package-info {
+            background: rgba(37, 211, 102, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px solid rgba(37, 211, 102, 0.5);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+            }
         }
         
         .back-btn {
@@ -167,9 +699,11 @@
             color: #93c5fd;
             text-decoration: none;
             font-size: 1.1rem;
-            padding: 12px 25px;
+            text-align: center;
+            width: 100%;
+            padding: 18px;
             background: rgba(255,255,255,0.1);
-            border-radius: 8px;
+            border-radius: 12px;
             transition: all 0.3s ease;
             border: 1px solid rgba(255,255,255,0.2);
         }
@@ -177,144 +711,483 @@
         .back-btn:hover {
             color: #ffffff;
             background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
         }
         
-        @keyframes celebrate {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        
-        .celebrate {
-            animation: celebrate 0.5s ease-in-out 3;
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
+            }
+            
+            .pricing-table {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .card-number-part {
+                font-size: 1.2rem;
+                padding: 10px 15px;
+                min-width: 90px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .vpn-icon {
+                font-size: 4rem;
+            }
+            
+            .whatsapp-btn {
+                padding: 18px 30px;
+                font-size: 1.2rem;
+            }
+            
+            .card-number-line {
+                gap: 5px;
+            }
+            
+            .copy-popup h2 {
+                font-size: 2rem;
+            }
+            
+            .copy-popup .card-number {
+                font-size: 1.5rem;
+                padding: 15px 25px;
+            }
+            
+            .duration-tabs {
+                gap: 8px;
+            }
+            
+            .duration-tab {
+                padding: 12px 18px;
+                font-size: 1rem;
+            }
+            
+            .discount-input-container, .contest-input-container {
+                flex-direction: column;
+            }
+            
+            .promo-sections {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- هدر -->
         <div class="header">
-            <h1>🎡 گردونه شانس</h1>
-            <p>شانس خودت رو امتحان کن!</p>
+            <div class="vpn-icon">🚀</div>
+            <h1>فروشگاه فیلترشکن</h1>
+            <p>اتصال امن و پرسرعت به اینترنت جهانی</p>
+        </div>
+
+        <!-- تب‌های مدت زمان -->
+        <div class="duration-tabs" id="durationTabs">
+            <!-- با JavaScript پر می‌شود -->
         </div>
         
-        <div class="wheel-container">
-            <div class="pointer"></div>
-            <div class="wheel" id="wheel">
-                <div class="wheel-item" style="transform: rotate(18deg);">پوچ</div>
-                <div class="wheel-item" style="transform: rotate(54deg);">پوچ</div>
-                <div class="wheel-item" style="transform: rotate(90deg);">پوچ</div>
-                <div class="wheel-item" style="transform: rotate(126deg);">پوچ</div>
-                <div class="wheel-item" style="transform: rotate(162deg);">پوچ</div>
-                <div class="wheel-item" style="transform: rotate(198deg);">پوچ</div>
-                <div class="wheel-item" style="transform: rotate(234deg);">پوچ</div>
-                <div class="wheel-item" style="transform: rotate(270deg);">پوچ</div>
-                <div class="wheel-item" style="transform: rotate(306deg);">پوچ</div>
-                <div class="wheel-item" style="transform: rotate(342deg);">🎁 جایزه</div>
+        <!-- جدول قیمت -->
+        <div class="pricing-container">
+            <div class="pricing-table" id="pricingTable">
+                <!-- بسته‌ها با JavaScript پر می‌شوند -->
+            </div>
+            <div id="selectedInfo" class="selected-package-info" style="display: none;">
+                <!-- اطلاعات بسته انتخاب شده -->
+            </div>
+        </div>
+
+        <!-- بخش کد تخفیف و مسابقه -->
+        <div class="promo-sections">
+            <!-- بخش کد تخفیف -->
+            <div class="discount-section">
+                <div class="discount-title">کد تخفیف ویژه</div>
+                <div class="discount-input-container">
+                    <input type="text" class="discount-input" id="discountCode" placeholder="کد تخفیف را وارد کنید">
+                    <button class="apply-discount-btn" onclick="applyDiscount()">
+                        <i class="fas fa-tag"></i>
+                        اعمال تخفیف
+                    </button>
+                </div>
+                <div class="discount-message" id="discountMessage"></div>
+            </div>
+            
+            <!-- بخش مسابقه -->
+            <div class="contest-section">
+                <div class="contest-title">مسابقه فیلترشکن رایگان</div>
+                <div class="contest-input-container">
+                    <input type="text" class="contest-input" id="contestCode" placeholder="کد مسابقه را وارد کنید">
+                    <button class="enter-contest-btn" onclick="enterContest()">
+                        <i class="fas fa-trophy"></i>
+                        ورود به مسابقه
+                    </button>
+                </div>
+                <div class="contest-message" id="contestMessage"></div>
             </div>
         </div>
         
-        <button class="spin-btn" onclick="spinWheel()" id="spinBtn">
-            🎯 چرخوندن گردونه
-        </button>
-        
-        <div class="attempts">
-            فرصت: <span id="attemptsCount">۱</span> بار
-        </div>
-        
-        <div class="result" id="result">
-            منتظر چرخوندن...
-        </div>
-        
-        <div class="code-display" id="codeDisplay">
-            <!-- کد جایزه نمایش داده می‌شود -->
+        <!-- مراحل خرید -->
+        <div class="steps-container">
+            <!-- مرحله ۱: انتخاب بسته -->
+            <div class="step">
+                <div class="step-number">۱</div>
+                <div class="step-title">📦 انتخاب بسته اینترنتی</div>
+                <p>یکی از بسته‌های بالا را انتخاب کنید</p>
+            </div>
+            
+            <!-- مرحله ۲: واریز مبلغ -->
+            <div class="step">
+                <div class="step-number">۲</div>
+                <div class="step-title">💳 واریز مبلغ به حساب بانکی</div>
+                <div class="bank-card" onclick="copyCardNumber()">
+                    <div class="bank-title">واریز مبلغ به حساب بانکی</div>
+                    <div class="bank-name">بانک سامان</div>
+                    
+                    <div class="card-number-section">
+                        <div class="card-number-line">
+                            <div class="card-number-part">6219</div>
+                            <div class="card-number-dash">-</div>
+                            <div class="card-number-part">8619</div>
+                        </div>
+                        <div class="card-number-line">
+                            <div class="card-number-part">8734</div>
+                            <div class="card-number-dash">-</div>
+                            <div class="card-number-part">8090</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-owner">بنام: امیر محمد حضراتی</div>
+                    
+                    <button class="copy-btn" onclick="copyCardNumber()" id="copyButton">
+                        <i class="fas fa-copy"></i>
+                        کپی شماره کارت
+                    </button>
+                </div>
+            </div>
+            
+            <!-- مرحله ۳: ارسال به واتساپ -->
+            <div class="step">
+                <div class="step-number">۳</div>
+                <div class="step-title">📱 ارسال درخواست خرید</div>
+                <div class="whatsapp-section">
+                    <p>پس از واریز، روی دکمه زیر کلیک کنید</p>
+                    <button id="whatsappBtn" class="whatsapp-btn" onclick="sendToWhatsApp()">
+                        <i class="fab fa-whatsapp whatsapp-icon"></i>
+                        ارسال به واتساپ
+                    </button>
+                    <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
+                        شماره واتساپ: ۰۹۲۲۴۰۴۴۸۴۲
+                    </div>
+                </div>
+            </div>
         </div>
         
         <a href="index.html" class="back-btn">
-            ← بازگشت به صفحه اصلی
+            <i class="fas fa-arrow-right"></i>
+            بازگشت به صفحه اصلی
         </a>
     </div>
 
-    <script>
-        let attempts = 1;
-        let maxAttempts = 1;
-        let isSpinning = false;
-        
-        // کدهای جایزه
-        const prizeCodes = ["GOLDBONUS", "FREEMONTH", "WINNERVIP"];
-        const discountCodes = ["DISCOUNT50", "OFF50000", "SAVE50K"];
+    <!-- پاپ‌آپ کپی موفق -->
+    <div class="copy-popup" id="copyPopup" style="display: none;">
+        <div class="copy-popup-content">
+            <h2>✅ شماره کارت کپی شد</h2>
+            <div class="card-number">6219861987348090</div>
+            <p>شماره کارت با موفقیت کپی شد</p>
+            <p>می‌توانید در برنامه بانکی خود پیست کنید</p>
+            <button class="close-popup" onclick="closeCopyPopup()">باشه</button>
+        </div>
+    </div>
 
-        function spinWheel() {
-            if (isSpinning) return;
+    <script>
+        // قیمت‌های نهایی
+        const packages = {
+            "1month": [
+                { size: "20 گیگ", duration: "۱ ماه", price: 83000, icon: "📱" },
+                { size: "30 گیگ", duration: "۱ ماه", price: 100000, icon: "💻" },
+                { size: "40 گیگ", duration: "۱ ماه", price: 117000, icon: "🚀" },
+                { size: "50 گیگ", duration: "۱ ماه", price: 133000, icon: "⚡" },
+                { size: "60 گیگ", duration: "۱ ماه", price: 150000, icon: "🔥" },
+                { size: "70 گیگ", duration: "۱ ماه", price: 183000, icon: "🎯" },
+                { size: "100 گیگ", duration: "۱ ماه", price: 250000, icon: "💎" },
+                { size: "200 گیگ", duration: "۱ ماه", price: 500000, icon: "👑" },
+                { size: "300 گیگ", duration: "۱ ماه", price: 750000, icon: "🚀" }
+            ],
+            "2month": [
+                { size: "20 گیگ", duration: "۲ ماه", price: 108000, icon: "📱" },
+                { size: "40 گیگ", duration: "۲ ماه", price: 141000, icon: "💻" },
+                { size: "60 گیگ", duration: "۲ ماه", price: 183000, icon: "🚀" },
+                { size: "80 گیگ", duration: "۲ ماه", price: 241000, icon: "⚡" },
+                { size: "100 گیگ", duration: "۲ ماه", price: 283000, icon: "🔥" },
+                { size: "120 گیگ", duration: "۲ ماه", price: 349000, icon: "🎯" },
+                { size: "150 گیگ", duration: "۲ ماه", price: 399000, icon: "💎" },
+                { size: "200 گیگ", duration: "۲ ماه", price: 532000, icon: "👑" },
+                { size: "300 گیگ", duration: "۲ ماه", price: 765000, icon: "🚀" }
+            ],
+            "3month": [
+                { size: "60 گیگ", duration: "۳ ماه", price: 200000, icon: "📱" },
+                { size: "80 گیگ", duration: "۳ ماه", price: 266000, icon: "💻" },
+                { size: "90 گیگ", duration: "۳ ماه", price: 283000, icon: "🚀" },
+                { size: "100 گیگ", duration: "۳ ماه", price: 299000, icon: "⚡" },
+                { size: "120 گیگ", duration: "۳ ماه", price: 366000, icon: "🔥" },
+                { size: "150 گیگ", duration: "۳ ماه", price: 416000, icon: "🎯" },
+                { size: "200 گیگ", duration: "۳ ماه", price: 549000, icon: "💎" },
+                { size: "300 گیگ", duration: "۳ ماه", price: 782000, icon: "👑" }
+            ]
+        };
+
+        // تنظیمات تخفیف
+        const DISCOUNT_CONFIG = {
+            VALID_CODE: "CAFINETT8",
+            DISCOUNT_AMOUNT: 30000,
+            DISCOUNT_MESSAGE: "۳۰,۰۰۰ تومان تخفیف اعمال شد!"
+        };
+
+        let selectedPackage = null;
+        let selectedDuration = "1month";
+        let copyCooldown = false;
+        let discountApplied = false;
+
+        // ایجاد تب‌های مدت زمان
+        function createDurationTabs() {
+            const durationTabs = document.getElementById('durationTabs');
+            const durations = [
+                { id: "1month", name: "🔷 یک ماهه" },
+                { id: "2month", name: "🔷 دو ماهه" },
+                { id: "3month", name: "🔷 سه ماهه" }
+            ];
             
-            const wheel = document.getElementById('wheel');
-            const spinBtn = document.getElementById('spinBtn');
-            const resultDiv = document.getElementById('result');
-            const codeDisplay = document.getElementById('codeDisplay');
+            durations.forEach(duration => {
+                const tab = document.createElement('button');
+                tab.className = 'duration-tab';
+                if (duration.id === selectedDuration) {
+                    tab.classList.add('active');
+                }
+                tab.textContent = duration.name;
+                tab.setAttribute('data-duration', duration.id);
+                
+                tab.addEventListener('click', () => {
+                    selectedDuration = duration.id;
+                    document.querySelectorAll('.duration-tab').forEach(t => {
+                        t.classList.remove('active');
+                    });
+                    tab.classList.add('active');
+                    createPricingTable();
+                });
+                
+                durationTabs.appendChild(tab);
+            });
+        }
+
+        // ایجاد جدول قیمت
+        function createPricingTable() {
+            const pricingTable = document.getElementById('pricingTable');
+            pricingTable.innerHTML = '';
             
-            isSpinning = true;
-            spinBtn.disabled = true;
-            codeDisplay.style.display = 'none';
+            const currentPackages = packages[selectedDuration];
             
-            // چرخش تصادفی (۹۰٪ شانس پوچ)
-            const random = Math.random();
-            let finalAngle;
-            let prizeWon = false;
+            currentPackages.forEach((pkg, index) => {
+                const button = document.createElement('button');
+                button.className = 'package-btn';
+                
+                button.innerHTML = `
+                    <div class="package-size">${pkg.size}</div>
+                    <div class="package-price">${formatPrice(pkg.price)} تومان</div>
+                    <div class="package-duration">${pkg.duration}</div>
+                `;
+                
+                button.addEventListener('click', () => selectPackage(index));
+                pricingTable.appendChild(button);
+            });
+        }
+
+        // قالب‌بندی قیمت
+        function formatPrice(price) {
+            return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // انتخاب بسته
+        function selectPackage(index) {
+            // حذف انتخاب قبلی
+            document.querySelectorAll('.package-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
             
-            if (random < 0.9) { // 90% شانس پوچ
-                // توقف روی یکی از پوچ‌ها
-                const poochAngles = [18, 54, 90, 126, 162, 198, 234, 270, 306];
-                finalAngle = 3600 + poochAngles[Math.floor(Math.random() * poochAngles.length)];
-            } else { // 10% شانس جایزه
-                // توقف روی جایزه
-                finalAngle = 3600 + 342;
-                prizeWon = true;
+            // انتخاب جدید
+            const currentPackages = packages[selectedDuration];
+            selectedPackage = currentPackages[index];
+            document.querySelectorAll('.package-btn')[index].classList.add('selected');
+            
+            // نمایش اطلاعات بسته انتخاب شده
+            document.getElementById('selectedInfo').style.display = 'block';
+            document.getElementById('selectedInfo').innerHTML = `
+                ✅ بسته انتخاب شده: <strong>${selectedPackage.size}</strong>
+                - مبلغ: <strong>${formatPrice(selectedPackage.price)} تومان</strong>
+                ${discountApplied ? '<br>✅ کد تخفیف اعمال شد!' : ''}
+            `;
+        }
+
+        // اعمال کد تخفیف
+        function applyDiscount() {
+            const discountCode = document.getElementById('discountCode').value.trim();
+            const discountMessage = document.getElementById('discountMessage');
+            
+            if (discountCode.toUpperCase() === DISCOUNT_CONFIG.VALID_CODE) {
+                discountApplied = true;
+                discountMessage.innerHTML = `<span class="discount-success">✅ کد تخفیف با موفقیت اعمال شد! ${DISCOUNT_CONFIG.DISCOUNT_MESSAGE}</span>`;
+                
+                // اگر بسته‌ای انتخاب شده، قیمت نهایی را محاسبه کن
+                if (selectedPackage) {
+                    const finalPrice = Math.max(selectedPackage.price - DISCOUNT_CONFIG.DISCOUNT_AMOUNT, 0);
+                    document.getElementById('selectedInfo').innerHTML = `
+                        ✅ بسته انتخاب شده: <strong>${selectedPackage.size}</strong>
+                        - مبلغ اصلی: <strong>${formatPrice(selectedPackage.price)} تومان</strong>
+                        - مبلغ با تخفیف: <strong>${formatPrice(finalPrice)} تومان</strong>
+                        <br>✅ کد تخفیف اعمال شد!
+                    `;
+                }
+            } else {
+                discountApplied = false;
+                discountMessage.innerHTML = '<span class="discount-error">❌ کد تخفیف نامعتبر است</span>';
+                
+                if (selectedPackage) {
+                    document.getElementById('selectedInfo').innerHTML = `
+                        ✅ بسته انتخاب شده: <strong>${selectedPackage.size}</strong>
+                        - مبلغ: <strong>${formatPrice(selectedPackage.price)} تومان</strong>
+                    `;
+                }
+            }
+        }
+
+        // ورود به مسابقه - انتقال به صفحه مسابقه
+        function enterContest() {
+            const contestCode = document.getElementById('contestCode').value.trim().toUpperCase();
+            const contestMessage = document.getElementById('contestMessage');
+            
+            if (!contestCode) {
+                contestMessage.innerHTML = '<span class="contest-error">لطفاً کد مسابقه را وارد کنید</span>';
+                return;
             }
             
-            wheel.style.transform = `rotate(${finalAngle}deg)`;
+            // کدهای معتبر
+            const validCodes = ['VPN1', 'FREE2024', 'TEST123'];
             
-            setTimeout(() => {
-                isSpinning = false;
+            if (validCodes.includes(contestCode)) {
+                contestMessage.innerHTML = '<span class="contest-success">✅ کد معتبر است! در حال انتقال...</span>';
                 
-                if (prizeWon) {
-                    // برنده جایزه اصلی
-                    const prizeCode = prizeCodes[Math.floor(Math.random() * prizeCodes.length)];
-                    resultDiv.innerHTML = '<span class="prize">🎉 شانس با تو یار بود! 🎉</span>';
-                    resultDiv.innerHTML += '<br>🏆 برنده ۱ ماه فیلترشکن رایگان ۳۰ گیگ شدی!';
-                    codeDisplay.style.display = 'block';
-                    codeDisplay.innerHTML = `کد جایزه: <strong>${prizeCode}</strong>`;
-                    codeDisplay.classList.add('celebrate');
-                    
-                    // کپی کردن خودکار
-                    navigator.clipboard.writeText(prizeCode).then(() => {
-                        setTimeout(() => {
-                            alert(`کد ${prizeCode} کپی شد! برو به صفحه اصلی و استفاده کن.`);
-                        }, 1000);
-                    });
-                } else {
-                    // برنده کد تخفیف
-                    const discountCode = discountCodes[Math.floor(Math.random() * discountCodes.length)];
-                    resultDiv.innerHTML = '<span class="discount">💸 کد تخفیف ۵۰,۰۰۰ تومانی گرفتی!</span>';
-                    codeDisplay.style.display = 'block';
-                    codeDisplay.innerHTML = `کد تخفیف: <strong>${discountCode}</strong>`;
-                    
-                    // کپی کردن خودکار
-                    navigator.clipboard.writeText(discountCode).then(() => {
-                        setTimeout(() => {
-                            alert(`کد تخفیف ${discountCode} کپی شد!`);
-                        }, 1000);
-                    });
-                }
-                
-                attempts++;
-                document.getElementById('attemptsCount').textContent = Math.max(0, maxAttempts - attempts + 1);
-                
-                if (attempts > maxAttempts) {
-                    spinBtn.disabled = true;
-                    spinBtn.textContent = 'فرصت تموم شد';
-                } else {
-                    spinBtn.disabled = false;
-                }
-            }, 4000);
+                // انتقال به صفحه مسابقه با پارامتر کد
+                setTimeout(() => {
+                    window.location.href = `contest.html?code=${contestCode}`;
+                }, 1500);
+            } else {
+                contestMessage.innerHTML = '<span class="contest-error">❌ کد مسابقه نامعتبر است</span>';
+            }
         }
+
+        // کپی شماره کارت
+        function copyCardNumber() {
+            if (copyCooldown) return;
+            
+            const cardNumber = "6219861987348090";
+            
+            // فعال کردن کول‌داون
+            copyCooldown = true;
+            
+            const copyToClipboard = (text) => {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    return navigator.clipboard.writeText(text);
+                }
+                
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.top = '0';
+                textArea.style.left = '0';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    const successful = document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    return Promise.resolve();
+                } catch (err) {
+                    document.body.removeChild(textArea);
+                    return Promise.reject(err);
+                }
+            };
+            
+            copyToClipboard(cardNumber)
+                .then(() => {
+                    showCopyPopup();
+                })
+                .catch((err) => {
+                    console.log('خطا در کپی:', err);
+                    showCopyPopup();
+                })
+                .finally(() => {
+                    setTimeout(() => {
+                        copyCooldown = false;
+                    }, 500);
+                });
+        }
+
+        function showCopyPopup() {
+            document.getElementById('copyPopup').style.display = 'flex';
+        }
+
+        function closeCopyPopup() {
+            document.getElementById('copyPopup').style.display = 'none';
+        }
+
+        // ارسال به واتساپ
+        function sendToWhatsApp() {
+            if (!selectedPackage) {
+                alert('لطفاً ابتدا یک بسته انتخاب کنید');
+                return;
+            }
+            
+            // محاسبه قیمت نهایی با تخفیف
+            let finalPrice = selectedPackage.price;
+            if (discountApplied) {
+                finalPrice = Math.max(selectedPackage.price - DISCOUNT_CONFIG.DISCOUNT_AMOUNT, 0);
+            }
+            
+            const message = `سلام! 👋
+
+📦 **درخواست خرید فیلترشکن**
+• بسته: ${selectedPackage.size}
+• مدت: ${selectedPackage.duration}
+• مبلغ اصلی: ${formatPrice(selectedPackage.price)} تومان
+${discountApplied ? `• مبلغ با تخفیف: ${formatPrice(finalPrice)} تومان` : ''}
+
+✅ مبلغ واریز شد.
+لطفاً رسید را ارسال کنید تا سرویس برایتان ارسال شود.
+
+با تشکر`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/989224044842?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // راه‌اندازی اولیه
+        document.addEventListener('DOMContentLoaded', function() {
+            createDurationTabs();
+            createPricingTable();
+        });
+
+        // اضافه کردن event listener برای کلیک روی کل کارت
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.bank-card')) {
+                copyCardNumber();
+            }
+        });
     </script>
 </body>
 </html>
